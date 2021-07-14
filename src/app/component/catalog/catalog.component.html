@@ -1,0 +1,81 @@
+<app-nav></app-nav>
+<div class="container" @fade>
+  <div class="p-5"></div>
+  <div class="p-5"></div>
+  <mat-divider class="text-light border border-3"></mat-divider>
+  <div class="p-4"></div>
+  <div
+    class="
+      row
+      d-flex
+      justify-content-center
+      text-uppercase
+      font-weight-bold
+      text-light
+      text-center
+    "
+  >
+    <h1 style="font-family: 'Times New Roman', Times, serif">
+      CataLog<i class="fas fa-music text-light"></i>
+    </h1>
+  </div>
+  <div class="p-4"></div>
+  <mat-divider class="text-light border border-3"></mat-divider>
+  <div class="p-4"></div>
+
+  <div class="row d-flex justify-content-around" >
+    <div class="col-sm-10 col-md-6 col-lg-4 p-4" *ngFor="let music of catalog.musics">
+      <mat-card class="shadow-lg border border-4 border-dark border-lg text-light rounded" style="width: 350px;">
+        <a href="" class="">
+        <div class="d-flex justify-content-center rounded" style="height: 300px;">
+            <img
+            mat-card-image
+            [src]="['/assets/images/welcomeBg1.png']"
+            alt="vaccinCovid"
+            class="rounded shadow border-bottom border-4 border-dark"
+            />
+          </div>
+        </a>
+        <mat-card-header class="row d-flex justify-content-center">
+          <mat-card-title class="lead text-capitalize font-weight-bolder text-center">
+            <u>{{ music.title}}</u>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="container">
+          <div class="row d-flex justify-content-center">
+            <p class="text-center">
+              {{ music.tags }}<i class="fas fa-tags"></i>
+            </p>
+          </div>
+
+          <div class="flex-row d-flex justify-content-center">
+            <p>{{music.basicPrice}}.00<i class="fas fa-hand-holding-usd fa-2 text-light"></i></p>
+         </div>
+
+          <div class="flex-row d-flex justify-content-between">
+              <p>{{ music.nbrOfLike }} <i class="fab fa-gratipay btn text-{{ isLiked(music.title) ? 'danger' : 'white' }}" (click)="likeOrUnlike('bombay',music.title)"></i></p>
+              <p>{{ music.nbrOfShare }} <i class="fas fa-share-alt btn text-{{  isShared(music.title) ? 'info' : 'white' }}" (click)="openShare(music.title)"></i></p>
+              <p>{{ music.nbrOfComment }} <i class="fas btn text-light fa-comment" (click)="openComment(music.title)"></i></p>
+          </div>
+
+          <div class="row d-flex justify-content-center pb-2">
+            <button type="button" class="btn btn-primary text-light mb-3 border">
+              PLAY<i class="fas fa-play pl-1"></i>
+            </button>
+            
+              <button class="btn btn-warning text-light border" (click)="openAddingArticle(music.title,music.basicPrice,music.exclusivePrice)">
+                ADD TO CART<i class="fas fa-shopping-cart text-light"></i>
+              </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div class="flex-row">
+  <div class="p-5"></div>
+  <div class="p-5"></div>
+</div>
+<app-footer class="position-sticky"></app-footer>
+
+

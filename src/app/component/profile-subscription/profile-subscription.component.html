@@ -1,0 +1,61 @@
+<div class="bg-dark border text-light container-fluid modal-dialog-scrollable" style="overflow-x:auto;overflow-y:auto;">
+    <div class="modal-header">
+      <h4 class="modal-title text-center text-capitalize">
+        {{subType}}<i class="fas fa-users"></i>
+      </h4>
+  
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="activeModal.dismiss('Cross click')"
+        >
+        <i class="fas fa-times text-danger"></i>
+      </button>
+    </div>
+    <div class="modal-body bg-dark">
+      <h2 class="text-capitalize">
+      </h2>
+      <div class="bg-dark">
+          <mat-card *ngFor="let subscription of subscriptions">
+              <div class="d-flex align-items-center flex-row">
+                  <div class="flex-shrink-0">
+                      <img
+                      mat-card-image
+                      [src]="['http://localhost:4444/customer/getPicture/bayDrip']"
+                      alt="vaccinCovid"
+                      class="rounded-circle border"
+                      />
+                    </div>
+                    <div class="flex-grow-1 ms-5 text-start">
+
+                            <div class="flex-row">
+                                <small><u>{{subscription.username}}</u></small>
+                            </div>
+                            <div class="flex-row">
+                                <small>{{subscription.city}}</small>
+                            </div>
+                            <div class="flex-row">
+                                
+                                <mat-divider></mat-divider>
+                            </div>
+                    
+                    </div>
+
+                    <div class="flex-grow-1 ms-3">
+                        <div class=" flex-row">
+                          <small >
+                           <u> Subscribers :</u> {{subscription.nbrOfSubscriber}} <i class="fas fa-users btn text-light" ></i>
+                          </small>
+                          <small >
+                           <u> SubscribeTo :</u> {{subscription.nbrOfSubscribeTo}}<i class="fas fa-users btn text-light"></i>
+                          </small>
+                          </div>
+                    </div>
+              </div>
+          </mat-card>
+  
+      </div>
+    </div>
+  </div>
+  

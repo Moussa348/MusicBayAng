@@ -1,0 +1,78 @@
+<div class="bg-dark border text-light container-fluid modal-dialog-scrollable">
+  <div class="modal-header">
+    <h4 class="modal-title">
+      Share<i class="fas fa-share-alt"></i>
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true"><i class="fas fa-times text-danger"></i></span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <mat-card>
+      <mat-card-header class="flex-row d-flex justify-content-center">
+        <mat-card-title>
+          <h2 class="text-capitalize">
+            <u>{{ music.title }}</u>
+          </h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="flex-row d-flex justify-content-center pt-4">
+          <div class="col-4 pt-3">
+            <img
+              mat-card-image
+              [src]="['/assets/images/welcomeBg1.png']"
+              alt="vaccinCovid"
+              class="rounded border text-center"
+            />
+          </div>
+          <div class="col-4">
+            <div class="flex-row d-flex justify-content-center">
+              <p>
+                {{ music.tags }}
+              </p>
+            </div>
+            <div class="flex-row d-flex justify-content-between">
+              <p>
+                {{ music.nbrOfLike }}
+                <i class="fab fa-gratipay btn text-white"></i>
+              </p>
+              <p>
+                {{ music.nbrOfShare }}
+                <i class="fas fa-share-alt-square btn text-white"></i>
+              </p>
+              <p>
+                {{ music.nbrOfComment }}
+                <i class="fas btn text-light fa-comment"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="flex-row d-flex justify-content-center pt-1">
+            <p>Price : {{music.basicPrice | number}}<i class="fas fa-dollar-sign"></i></p>
+          </div>
+          <div class="flex-row d-flex justify-content-center pt-1">
+            <p>Time   : {{music.timeLength}}<i class="fas fa-hourglass-half"></i></p>
+          </div>
+          <div class="flex-row d-flex justify-content-center pt-1">
+            <p>Published : {{music.date | date}}, by : {{music.creator}} </p>
+          </div>
+
+          <div class="form-floating flex-row d-flex justify-content-center pt-1 text-light">
+            <textarea class="form-control bg-dark text-light" [(ngModel)]="sharingMsg" ngModel placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;color: white;"></textarea>
+            <label for="floatingTextarea2">Sharing Message</label>
+          </div>
+
+        </mat-card-content>
+        
+      </mat-card>
+    </div>
+    <div class="modal-footer flex-row d-flex justify-content-center">
+    <button type="button" class="btn btn-outline-light mt-4" (click)="share()">Share<i class="fas fa-share-alt"></i></button>
+  </div>
+</div>

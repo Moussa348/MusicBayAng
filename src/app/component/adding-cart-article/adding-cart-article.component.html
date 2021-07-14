@@ -1,0 +1,69 @@
+<div class="bg-dark border text-light container-fluid modal-dialog-scrollable" style="overflow-x:auto;overflow-y:auto;" *ngIf="!isArticleInTransaction()">
+
+    <div class="modal-header">
+        <h4 class="modal-title fw-bold">Choose Licence<i class="fas fa-stamp"></i></h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="fas fa-times text-danger"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <mat-card class="border shadow btn text-light m-4" (click)="isTransactionAppending()?addArticleToTransaction(basicPriceType):createTransaction(basicPriceType)">
+            <div class="flex-row">
+                <h3 class="text-start fw-normal">Basic</h3>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="flex-row pt-2">
+                <p class="text-start text-sucess">{{basicPrice}}.00<i class="fas fa-dollar-sign"></i></p>
+            </div>
+            <div class="flex-row">
+                <p class="text-start text-wrap text-break fw-light">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum porro repellat aliquid unde ab magni facilis nostrum sequi ullam iste!
+                </p>
+            </div>
+
+            <div class="flex-row d-flex justify-content-start">
+                <button class="btn btn-warning">View Contract<i class="fas fa-file-contract"></i></button>
+            </div>
+            
+        </mat-card>
+        <mat-card class="border shadow btn text-light m-4" (click)="isTransactionAppending()?addArticleToTransaction(exclusivePriceType):createTransaction(exclusivePriceType)">
+            <div class="flex-row">
+                <h3 class="text-start fw-normal">Exclusive</h3>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="flex-row pt-2">
+                <p class="text-start text-sucess">{{exclusivePrice}}.00<i class="fas fa-dollar-sign"></i></p>
+            </div>
+            <div class="flex-row">
+                <p class="text-start text-wrap text-break fw-light">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum porro repellat aliquid unde ab magni facilis nostrum sequi ullam iste!
+                </p>
+            </div>
+
+            <div class="flex-row d-flex justify-content-start">
+                <button class="btn btn-warning">View Contract<i class="fas fa-file-contract"></i></button>
+            </div>
+            
+        </mat-card>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+</div>
+
+<div class="bg-dark border text-light container-fluid modal-dialog-scrollable" style="overflow-x:auto;overflow-y:auto;" *ngIf="isArticleInTransaction()">
+
+    <div class="modal-header">
+        <h4 class="modal-title fw-bold">WARNING<i class="fas fa-exclamation-triangle text-warning"></i></h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="fas fa-times text-danger"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <mat-card class="border shadow text-light m-4" >
+            <div class="flex-row d-flex justify-content-center p-2">
+                <p class="text-start text-wrap text-break fw-light">The article is already in the cart...</p>
+            </div>
+        </mat-card>
+    </div>
+</div>

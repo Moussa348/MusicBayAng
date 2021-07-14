@@ -1,0 +1,66 @@
+<div class="bg-dark border text-light container-fluid modal-dialog-scrollable" style="overflow-x:auto;overflow-y:auto;">
+  <div class="modal-header">
+    <h4 class="modal-title text-center">
+      Comments<i class="fas fa-comment"></i>
+    </h4>
+
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true"><i class="fas fa-times text-danger"></i></span>
+    </button>
+  </div>
+  <div class="modal-body bg-dark">
+    <h2 class="text-capitalize text-center">
+      <u>{{ title }}</u>
+    </h2>
+    <div class="card">
+      <button
+        type="button"
+        class="btn btn-dark"
+        (click)="collapse.toggle()"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample"
+      >
+        {{ collapsed() ? "show" : "hide" }}
+      </button>
+      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <div class="card-body bg-dark">
+            <div *ngFor="let comment of comments" class="row d-flex justify-content-between text-center text-break">
+              <mat-card>
+
+                <mat-divider></mat-divider>
+                
+                <div>
+                  <small class="text-light btn" (click)="goToProfile(comment.sendBy)"><u>{{comment.sendBy}}</u></small>
+                </div>
+                <div>
+                  <small class="text-light text-wrap">{{ comment.content }}</small>
+                </div>
+                <div>
+                  <small class="text-light">{{comment.nbrLike}} <i class="fas fa-heart btn text-{{commentIsLiked(comment.id)?'danger':'white'}}" (click)="increaseOrDecreaseLike(comment.id)"></i></small>
+                </div>
+              </mat-card>
+              </div>
+        </div>
+      </div>
+
+      <div class="form-floating text-light">
+        <textarea class="form-control bg-dark text-light" [(ngModel)]="comment.content" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;color: white;"></textarea>
+        <label for="floatingTextarea2">Comment</label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer flex-row d-flex justify-content-center">
+    <button
+      type="button"
+      class="btn  btn-outline-light"
+      (click)="postComment()"
+    >
+      Comment<i class="fas fa-comment"></i>
+    </button>
+  </div>
+</div>

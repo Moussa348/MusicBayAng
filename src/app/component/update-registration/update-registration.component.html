@@ -1,0 +1,209 @@
+<div
+  class="bg-dark border text-light container-fluid modal-dialog-scrollable"
+  style="overflow-x: auto; overflow-y: auto"
+>
+  <div class="modal-header">
+    <h4 class="modal-title text-center text-capitalize">
+      Update Registration<i class="fas fa-user-edit"></i>
+    </h4>
+
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <i class="fas fa-times text-danger"></i>
+    </button>
+  </div>
+  <div class="modal-body bg-dark">
+    <h2 class="text-capitalize"></h2>
+    <div class="bg-dark">
+      <mat-card>
+        <div class="d-flex align-items-center flex-row d-flex justify-content-center">
+          <div class="flex-shrink-0">
+            <img
+              mat-card-image
+              [src]="['http://localhost:4444/customer/getPicture/bayDrip']"
+              alt="vaccinCovid"
+              class="rounded border"
+            />
+          </div>
+        </div>
+        <div class="flex-row">
+          <form [formGroup]="registrationForm" (ngSubmit)="updateCustomer()">
+            <div class="m-2">
+              <div class="flex-row text-start">
+                <label for="email" class="form-label text-light text-start"
+                  >Email address</label
+                >
+              </div>
+              <div class="flex-row">
+                <input
+                  type="email"
+                  class="form-control text-primary"
+                  placeholder="email@email.com"
+                  [(ngModel)]="profile.email"
+                  id="email"
+                  formControlName="email"
+                  readonly
+                />
+              </div>
+            </div>
+
+            <div class="m-2">
+              <div class="flex-row text-start">
+                <label for="username" class="form-label text-light text-start"
+                  >Username</label
+                >
+              </div>
+              <div class="flex-row text-end">
+                <input
+                  #username
+                  type="text"
+                  class="form-control border"
+                  placeholder="min 6 character max 20 character"
+                  [(ngModel)]="profile.username"
+                  id="username"
+                  formControlName="username"
+                  min="6"
+                  max="20"
+                />
+                <span class="text-light">{{ username.value.length }} / 40</span>
+              </div>
+            </div>
+
+            <div class="m-2">
+              <div class="flex-row text-start">
+                <label for="username" class="form-label text-light text-start"
+                  >City</label
+                >
+              </div>
+              <div class="flex-row text-end">
+                <input
+                  #username
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="profile.city"
+                  id="city"
+                  formControlName="city"
+                />
+              </div>
+            </div>
+
+            <div class="m-2">
+              <div class="flex-row text-start">
+                <label for="username" class="form-label text-light text-start"
+                  >Biography</label
+                >
+              </div>
+              <div class="flex-row text-end">
+                <textarea
+                  class="form-control"
+                  formControlName="biography"
+                  [(ngModel)]="profile.biography"
+                  placeholder="Leave a comment here"
+                  id="biography"
+                  style="height: 100px"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="m-2">
+              <div class="flex-row text-start">
+                <label for="picture" class="form-label">Profile Picture</label>
+              </div>
+              <div class="flex-row">
+                <input
+                  class="form-control form-control-lg"
+                  id="picture"
+                  type="file"
+                  (change)="onFileChanged($event)"
+                />
+              </div>
+            </div>
+
+            <div class="form-check m-3">
+              <div class="flex-row text-start">
+                <input
+                  class="form-check-input"
+                  [value]="true"
+                  formControlName="updatePassword"
+                  type="checkbox"
+                  id="disabledFieldsetCheck"
+                />
+                <label class="form-check-label" for="disabledFieldsetCheck">
+                  Update Password?
+                </label>
+              </div>
+            </div>
+            <div
+              class="m-3"
+              *ngIf="registrationForm.get('updatePassword').value == true"
+            >
+              <div class="flex-row text-start">
+                <label for="exampleInputPassword1" class="form-label text-light"
+                  >Password</label
+                >
+              </div>
+              <div class="flex-row text-end">
+                <input
+                  #pass
+                  type="password"
+                  class="form-control is-invalid"
+                  [(ngModel)]="profile.password"
+                  formControlName="password"
+                  placeholder="min 8 character and max 40 character"
+                  id="password"
+                />
+                <span class="text-light">{{ pass.value.length }} / 40</span>
+              </div>
+            </div>
+            <div
+              class="m-3"
+              *ngIf="registrationForm.get('updatePassword').value == true"
+            >
+              <div class="flex-row text-start">
+                <label for="passwordAgain" class="form-label text-light"
+                  >Re-enter Password</label
+                >
+              </div>
+              <div class="flex-row text-end">
+                <input
+                  #passAgain
+                  type="password"
+                  formControlName="passwordAgain"
+                  [(ngModel)]="profile.password"
+                  placeholder="min 8 character and max 40 character"
+                  class="form-control"
+                  id="passwordAgain"
+                  min="8"
+                  max="40"
+                />
+                <span class="text-light"
+                  >{{ passAgain.value.length }} / 40</span
+                >
+              </div>
+            </div>
+
+            <div class="flex-row m-2">
+              <mat-divider class="text-light"></mat-divider>
+              <div class="p-2"></div>
+            </div>
+
+            <div class="flex-row d-flex justify-content-center">
+              <button
+                mat-button
+                matStepperNext
+                type="submit"
+                class="btn btn-success rounded-pill border border-3 shadow text-capitalize"
+              >
+                Update<i class="fas fa-edit"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
