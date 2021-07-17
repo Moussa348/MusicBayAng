@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './component/home/home.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSelectModule} from '@angular/material/select';
 import { NavComponent } from './component/nav/nav.component';
@@ -43,6 +44,9 @@ import { ListLikedMusicComponent } from './component/list-liked-music/list-liked
 import { ListSharedMusicComponent } from './component/list-shared-music/list-shared-music.component';
 import { ListPurchasedMusicComponent } from './component/list-purchased-music/list-purchased-music.component';
 import { DatePipe } from '@angular/common';
+import { JwtModule } from '@auth0/angular-jwt';
+import { ALLOWED_URLS, STORAGE_KEY } from './util/constant';
+import { NotificationComponent } from './component/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +70,7 @@ import { DatePipe } from '@angular/common';
     ListLikedMusicComponent,
     ListSharedMusicComponent,
     ListPurchasedMusicComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,11 +80,11 @@ import { DatePipe } from '@angular/common';
     MatGridListModule,
     MatDialogModule,
     MatRippleModule,
-    HttpClientModule,
     MatCardModule,
     MatTabsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -90,7 +95,16 @@ import { DatePipe } from '@angular/common';
     MatChipsModule,
     MatIconModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter: () => {
+          return sessionStorage.getItem(STORAGE_KEY);
+        },
+        allowedDomains:ALLOWED_URLS
+      },
+    }),
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

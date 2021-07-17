@@ -1,0 +1,23 @@
+<div
+  class="d-flex align-items-center border rounded pl-2"
+  *ngFor="let recentNotification of recentNotifications"
+>
+  <div class="flex-shrink-0 ml-2 flex-fill">
+    <img
+      [src]="['http://localhost:4444/customer/getPicture/bayDrip']"
+      alt="vaccinCovid"
+      class="rounded-pill border border-2 img-responsive h-100 ml-1"
+    />
+  </div>
+  <div class="flex-grow-1 ms-3 m-4 flex-fill">
+    <div class="flex-row">
+      <small class="text-capitalize">{{ recentNotification.triggeredBy }}</small>
+    </div>
+    <div class="flex-row">
+      <small>{{ recentNotification.notificationEvent }}</small>
+    </div>
+    <div class="flex-row">
+        <small>{{ recentNotification.date | date:'medium' }}</small>
+      </div>
+  </div>
+</div>

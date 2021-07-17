@@ -56,6 +56,16 @@
       <div class="collapse navbar-collapse justify-content-end text-light" id="nav" [ngbCollapse]="isMenuCollapsed">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
+            <a
+              class="nav-link btn text-uppercase font-weight px-3 dropdown text-light dropdown-toggle" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+              >Notification<i class="fas fa-bell"></i></a
+            >
+
+            <div class="dropdown-menu" aria-labelledby="notificationDropdown" style="overflow-x:auto;overflow-y:auto;">
+              <app-notification class="w-100" *ngIf="getNotificationStatus()"></app-notification>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
 
               <a (click)="openCart = !openCart"
               class="nav-link btn text-uppercase font-weight px-3 dropdown text-light dropdown-toggle" id="cartDropDown" data-bs-toggle="dropdown" aria-expanded="false"

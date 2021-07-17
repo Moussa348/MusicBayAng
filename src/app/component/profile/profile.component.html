@@ -30,20 +30,22 @@
     <div class="grid-container">
       <mat-grid-list cols="2" rowHeight="350px">
         <mat-grid-tile colspan="2" rowspan="1">
-          <mat-card class="dashboard-card shadow-lg border border-4 border-dark text-light font-weight-bolder rounded">
+          <mat-card class="dashboard-card shadow-lg border border-2 border-light text-light font-weight-bolder rounded">
 
             <mat-card-content class="dashboard-card-content">
 
               <div class="flex-row d-flex align-items-center">
-                  
-                <div class="flex-shrink-0">
-                  <img
-                  [src]="['http://localhost:4444/customer/getPicture/bayDrip']"
-                  alt="vaccinCovid"
-                  class="rounded shadow border border-4 border-dark text-center"
-                  (click)="openUpdateRegistration()"
-                  />
-                </div>
+                  <a class="btn">
+
+                    <div class="flex-shrink-0">
+                      <img
+                      [src]="['http://localhost:4444/customer/getPicture/bayDrip']"
+                      alt="vaccinCovid"
+                      class="rounded shadow border border-2 border-dark text-center"
+                      (click)="openUpdateRegistration()"
+                      />
+                    </div>
+                  </a>
                 <div class="flex-grow-1 ms-5 text-start">
                   <div class=" flex-row">
                     <p class="lead text-capitalize">
@@ -88,7 +90,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="3">
-          <mat-card class="dashboard-card shadow-lg border border-4 border-dark text-light rounded" style="overflow-x:auto;overflow-y:auto;">
+          <mat-card class="dashboard-card shadow-lg border border-2 border-light text-light rounded" style="overflow-x:auto;overflow-y:auto;">
               <mat-tab-group mat-align-tabs="center">
                 <mat-tab label="Liked Music">
                     <app-list-liked-music [username]="currentUserName" ></app-list-liked-music>

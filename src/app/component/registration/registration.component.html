@@ -24,7 +24,7 @@
     <mat-divider class="border border-3"></mat-divider>
     <div class="p-5"></div>
 
-<mat-card @fade class="shadow container border border-4 border-dark shadow-lg">
+<mat-card @fade class="shadow container border border-2 border shadow-lg">
     <form [formGroup]="registrationForm" (ngSubmit)="createCustomer()" class="font-weight-bolder">
         <div class="m-3">
             <div class="flex-row text-start">
@@ -64,7 +64,7 @@
         </div>
 
         <div class="flex-row">
-            <mat-divider class=" border border-3 border-dark"></mat-divider>
+            <mat-divider class=" border border-2"></mat-divider>
             <div class="p-2"></div>
         </div>
 
@@ -73,7 +73,7 @@
             mat-button
             matStepperNext
             type="submit"
-            class="btn btn-success border border-3 shadow text-capitalize rounded-pill"
+            class="btn btn-success border border-2 shadow text-capitalize rounded-pill"
             >
             register<i class="fas fa-user-plus"></i>
         </button>

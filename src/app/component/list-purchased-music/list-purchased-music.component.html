@@ -1,15 +1,18 @@
 <div *ngIf="!isEmpty()">
     <mat-card
-      class="flex-row d-flex align-items-center border border-4 border-dard shadow-lg text-light font-weight-bolder m-4"
+      class="flex-row d-flex align-items-center border border-2 border-light shadow-lg text-light font-weight-bolder m-4"
       *ngFor="let purchasedMusic of purchasedMusics"
     >
+    <a [routerLink]="">
+
       <div class="flex-shrink-0 h-100">
         <img
-          [src]="['assets/images/welcomeBg1.png']"
-          alt="vaccinCovid"
-          class="rounded border border-4 border-dark shadow text-center h-100 img-responsive flex"
+        [src]="['assets/images/welcomeBg1.png']"
+        alt="vaccinCovid"
+        class="rounded border border-1 border-dark shadow text-center h-100 img-responsive flex"
         />
       </div>
+    </a>
       <div class="flex-grow-1 ms-5 text-start">
         <div class="flex-row">
           <p class="lead text-capitalize">

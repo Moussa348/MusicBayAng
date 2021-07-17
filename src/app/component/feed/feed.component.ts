@@ -23,7 +23,7 @@ import { FeedService } from 'src/app/service/feed.service';
   ]
 })
 export class FeedComponent implements OnInit {
-  username = 'bombay';
+  username = sessionStorage.getItem('username');;
   lastDateOfCurrentFeed;
   noPage = 0;
 

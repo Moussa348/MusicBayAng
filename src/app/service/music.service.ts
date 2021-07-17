@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Catalog } from '../model/catalog';
 import { Music } from '../model/music';
+import { STORAGE_KEY } from '../util/constant';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,13 @@ export class MusicService {
     return this.http.get<Music>(this.url + 'getMusic/' + title);
   }
 
-  getCatalog(username:string){
-    return this.http.get<Catalog>(this.url + 'getCatalog/' + username);
+  getCatalog(username:string,noPage:number){
+    const params = new HttpParams().set("username",username).set("noPage",noPage.toString());
+    const options = {params:params};
+    return this.http.get<Catalog>(this.url + 'getCatalog/',options);
   }
 
-  getListMusic(){
-    return this.http.get<Music[]>(this.url + 'getListMusic');
+  getListMusic(noPage:number){
+    return this.http.get<Music[]>(this.url + 'getListMusic/' + noPage);
   }
 }

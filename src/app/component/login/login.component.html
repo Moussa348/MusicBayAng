@@ -1,1 +1,102 @@
-<p>login works!</p>
+<app-nav></app-nav>
+
+<div class="container" @fade>
+    <div class="p-5"></div>
+    <div class="p-5"></div>
+    <mat-divider class="border border-3"></mat-divider>
+    <div class="p-4"></div>
+    <div
+      class="
+        row
+        d-flex
+        justify-content-center
+        text-uppercase
+        font-weight-bold
+        text-light
+        text-center
+      "
+    >
+      <h1 style="font-family: 'Times New Roman', Times, serif">
+       LOGIN<i class="fas fa-user-lock"></i
+        >
+      </h1>
+    </div>
+    <div class="p-4"></div>
+    <mat-divider class="border border-3"></mat-divider>
+    <div class="p-5"></div>
+
+  <div class="container">
+    <mat-card class="shadow-lg container border border-2  rounded">
+      <div class="p-4"></div>
+      <form
+        [formGroup]="authFormGroup"
+        (ngSubmit)="onSubmit()"
+        *ngIf="!isLoggedIn()"
+      >
+        <div class="m-3">
+          <div class="flex-row text-start">
+            <label for="username" class="form-label text-light text-start"
+              >Username</label
+            >
+          </div>
+          <div class="flex-row text-end">
+            <input
+              #username
+              type="text"
+              class="form-control border border-2 border-dark shadow"
+              placeholder="min 6 character max 20 character"
+              id="username"
+              formControlName="username"
+              min="6"
+              max="20"
+            />
+            <span class="text-light">{{ username.value.length }} / 40</span>
+          </div>
+        </div>
+
+        <div class="m-3">
+          <div class="flex-row text-start">
+            <label for="exampleInputPassword1" class="form-label text-light"
+              >Password</label
+            >
+          </div>
+          <div class="flex-row text-end">
+            <input
+              #pass
+              type="password"
+              class="form-control border border-2 border-dark shadow"
+              formControlName="password"
+              placeholder="min 8 character and max 40 character"
+              id="password"
+            />
+            <span class="text-light">{{ pass.value.length }} / 40</span>
+          </div>
+        </div>
+        <div class="flex-row d-flex justify-content-center">
+          <button class="btn btn-dark border border-2 shadow rounded-pill pl-4 pr-4 pt-2 pb-2" type="submit">
+            Login<i class="fas fa-sign-in-alt"></i>
+          </button>
+        </div>
+      </form>
+
+      <div class="text-center text-justify" *ngIf="isLoggedIn()">
+        <h1>You are already logged! Do you want to log out?</h1>
+        <button
+          class="btn btn-danger rounded-pill border border-3 shadow"
+          (click)="logout()"
+        >
+          Logout<i class="fas fa-sign-out-alt pl-1"></i>
+        </button>
+      </div>
+      <div class="p-2"></div>
+    </mat-card>
+    <div class="p-4"></div>
+    <div class="p-4"></div>
+    <div class="p-4"></div>
+    <div class="p-4"></div>
+    <div class="p-4"></div>
+    <div class="p-4"></div>
+    <div class="p-4"></div>
+    <div class="p-4"></div>
+  </div>
+</div>

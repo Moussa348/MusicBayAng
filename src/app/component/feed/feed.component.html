@@ -23,13 +23,13 @@
     <mat-divider class="text-light border border-3"></mat-divider>
     <div class="p-4"></div>
 
-    <mat-card class="flex-row d-flex align-items-center border border-4 border-dark shadow-lg text-light font-weight-bolder m-4" *ngFor="let sharedMusic of feed.sharedMusics">
-        <a href="">
+    <mat-card class="flex-row d-flex align-items-center border border-2 border-dark shadow-lg text-light font-weight-bolder m-4" *ngFor="let sharedMusic of feed.sharedMusics">
+        <a [routerLink]="">
             <div class="">
                 <img
                 [src]="['assets/images/welcomeBg1.png']"
                 alt="vaccinCovid"
-                class="rounded border border-4 border-dark h-100 img-responsive img-fluid "
+                class="rounded border border-1 border-dark img-responsive img-fluid "
                 />
             </div>
         </a>
@@ -87,7 +87,7 @@
     class="flex-row d-flex align-items-center border border-4 border-dark shadow-lg text-light font-weight-bolder m-4"
     *ngFor="let purchasedMusic of feed.purchasedMusics"
   >
-  <a href="">
+  <a [routerLink]="">
 
       <div class="flex-shrink-0 h-100">
           <img
@@ -144,16 +144,16 @@
   </mat-card>
 
   <mat-card
-    class="flex-row d-flex align-items-center border border-4 border-dark shadow-lg text-light font-weight-bolder m-4"
+    class="flex-row d-flex align-items-center border border-2 border-dark shadow-lg text-light font-weight-bolder m-4"
     *ngFor="let likedMusic of feed.likedMusics"
   >
-  <a href="">
+  <a [routerLink]="">
 
       <div class="flex-shrink-0">
           <img
-          [src]="['assets/images/welcomeBg1.png']"
+          [src]="['assets/images/welcomeBg2.png']"
           alt="vaccinCovid"
-          class="rounded border border-4 border-dark h-100 img-responsive img-fluid"
+          class="rounded shadow border border-1 border-dark h-100 img-responsive img-fluid"
           />
         </div>
     </a>

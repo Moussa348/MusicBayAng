@@ -1,0 +1,9 @@
+img{
+    width: 250px;
+    height: 100%;
+}
+
+img:hover{
+    opacity: 0.5;
+}
+

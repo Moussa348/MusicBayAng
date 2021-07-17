@@ -30,7 +30,7 @@ import { PurchasedMusic } from 'src/app/model/purchased-music';
   ],
 })
 export class ProfileComponent implements OnInit {
-  currentUserName = 'bombay'; //TODO --> get from session storage
+  currentUserName = sessionStorage.getItem('username'); //TODO --> get from session storage
   profileUserName = '';
   profile: Customer = new Customer();
   subscribed = false;

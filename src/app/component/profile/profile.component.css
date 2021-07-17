@@ -28,3 +28,7 @@ img{
   width: 275px;
   height:auto;
 }
+
+img:hover{
+opacity: 0.5;
+}

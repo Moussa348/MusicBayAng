@@ -14,6 +14,7 @@ import { CommentComponent } from '../comment/comment.component';
 import { ShareComponent } from '../share/share.component';
 import { AddingCartArticleComponent } from '../adding-cart-article/adding-cart-article.component';
 import { DatePipe } from '@angular/common';
+import { getUsername } from 'src/app/util/jwtUtils';
 
 @Component({
   selector: 'app-catalog',
@@ -29,8 +30,9 @@ import { DatePipe } from '@angular/common';
 })
 export class CatalogComponent implements OnInit {
   catalog: Catalog = new Catalog();
-  username = 'bombay';
-  stop =false;
+  username = sessionStorage.getItem('username');
+  stop = false;
+  noPage = 0;
 
   constructor(
     private musicService: MusicService,
@@ -40,20 +42,32 @@ export class CatalogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.datePipe.transform(new Date(),'yyyy-MM-dd HH:mm'));
+    console.log(this.username);
     this.getCatalog();
   }
 
   getCatalog() {
-    this.musicService.getCatalog('bombay').subscribe(
-      (data) => {
-        this.catalog = data;
-        console.log(this.catalog);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    if (this.username != null) {
+      this.musicService.getCatalog(this.username,this.noPage).subscribe(
+        (data) => {
+          this.catalog = data;
+          console.log(this.catalog);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.musicService.getListMusic(this.noPage).subscribe(
+        (data) => {
+          this.catalog.musics = data;
+          console.log(this.catalog.musics);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 
   likeOrUnlike(username: string, title: string) {
@@ -72,9 +86,9 @@ export class CatalogComponent implements OnInit {
       });
     } else {
       this.monitoringService.likeMusic(username, title).subscribe();
-      
+
       this.catalog.likedMusicTitles.push(title);
-      
+
       this.catalog.musics.forEach((music) => {
         if (music.title == title) {
           music.nbrOfLike++;
@@ -86,15 +100,15 @@ export class CatalogComponent implements OnInit {
   }
 
   isShared(title: string) {
-    return this.catalog.sharedMusicTitles.find(
+    return this.catalog.sharedMusicTitles != null?this.catalog.sharedMusicTitles.find(
       (sharedMusicTitle) => sharedMusicTitle == title
-    );
+    ):false;
   }
 
   isLiked(title: string) {
-    return this.catalog.likedMusicTitles.find(
+    return this.catalog.likedMusicTitles? this.catalog.likedMusicTitles.find(
       (likedMusicTitle) => likedMusicTitle == title
-    );
+    ):false;
   }
 
   openComment(title: string) {
@@ -118,9 +132,9 @@ export class CatalogComponent implements OnInit {
       modalRef.componentInstance.music = music;
     } else {
       const index = this.catalog.likedMusicTitles.indexOf(title);
-      
+
       this.monitoringService.unShareMusic(this.username, title).subscribe();
-      
+
       this.catalog.sharedMusicTitles.splice(index);
 
       this.catalog.musics.forEach((music) => {
@@ -133,7 +147,7 @@ export class CatalogComponent implements OnInit {
     }
   }
 
-  openAddingArticle(title: string,basicPrice:number,exclusivePrice:number) {
+  openAddingArticle(title: string, basicPrice: number, exclusivePrice: number) {
     const modalRef = this.modalService.open(AddingCartArticleComponent, {
       centered: true,
       scrollable: true,
@@ -144,7 +158,7 @@ export class CatalogComponent implements OnInit {
     modalRef.componentInstance.exclusivePrice = exclusivePrice;
   }
 
-  play(){
+  play() {
     return this.stop;
   }
 }

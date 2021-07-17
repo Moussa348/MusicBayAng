@@ -12,12 +12,19 @@ import { TransactionService } from 'src/app/service/transaction.service';
 export class NavComponent {
   username = "bombay";
   openCart = false;
+  openNotification = true;
   public isMenuCollapsed = true;
 
   
-
+  getNotificationStatus(){
+    return this.openNotification;
+  }
   showCart(){
     return this.openCart;
+  }
+
+  setNOtificationStatus(){
+    this.openNotification = !this.openNotification;
   }
 
 }
