@@ -12,4 +12,5 @@ export class Music {
     nbrOfComment:number;
     basicPrice:number;
     exclusivePrice:number;
+    fileNames:string[];
 }

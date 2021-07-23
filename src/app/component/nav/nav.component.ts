@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { TransactionService } from 'src/app/service/transaction.service';
+import { AuthGuardService } from 'src/app/service/auth-guard.service';
+import { getUsername } from 'src/app/util/jwtUtils';
 
 @Component({
   selector: 'app-nav',
@@ -10,12 +12,15 @@ import { TransactionService } from 'src/app/service/transaction.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-  username = "bombay";
+  username = getUsername();
   openCart = false;
   openNotification = true;
   public isMenuCollapsed = true;
-
   
+  constructor(
+    private authGuardService:AuthGuardService
+  ){}
+
   getNotificationStatus(){
     return this.openNotification;
   }
@@ -25,6 +30,10 @@ export class NavComponent {
 
   setNOtificationStatus(){
     this.openNotification = !this.openNotification;
+  }
+
+  isLoggedIn(){
+    return this.authGuardService.isLoggedIn();
   }
 
 }

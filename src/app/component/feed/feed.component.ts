@@ -47,8 +47,8 @@ export class FeedComponent implements OnInit {
   }
 
   loadFeed() {
-    this.noPage += 1;
-    let date = new Date();
+    this.noPage++;
+    console.log(this.noPage);
 
     this.feedService
       .getFeed(
@@ -60,7 +60,7 @@ export class FeedComponent implements OnInit {
           this.feed.likedMusics.concat(data.likedMusics);
           this.feed.sharedMusics.concat(data.sharedMusics);
           this.feed.purchasedMusics.concat(data.purchasedMusics);
-          this.feed.profiles.concat(data.profiles);
+          //this.feed.profiles.concat(data.profiles);
           console.log(this.feed);
         },
         (err) => {

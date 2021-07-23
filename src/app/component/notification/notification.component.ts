@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecentNotification } from 'src/app/model/recent-notification';
 import { NotificationService } from 'src/app/service/notification.service';
+import { getUsername } from 'src/app/util/jwtUtils';
 
 @Component({
   selector: 'app-notification',
@@ -8,7 +9,7 @@ import { NotificationService } from 'src/app/service/notification.service';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
-  username = "bombay";
+  username = getUsername();
   noPage =0;
   recentNotifications:RecentNotification[] = new Array();
 

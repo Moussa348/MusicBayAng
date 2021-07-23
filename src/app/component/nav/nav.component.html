@@ -21,9 +21,9 @@
               >HOME<i class="fas fa-home"></i></a
             >
           </li>
-          <li class="nav-item dropdown" data-toggle="dropdown">
+          <li class="nav-item" *ngIf="isLoggedIn()">
             <a
-              class="nav-link text-uppercase font-weight px-3 dropdown text-light"
+              class="nav-link text-uppercase font-weight px-3 text-light"
               [routerLink]="['/profile',username]" 
               >Profile<i class="fas fa-user-circle"></i></a
             >
@@ -37,14 +37,14 @@
             >
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isLoggedIn()">
             <a
               [routerLink]="['/feed']" 
               class="nav-link text-uppercase font-weight px-3 text-light"
               >FEED<i class="fas fa-rss"></i></a
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isLoggedIn()">
             <a
               [routerLink]="['/catalog']" 
               class="nav-link text-uppercase font-weight px-3 text-light"
@@ -77,7 +77,7 @@
             </div>
 
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!isLoggedIn()">
             <a
               [routerLink]="['/registration']" 
               class="nav-link text-uppercase px-3 text-light"
@@ -88,7 +88,7 @@
             <a
               [routerLink]="['/login']" 
               class="nav-link text-uppercase px-3 text-light"
-              >LOGIN<i class="fas fa-user-lock"></i
+              >{{isLoggedIn()?'LOGOUT':'LOGIN'}}<i class="fas {{isLoggedIn()?'fa-lock-open':'fa-lock'}}"></i
             ></a>
           </li>
         </ul>

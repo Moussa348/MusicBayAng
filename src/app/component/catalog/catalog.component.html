@@ -24,7 +24,7 @@
   <div class="p-4"></div>
 
   <div class="row d-flex justify-content-around" >
-    <div class="col-sm-10 col-md-6 col-lg-4 p-4" *ngFor="let music of catalog.musics">
+    <div class="col-sm-10 col-md-6 col-lg-4 p-4" *ngFor="let music of catalog.musics; let i=index">
       <mat-card class="shadow-lg border border-2 border-dark text-light rounded" style="width: 350px;">
         <a [routerLink]="">
         <div class="d-flex justify-content-center rounded" style="height: 300px;">
@@ -37,7 +37,7 @@
           </div>
         </a>
         <mat-card-header class="row d-flex justify-content-center">
-          <mat-card-title class="lead text-capitalize font-weight-bolder text-center">
+          <mat-card-title class="lead text-capitalize font-weight-bolder text-center text-break">
             <u>{{ music.title}}</u>
           </mat-card-title>
         </mat-card-header>
@@ -59,7 +59,7 @@
           </div>
 
           <div class="row d-flex justify-content-center pb-2">
-            <button type="button" class="btn btn-primary text-light mb-3 border">
+            <button type="button" class="btn btn-primary text-light mb-3 border" (click)="play(i)">
               PLAY<i class="fas fa-play pl-1"></i>
             </button>
             

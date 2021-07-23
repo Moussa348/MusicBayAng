@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TransactionService } from 'src/app/service/transaction.service';
+import { getUsername } from 'src/app/util/jwtUtils';
 
 @Component({
   selector: 'app-adding-cart-article',
@@ -8,7 +9,7 @@ import { TransactionService } from 'src/app/service/transaction.service';
   styleUrls: ['./adding-cart-article.component.css']
 })
 export class AddingCartArticleComponent implements OnInit {
-  username = "bombay";
+  username = getUsername();
   hasTransactionPending:boolean;
   articleIsInTransaction:boolean
   basicPriceType = "BASIC";

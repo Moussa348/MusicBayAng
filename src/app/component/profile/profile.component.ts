@@ -16,6 +16,7 @@ import { UpdateRegistrationComponent } from '../update-registration/update-regis
 import { LikedMusic } from 'src/app/model/liked-music';
 import { SharedMusic } from 'src/app/model/shared-music';
 import { PurchasedMusic } from 'src/app/model/purchased-music';
+import { getUsername } from 'src/app/util/jwtUtils';
 
 @Component({
   selector: 'app-profile',
@@ -30,7 +31,7 @@ import { PurchasedMusic } from 'src/app/model/purchased-music';
   ],
 })
 export class ProfileComponent implements OnInit {
-  currentUserName = sessionStorage.getItem('username'); //TODO --> get from session storage
+  currentUserName = getUsername(); //TODO --> get from session storage
   profileUserName = '';
   profile: Customer = new Customer();
   subscribed = false;

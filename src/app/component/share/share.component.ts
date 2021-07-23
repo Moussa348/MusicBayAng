@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Music } from 'src/app/model/music';
 import { MonitoringService } from 'src/app/service/monitoring.service';
+import { getUsername } from 'src/app/util/jwtUtils';
 
 @Component({
   selector: 'app-share',
@@ -10,7 +11,7 @@ import { MonitoringService } from 'src/app/service/monitoring.service';
   styleUrls: ['./share.component.css']
 })
 export class ShareComponent implements OnInit {
-  username = "bombay";
+  username = getUsername();
   sharingMsg;
   @Input() music:Music;
 

@@ -15,6 +15,7 @@ import { ShareComponent } from '../share/share.component';
 import { AddingCartArticleComponent } from '../adding-cart-article/adding-cart-article.component';
 import { DatePipe } from '@angular/common';
 import { getUsername } from 'src/app/util/jwtUtils';
+import { Howl, Howler } from 'howler';
 
 @Component({
   selector: 'app-catalog',
@@ -30,8 +31,8 @@ import { getUsername } from 'src/app/util/jwtUtils';
 })
 export class CatalogComponent implements OnInit {
   catalog: Catalog = new Catalog();
-  username = sessionStorage.getItem('username');
-  stop = false;
+  username = getUsername();
+  sounds : HTMLAudioElement[];;
   noPage = 0;
 
   constructor(
@@ -51,16 +52,18 @@ export class CatalogComponent implements OnInit {
       this.musicService.getCatalog(this.username,this.noPage).subscribe(
         (data) => {
           this.catalog = data;
+          this.setSoundPlayings(this.catalog.musics.length)
           console.log(this.catalog);
         },
         (err) => {
           console.log(err);
         }
-      );
-    } else {
-      this.musicService.getListMusic(this.noPage).subscribe(
-        (data) => {
-          this.catalog.musics = data;
+        );
+      } else {
+        this.musicService.getListMusic(this.noPage).subscribe(
+          (data) => {
+            this.catalog.musics = data;
+            this.setSoundPlayings(this.catalog.musics.length)
           console.log(this.catalog.musics);
         },
         (err) => {
@@ -68,6 +71,18 @@ export class CatalogComponent implements OnInit {
         }
       );
     }
+
+  }
+
+  setSoundPlayings(length:number){
+    this.sounds = new Array(length);
+   
+    for(let i = 0; i < this.sounds.length ; i++){
+        this.sounds[i] = new Audio();
+    }
+    
+    console.log(this.sounds);
+
   }
 
   likeOrUnlike(username: string, title: string) {
@@ -158,7 +173,40 @@ export class CatalogComponent implements OnInit {
     modalRef.componentInstance.exclusivePrice = exclusivePrice;
   }
 
-  play() {
-    return this.stop;
+  play(index: number,fileName:string) {
+    const sound = this.sounds[index] 
+
+    //firstTime playing
+    if(!sound.src){
+      console.log(sound);
+      sound.src = 'http://localhost:4444/file/play/Hope.mp3';
+      sound.load();
+      this.stopOther();
+      console.log("PLAY FOR FIRST TIME");
+      sound.play();
+      return;
+    }
+    
+    if(sound.src && !sound.paused){
+      console.log("PAUSE");
+      sound.pause();
+      return;
+    }
+    
+    if(sound.src && sound.paused){
+      console.log("PLAYING AFTER BEING PAUSED");
+      this.stopOther();
+      sound.play();
+      return;
+    }
+  }
+
+  stopOther(){
+    for (let i = 0 ; i < this.sounds.length; i++){
+      const sound = this.sounds[i];
+      if(!sound.paused){
+        sound.pause();
+      }
+    }
   }
 }

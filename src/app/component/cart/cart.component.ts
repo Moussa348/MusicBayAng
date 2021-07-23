@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Transaction } from 'src/app/model/transaction';
 import { TransactionService } from 'src/app/service/transaction.service';
 import { EventEmitter } from '@angular/core';
+import { getUsername } from 'src/app/util/jwtUtils';
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +11,7 @@ import { EventEmitter } from '@angular/core';
 })
 export class CartComponent implements OnInit {
   transaction: Transaction = new Transaction();
-  username = "bombay";
+  username = getUsername();
 
   constructor(
     private transactionService:TransactionService
