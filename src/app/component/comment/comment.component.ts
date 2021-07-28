@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from '../../model/comment';
@@ -12,11 +12,12 @@ import { Router } from '@angular/router';
 })
 export class CommentComponent implements OnInit {
   @Input() title;
-  username = 'bombay';
+  @Input() username ;
   comments: Comment[] = new Array();
   isCollapsed = false;
   comment: Comment = new Comment();
   noPage = 0;
+  @Output() nbComment: EventEmitter<number> = new EventEmitter<number>();
 
 
   constructor(
@@ -42,6 +43,16 @@ export class CommentComponent implements OnInit {
   }
 
   loadMoreComments(){
+    this.noPage++;
+    this.commentService.getListCommentOfMusic(this.title,this.noPage).subscribe(
+      (data) => {
+        this.comments.push.apply(this.comments,data);
+        console.log(this.comments);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
     
   }
 
@@ -97,6 +108,7 @@ export class CommentComponent implements OnInit {
       (data) =>{
         this.comment.content = "";
         this.comments.push(data);
+        this.nbComment.emit(this.comments.length);
       },
       (err) => {
         console.log(err);
@@ -112,5 +124,9 @@ export class CommentComponent implements OnInit {
   goToProfile(username:string){
     this.router.navigate(['profile/',username]);
     this.activeModal.close();
+  }
+
+  hasComments(){
+    return this.comments.length >0;
   }
 }

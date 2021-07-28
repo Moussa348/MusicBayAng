@@ -9,6 +9,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { FeedService } from 'src/app/service/feed.service';
+import { getUsername } from 'src/app/util/jwtUtils';
 
 @Component({
   selector: 'app-feed',
@@ -23,7 +24,7 @@ import { FeedService } from 'src/app/service/feed.service';
   ]
 })
 export class FeedComponent implements OnInit {
-  username = sessionStorage.getItem('username');;
+  username = getUsername();
   lastDateOfCurrentFeed;
   noPage = 0;
 
@@ -57,9 +58,9 @@ export class FeedComponent implements OnInit {
       )
       .subscribe(
         (data) => {
-          this.feed.likedMusics.concat(data.likedMusics);
-          this.feed.sharedMusics.concat(data.sharedMusics);
-          this.feed.purchasedMusics.concat(data.purchasedMusics);
+          this.feed.likedMusics.push.apply(this.feed.likedMusics,data.likedMusics);
+          this.feed.sharedMusics.push.apply(this.feed.sharedMusics,data.sharedMusics);
+          this.feed.purchasedMusics.push.apply(this.feed.purchasedMusics,data.purchasedMusics);
           //this.feed.profiles.concat(data.profiles);
           console.log(this.feed);
         },

@@ -1,4 +1,7 @@
-<div class="bg-dark border text-light container-fluid modal-dialog-scrollable" style="overflow-x:auto;overflow-y:auto;">
+<div
+  class="bg-dark border text-light container-fluid modal-dialog-scrollable"
+  style="overflow-x: auto; overflow-y: auto"
+>
   <div class="modal-header">
     <h4 class="modal-title text-center">
       Comments<i class="fas fa-comment"></i>
@@ -19,47 +22,109 @@
     </h2>
     <div class="card">
       <button
+        *ngIf="hasComments()"
         type="button"
-        class="btn btn-dark"
+        class="btn btn-dark btn-outline-light pb-4"
         (click)="collapse.toggle()"
         [attr.aria-expanded]="!isCollapsed"
         aria-controls="collapseExample"
       >
-        {{ collapsed() ? "show" : "hide" }}
+        {{
+          collapsed()
+            ? "Show " + comments.length + " comments..."
+            : "Hide " + comments.length + " comments..."
+        }}
       </button>
       <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-        <div class="card-body bg-dark">
-            <div *ngFor="let comment of comments" class="row d-flex justify-content-between text-center text-break">
-              <mat-card>
-
-                <mat-divider></mat-divider>
-                
-                <div>
-                  <small class="text-light btn" (click)="goToProfile(comment.sendBy)"><u>{{comment.sendBy}}</u></small>
+        <div class="card-body bg-dark" *ngIf="hasComments()">
+          <div *ngFor="let comment of comments">
+            <mat-card
+              class="d-flex text-center text-break align-items-center collapse"
+              id="{{ 'hideComment' + i }}"
+            >
+              <div class="flex-shrink-0">
+                <img
+                  [src]="['http://localhost:4444/customer/getPicture/bayDrip']"
+                  alt="vaccinCovid"
+                  class="
+                    rounded-circle
+                    border border-2
+                    img-responsive
+                    h-100
+                    ml-1
+                  "
+                />
+                <div class="flex-row">
+                  <small
+                    class="text-light btn"
+                    (click)="goToProfile(comment.sendBy)"
+                    ><u>{{ comment.sendBy }}</u></small
+                  >
                 </div>
-                <div>
-                  <small class="text-light text-wrap">{{ comment.content }}</small>
-                </div>
-                <div>
-                  <small class="text-light">{{comment.nbrLike}} <i class="fas fa-heart btn text-{{commentIsLiked(comment.id)?'danger':'white'}}" (click)="increaseOrDecreaseLike(comment.id)"></i></small>
-                </div>
-              </mat-card>
               </div>
+
+              <div class="flex-grow-1 ms-3">
+                <div class="flex-row">
+                  <small class="text-light text-wrap">{{
+                    comment.content
+                  }}</small>
+                </div>
+                <div class="flex-row">
+                  <small class="text-light"
+                    >{{ comment.nbrLike }}
+                    <i
+                      class="fas fa-heart btn text-{{
+                        commentIsLiked(comment.id) ? 'danger' : 'white'
+                      }}"
+                      (click)="increaseOrDecreaseLike(comment.id)"
+                    ></i
+                  ></small>
+                </div>
+              </div>
+              <div class="float-end">
+                <a
+                  class="btn"
+                  data-bs-toggle="collapse"
+                  href="{{ 'hideComment' + i }}"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="{{ 'hideComment' + i }}"
+                >
+                  <i class="fas fa-eye-slash"></i>
+                </a>
+              </div>
+            </mat-card>
+            <mat-divider class="border border-2"></mat-divider>
+          </div>
+
+          <div
+            class="flex-row d-flex justify-content-center pt-4"
+            *ngIf="hasComments()"
+          >
+            <button
+              class="btn btn-outline-info rounded-pill border text-light"
+              (click)="loadMoreComments()"
+            >
+              More <i class="fas fa-cloud-download-alt"></i>
+            </button>
+          </div>
         </div>
       </div>
 
       <div class="form-floating text-light">
-        <textarea class="form-control bg-dark text-light" [(ngModel)]="comment.content" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px;color: white;"></textarea>
+        <textarea
+          class="form-control bg-dark text-light"
+          [(ngModel)]="comment.content"
+          placeholder="Leave a comment here"
+          id="floatingTextarea2"
+          style="height: 100px; color: white"
+        ></textarea>
         <label for="floatingTextarea2">Comment</label>
       </div>
     </div>
   </div>
   <div class="modal-footer flex-row d-flex justify-content-center">
-    <button
-      type="button"
-      class="btn  btn-outline-light"
-      (click)="postComment()"
-    >
+    <button type="button" class="btn btn-outline-light" (click)="postComment()">
       Comment<i class="fas fa-comment"></i>
     </button>
   </div>

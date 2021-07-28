@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,6 +11,9 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { getUsername } from 'src/app/util/jwtUtils';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { NavComponent } from '../nav/nav.component';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +30,8 @@ import {
 export class LoginComponent implements OnInit {
 
   authFormGroup: FormGroup;
+  @ViewChild('staticAlert', {static: false}) staticAlert: NgbAlert;
+  @ViewChild(NavComponent) nav;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -45,6 +50,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', Validators.required),
     });
   }
+
 
   onSubmit() {
     if (this.authFormGroup.valid) {
@@ -70,12 +76,18 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  getUsername(){
+    return getUsername();
+  }
+
   isLoggedIn() {
     return this.authGuardService.isLoggedIn();
   }
 
   logout() {
     this.authGuardService.logout();
+    setTimeout(() => this.staticAlert.close(), 5000);
+    this.nav.username = null;
     this.openSnackBar('Till next time!', 'DISMISS');
   }
 

@@ -93,6 +93,11 @@
     <div class="p-4"></div>
     <div class="p-4"></div>
     <div class="p-4"></div>
+    <div>
+      <ngb-alert *ngIf="!isLoggedIn()" type="primary" #staticAlert>
+        Later, we hope we will see you again very shortly!
+      </ngb-alert>
+    </div>
     <div class="p-4"></div>
     <div class="p-4"></div>
     <div class="p-4"></div>

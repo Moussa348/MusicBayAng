@@ -2,3 +2,11 @@ img{
     width: 75px;
     height:75px;
 }
+a>i{
+    color: white;
+}
+
+a>i:hover{
+    opacity: 0.5;
+    color: aqua;
+}

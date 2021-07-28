@@ -18,7 +18,6 @@ export class NavComponent {
   public isMenuCollapsed = true;
   
   constructor(
-    private authGuardService:AuthGuardService
   ){}
 
   getNotificationStatus(){
@@ -33,7 +32,7 @@ export class NavComponent {
   }
 
   isLoggedIn(){
-    return this.authGuardService.isLoggedIn();
+    return this.username != null;
   }
 
 }

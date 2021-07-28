@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import {MatRippleModule} from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WelcomeComponent } from './component/welcome/welcome.component';
 import { Error404Component } from './component/error404/error404.component';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -108,7 +108,7 @@ import { ConversationComponent } from './component/conversation/conversation.com
       },
     }),
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,NgbAlertConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

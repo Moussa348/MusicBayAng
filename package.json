@@ -25,6 +25,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@ng-bootstrap/ng-bootstrap": "^9.1.1",
+    "angular-jwt": "^0.1.11",
     "bootstrap": "^5.0.1",
     "howler": "^2.2.1",
     "jquery": "^3.6.0",

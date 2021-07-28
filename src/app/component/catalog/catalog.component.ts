@@ -133,6 +133,10 @@ export class CatalogComponent implements OnInit {
     });
 
     modalRef.componentInstance.title = title;
+    modalRef.componentInstance.username = this.username;
+    modalRef.componentInstance.nbComment.subscribe((nbComment) =>{
+      this.catalog.musics.find(music => music.title == title).nbrOfComment = nbComment;
+    });
   }
 
   openShare(title: string) {
@@ -158,7 +162,6 @@ export class CatalogComponent implements OnInit {
           return;
         }
       });
-      //window.location.reload();
     }
   }
 
@@ -173,12 +176,13 @@ export class CatalogComponent implements OnInit {
     modalRef.componentInstance.exclusivePrice = exclusivePrice;
   }
 
-  play(index: number,fileName:string) {
-    const sound = this.sounds[index] 
+  play(index: number,title:string) {
+    const sound = this.sounds[index];
 
-    //firstTime playing
     if(!sound.src){
       console.log(sound);
+      //Put title with + .mp3
+      //Maybe add a method that checks if there is any file to load -> in spring
       sound.src = 'http://localhost:4444/file/play/Hope.mp3';
       sound.load();
       this.stopOther();
@@ -186,7 +190,7 @@ export class CatalogComponent implements OnInit {
       sound.play();
       return;
     }
-    
+
     if(sound.src && !sound.paused){
       console.log("PAUSE");
       sound.pause();
@@ -200,13 +204,35 @@ export class CatalogComponent implements OnInit {
       return;
     }
   }
+  
+  replay(index:number){
+    const sound = this.sounds[index];
+    sound.currentTime = 0;
+
+    sound.play();
+    //setTime
+  }
+
+  setNbrComments($event,index:number){
+    this.catalog.musics[index].nbrOfComment = $event;
+  }
 
   stopOther(){
     for (let i = 0 ; i < this.sounds.length; i++){
       const sound = this.sounds[i];
       if(!sound.paused){
         sound.pause();
+        sound.currentTime = 0;
       }
     }
+  }
+
+
+  isPaused(index:number){
+    return this.sounds[index].paused;
+  }
+
+  isLoggedIn(){
+   return this.username != null;
   }
 }

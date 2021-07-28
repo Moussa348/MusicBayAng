@@ -67,8 +67,8 @@ export class AddingCartArticleComponent implements OnInit {
     );
   }
 
-  addArticleToTransaction(priceType){
-    this.transactionService.addArticleToTransaction(this.username,this.title,priceType).subscribe(
+  addArticleInTransaction(priceType){
+    this.transactionService.addArticleInTransaction(this.username,this.title,priceType).subscribe(
       (data) =>{
         console.log(data);
         if(data != null){

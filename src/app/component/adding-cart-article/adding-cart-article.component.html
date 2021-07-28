@@ -7,7 +7,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <mat-card class="border shadow btn text-light m-4" (click)="isTransactionAppending()?addArticleToTransaction(basicPriceType):createTransaction(basicPriceType)">
+        <mat-card class="border shadow btn text-light m-4" (click)="isTransactionAppending()?addArticleInTransaction(basicPriceType):createTransaction(basicPriceType)">
             <div class="flex-row">
                 <h3 class="text-start fw-normal">Basic</h3>
             </div>
@@ -26,7 +26,7 @@
             </div>
             
         </mat-card>
-        <mat-card class="border shadow btn text-light m-4" (click)="isTransactionAppending()?addArticleToTransaction(exclusivePriceType):createTransaction(exclusivePriceType)">
+        <mat-card class="border shadow btn text-light m-4" (click)="isTransactionAppending()?addArticleInTransaction(exclusivePriceType):createTransaction(exclusivePriceType)">
             <div class="flex-row">
                 <h3 class="text-start fw-normal">Exclusive</h3>
             </div>

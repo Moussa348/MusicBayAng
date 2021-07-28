@@ -26,10 +26,10 @@ export class TransactionService {
     return this.http.post<Transaction>(this.url + 'createTransaction/',params);
   }
 
-  addArticleToTransaction(username:string,title:string,priceType:string){
+  addArticleInTransaction(username:string,title:string,priceType:string){
     const params = new HttpParams().set("username",username).set("title",title).set("priceType",priceType);
     const options = {params:params};
-    return this.http.patch<Transaction>(this.url + 'addArticleToTransaction/',params);
+    return this.http.patch<Transaction>(this.url + 'addArticleInTransaction/',params);
   }
 
   removeArticleFromTransaction(username:string,title:string){
