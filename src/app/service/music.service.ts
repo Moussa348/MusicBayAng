@@ -25,4 +25,8 @@ export class MusicService {
   getListMusic(noPage:number){
     return this.http.get<Music[]>(this.url + 'getListMusic/' + noPage);
   }
+
+  getNbrOfPage(){
+    return this.http.get<number>(this.url + 'getNbrOfPage/');
+  }
 }

@@ -32,7 +32,9 @@ import { Howl, Howler } from 'howler';
 export class CatalogComponent implements OnInit {
   catalog: Catalog = new Catalog();
   username = getUsername();
-  sounds : HTMLAudioElement[];;
+  sounds : HTMLAudioElement[];
+  tabPaginations;
+  nbrOfPage = 0;
   noPage = 0;
 
   constructor(
@@ -43,8 +45,20 @@ export class CatalogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.username);
+    this.getNbrOfPage();
     this.getCatalog();
+  }
+
+  getNbrOfPage(){
+    this.musicService.getNbrOfPage().subscribe(
+      (data) => {
+        this.nbrOfPage = data;
+        console.log(this.nbrOfPage);
+        this.tabPaginations = new Array(this.nbrOfPage);
+      },(err) =>{
+        console.log(err);
+      }
+    );
   }
 
   getCatalog() {
@@ -71,7 +85,12 @@ export class CatalogComponent implements OnInit {
         }
       );
     }
+  }
 
+  loadMore(index:number){
+    this.noPage = index;
+
+    this.getCatalog();
   }
 
   setSoundPlayings(length:number){
@@ -185,7 +204,7 @@ export class CatalogComponent implements OnInit {
       //Maybe add a method that checks if there is any file to load -> in spring
       sound.src = 'http://localhost:4444/file/play/Hope.mp3';
       sound.load();
-      this.stopOther();
+      this.stopOthers();
       console.log("PLAY FOR FIRST TIME");
       sound.play();
       return;
@@ -199,7 +218,7 @@ export class CatalogComponent implements OnInit {
     
     if(sound.src && sound.paused){
       console.log("PLAYING AFTER BEING PAUSED");
-      this.stopOther();
+      this.stopOthers();
       sound.play();
       return;
     }
@@ -207,9 +226,12 @@ export class CatalogComponent implements OnInit {
   
   replay(index:number){
     const sound = this.sounds[index];
-    sound.currentTime = 0;
+    if(!sound.paused){
 
-    sound.play();
+      sound.currentTime = 0;
+      sound.play();
+    }
+
     //setTime
   }
 
@@ -217,7 +239,7 @@ export class CatalogComponent implements OnInit {
     this.catalog.musics[index].nbrOfComment = $event;
   }
 
-  stopOther(){
+  stopOthers(){
     for (let i = 0 ; i < this.sounds.length; i++){
       const sound = this.sounds[i];
       if(!sound.paused){
