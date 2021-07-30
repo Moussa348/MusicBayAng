@@ -25,5 +25,11 @@ i:hover{
 }
 .dropdown-menu {
   width: 350px !important;
-  height: 400px !important;
+  height: auto;
+  max-height: 300px !important;
+}
+
+::ng-deep .dropdown-menu{
+  margin: 0px !important;
+  padding: 0px !important;
 }

@@ -1,23 +1,43 @@
-<div
-  class="d-flex align-items-center border rounded pl-2"
-  *ngFor="let recentNotification of recentNotifications"
->
-  <div class="flex-shrink-0 ml-2 flex-fill">
-    <img
-      [src]="['http://localhost:4444/customer/getPicture/bayDrip']"
-      alt="vaccinCovid"
-      class="rounded-pill border border-2 img-responsive h-100 ml-1"
-    />
-  </div>
-  <div class="flex-grow-1 ms-3 m-4 flex-fill">
-    <div class="flex-row">
-      <small class="text-capitalize">{{ recentNotification.triggeredBy }}</small>
+<mat-card *ngFor="let recentNotification of recentNotifications">
+  <div class="d-flex align-items-center rounded pl-2">
+    <div class="flex-shrink-0">
+      <img
+        [src]="['http://localhost:4444/customer/getPicture/bayDrip']"
+        alt="vaccinCovid"
+        class="rounded-pill border border-2 img-responsive h-100 ml-1"
+      />
     </div>
-    <div class="flex-row">
-      <small>{{ recentNotification.notificationEvent }}</small>
-    </div>
-    <div class="flex-row">
-        <small>{{ recentNotification.date | date:'medium' }}</small>
+
+    <div class="flex-grow-1 ms-5 text-start">
+      <div class="flex-row">
+        <small class="text-capitalize">{{
+          recentNotification.triggeredBy
+        }}</small>
       </div>
+      <div class="flex-row">
+        <small>{{ recentNotification.notificationEvent }}</small>
+      </div>
+      <div class="flex-row">
+        <small>{{ recentNotification.date | date: "medium" }}</small>
+      </div>
+      <div class="flex-row">
+        <div class="p-2"></div>
+      </div>
+      <div class="flex-row">
+        <mat-divider class="border border-3"></mat-divider>
+      </div>
+    </div>
   </div>
+</mat-card>
+
+<div
+  class="flex-row d-flex justify-content-center pt-4 pb-4"
+  *ngIf="!isLastPage()"
+>
+  <button
+    class="btn btn-dark rounded-pill border text-light"
+    (click)="loadMoreNotifications()"
+  >
+  <i class="fas fa-caret-down"></i>
+  </button>
 </div>

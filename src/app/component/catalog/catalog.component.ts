@@ -16,6 +16,7 @@ import { AddingCartArticleComponent } from '../adding-cart-article/adding-cart-a
 import { DatePipe } from '@angular/common';
 import { getUsername } from 'src/app/util/jwtUtils';
 import { Howl, Howler } from 'howler';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-catalog',
@@ -34,8 +35,9 @@ export class CatalogComponent implements OnInit {
   username = getUsername();
   sounds : HTMLAudioElement[];
   tabPaginations;
-  nbrOfPage = 0;
+  nbrOfPage$ : Observable<number>;
   noPage = 0;
+  noPageShow = 1;
 
   constructor(
     private musicService: MusicService,
@@ -45,25 +47,15 @@ export class CatalogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //this.nbrOfPage$ = this.musicService.getNbrOfPage();
     this.getNbrOfPage();
-    this.getCatalog();
+    this.getCatalog(0);
   }
 
-  getNbrOfPage(){
-    this.musicService.getNbrOfPage().subscribe(
-      (data) => {
-        this.nbrOfPage = data;
-        console.log(this.nbrOfPage);
-        this.tabPaginations = new Array(this.nbrOfPage);
-      },(err) =>{
-        console.log(err);
-      }
-    );
-  }
 
-  getCatalog() {
+  getCatalog(noPage:number) {
     if (this.username != null) {
-      this.musicService.getCatalog(this.username,this.noPage).subscribe(
+      this.musicService.getCatalog(this.username,noPage).subscribe(
         (data) => {
           this.catalog = data;
           this.setSoundPlayings(this.catalog.musics.length)
@@ -74,7 +66,7 @@ export class CatalogComponent implements OnInit {
         }
         );
       } else {
-        this.musicService.getListMusic(this.noPage).subscribe(
+        this.musicService.getListMusic(noPage).subscribe(
           (data) => {
             this.catalog.musics = data;
             this.setSoundPlayings(this.catalog.musics.length)
@@ -87,10 +79,20 @@ export class CatalogComponent implements OnInit {
     }
   }
 
-  loadMore(index:number){
-    this.noPage = index;
 
-    this.getCatalog();
+  loadMore(noPage:number){
+    this.getCatalog(noPage);
+  }
+
+  getNbrOfPage(){
+    this.musicService.getNbrOfPage().subscribe(
+      (data) =>{
+        this.tabPaginations = new Array(data);
+        console.log(data);
+      },(err) =>{
+        console.log(err);
+      }
+    );
   }
 
   setSoundPlayings(length:number){

@@ -14,25 +14,27 @@ import { getUsername } from 'src/app/util/jwtUtils';
 export class NavComponent {
   username = getUsername();
   openCart = false;
-  openNotification = true;
+  openNotification = false;
   public isMenuCollapsed = true;
   
   constructor(
   ){}
 
-  getNotificationStatus(){
+  showNotification(){
     return this.openNotification;
   }
   showCart(){
     return this.openCart;
   }
 
-  setNOtificationStatus(){
-    this.openNotification = !this.openNotification;
-  }
 
   isLoggedIn(){
     return this.username != null;
+  }
+
+  isCartOpen($event){
+    console.log($event);
+    this.openCart = $event;
   }
 
 }

@@ -54,7 +54,7 @@
 
           <div class="flex-row d-flex justify-content-between" *ngIf="isLoggedIn()">
               <p>{{ music.nbrOfLike }} <i class="fab fa-gratipay btn text-{{ isLiked(music.title) ? 'danger' : 'white' }}" (click)="likeOrUnlike('bombay',music.title)"></i></p>
-              <p>{{ music.nbrOfShare }} <i class="fas fa-share-alt btn text-{{  isShared(music.title) ? 'info' : 'white' }}" (click)="openShare(music.title)"></i></p>
+              <p>{{ music.nbrOfShare }} <i class="fas fa-share-square btn text-{{  isShared(music.title) ? 'info' : 'white' }}" (click)="openShare(music.title)"></i></p>
               <p>{{ music.nbrOfComment }} <i class="fas btn text-light fa-comment" (click)="openComment(music.title)"></i></p>
           </div>
 
@@ -90,7 +90,11 @@
   </div>
 
   <div class="flex-row d-flex justify-content-center">
-    <nav aria-label="Page navigation example text-dark">
+    <!--
+    <ngb-pagination size="lg" [collectionSize]="nbrOfPage*10" [(page)]="noPageShow" [directionLinks]="false" ng-click="loadMore(noPageShow-1)"></ngb-pagination>
+    <pre>{{noPageShow}}</pre>
+  -->
+      <nav aria-label="Page navigation example text-dark">
       <ul class="pagination pagination-lg">
         <li class="page-item"><a class="page-link" href="#">Previous</a></li>
         

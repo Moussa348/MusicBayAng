@@ -19,4 +19,8 @@ export class NotificationService {
     const options = {params:params};
     return this.http.get<RecentNotification[]>(this.url + 'getRecentNotifications',options);
   }
+
+  getNbrOfPage(username:string){
+    return this.http.get<number>(this.url + 'getNbrOfPage/' + username);
+  }
 }

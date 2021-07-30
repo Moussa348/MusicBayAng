@@ -50,4 +50,12 @@ export class FeedService {
     return this.http.get<Customer[]>(this.url + 'getListSubscribeTo/',options);
   }
 
+  getNbrOfPageSub(username:string){
+    return this.http.get<number>(this.url + 'getNbrOfPageSub/' + username);
+  }
+
+  getNbrOfPageSubTo(username:string){
+    return this.http.get<number>(this.url + 'getNbrOfPageSubTo/' + username);
+  }
+
 }

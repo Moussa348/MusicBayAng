@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from '../../model/comment';
 import * as $ from 'jquery';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-comment',
@@ -12,13 +13,13 @@ import { Router } from '@angular/router';
 })
 export class CommentComponent implements OnInit {
   @Input() title;
-  @Input() username ;
+  @Input() username;
   comments: Comment[] = new Array();
   isCollapsed = false;
   comment: Comment = new Comment();
   noPage = 0;
+  nbrTotalOfPage = 0;
   @Output() nbComment: EventEmitter<number> = new EventEmitter<number>();
-
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -27,33 +28,27 @@ export class CommentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getNbrTotalOfPage();
     this.getListCommentOfMusic();
   }
 
   getListCommentOfMusic() {
-    this.commentService.getListCommentOfMusic(this.title,this.noPage).subscribe(
-      (data) => {
-        this.comments = data;
-        console.log(this.comments);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.commentService
+      .getListCommentOfMusic(this.title, this.noPage)
+      .subscribe(
+        (data) => {
+          this.comments.push.apply(this.comments, data);
+          console.log(data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 
-  loadMoreComments(){
+  loadMoreComments() {
     this.noPage++;
-    this.commentService.getListCommentOfMusic(this.title,this.noPage).subscribe(
-      (data) => {
-        this.comments.push.apply(this.comments,data);
-        console.log(this.comments);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    
+    this.getListCommentOfMusic();
   }
 
   increaseOrDecreaseLike(id: number) {
@@ -99,14 +94,14 @@ export class CommentComponent implements OnInit {
       : false;
   }
 
-  postComment(){
+  postComment() {
     this.comment.sendBy = this.username;
     this.comment.nbrLike = 0;
     console.log(this.comment.content);
 
-    this.commentService.postComment(this.comment,this.title).subscribe(
-      (data) =>{
-        this.comment.content = "";
+    this.commentService.postComment(this.comment, this.title).subscribe(
+      (data) => {
+        this.comment.content = '';
         this.comments.push(data);
         this.nbComment.emit(this.comments.length);
       },
@@ -114,19 +109,34 @@ export class CommentComponent implements OnInit {
         console.log(err);
       }
     );
-
   }
 
   collapsed() {
     return this.isCollapsed;
   }
 
-  goToProfile(username:string){
-    this.router.navigate(['profile/',username]);
+  goToProfile(username: string) {
+    this.router.navigate(['profile/', username]);
     this.activeModal.close();
   }
 
-  hasComments(){
-    return this.comments.length >0;
+  hasComments() {
+    return this.comments.length > 0;
+  }
+
+  getNbrTotalOfPage() {
+    this.commentService.getNbrOfPage(this.title).subscribe(
+      (data) => {
+        this.nbrTotalOfPage = data;
+        console.log(this.nbrTotalOfPage);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  isLastPage() {
+    return this.noPage + 1 == this.nbrTotalOfPage;
   }
 }

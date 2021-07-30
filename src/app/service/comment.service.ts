@@ -29,4 +29,8 @@ export class CommentService {
     const options = {params:params};
     return this.http.get<Comment[]>(this.url + 'getListCommentOfMusic/',options);
   }
+
+  getNbrOfPage(title:string){
+    return this.http.get<number>(this.url + 'getNbrOfPage/' + title);
+  }
 }

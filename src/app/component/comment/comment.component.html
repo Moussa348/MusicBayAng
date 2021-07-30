@@ -101,9 +101,11 @@
             class="flex-row d-flex justify-content-center pt-4"
             *ngIf="hasComments()"
           >
-            <button
-              class="btn btn-outline-info rounded-pill border text-light"
-              (click)="loadMoreComments()"
+
+            
+            <button *ngIf="!isLastPage()"
+            class="btn btn-outline-info rounded-pill border text-light"
+            (click)="loadMoreComments()"
             >
               More <i class="fas fa-cloud-download-alt"></i>
             </button>

@@ -39,7 +39,7 @@
               <small>{{ subscription.city }}</small>
             </div>
             <div class="flex-row">
-              <mat-divider></mat-divider>
+              <mat-divider class="border border-2"></mat-divider>
             </div>
           </div>
 
@@ -57,6 +57,17 @@
           </div>
         </div>
       </mat-card>
+
+      <div
+  class="flex-row d-flex justify-content-center pt-4 pb-4"
+  *ngIf="!isLastPage()"
+>
+  <button
+    class="btn btn-dark rounded-pill border text-light"
+    (click)="loadMoreSub()"
+  >
+  <i class="fas fa-caret-down"></i>
+  </button>
     </div>
   </div>
 </div>

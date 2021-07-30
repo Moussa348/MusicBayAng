@@ -16,11 +16,12 @@ export class ProfileSubscriptionComponent implements OnInit {
   subscriptions:Customer[] = new Array();
   SUB_TYPE = ['subscriber','subscribe_to'];
   noPageSub = 0 ;
+  totalPageSub = 0
   noPageSubTo = 0;
+  totalPageSubTo = 0;
 
   constructor(
     public activeModal: NgbActiveModal,
-    private customerService:CustomerService,
     private feedService:FeedService
   ) { }
 
@@ -28,17 +29,39 @@ export class ProfileSubscriptionComponent implements OnInit {
     console.log(this.username + ' ' + this.subType);
     
     if(this.subType == this.SUB_TYPE[0]){
+      this.getNbrOfPageSub();
       this.getListSubscriber();
     }else{
+      this.getNbrOfPageSubTo();
       this.getListSubscribeTo();
     }
+  }
+
+  getNbrOfPageSub(){
+    this.feedService.getNbrOfPageSub(this.username).subscribe(
+      (data) =>{
+        this.totalPageSub = data;
+      },(err) =>{
+        console.log(err);
+      }
+    );
+  }
+
+  getNbrOfPageSubTo(){
+    this.feedService.getNbrOfPageSubTo(this.username).subscribe(
+      (data) =>{
+        this.totalPageSubTo = data;
+      },(err) =>{
+        console.log(err);
+      }
+    );
   }
 
   getListSubscriber(){
     this.feedService.getListSubscriber(this.username,this.noPageSub).subscribe(
       (data) =>{
-        this.subscriptions = data;
-        console.log(this.subscriptions);
+        console.log(data);
+        this.subscriptions.push.apply(this.subscriptions, data);
       },(err)=>{
         console.log(err);
       }
@@ -46,14 +69,32 @@ export class ProfileSubscriptionComponent implements OnInit {
   }
 
   getListSubscribeTo(){
-    this.feedService.getListSubscribeTo(this.username,this.noPageSub).subscribe(
+    this.feedService.getListSubscribeTo(this.username,this.noPageSubTo).subscribe(
       (data) =>{
-        this.subscriptions = data;
-        console.log(this.subscriptions);
+        console.log(data);
+        this.subscriptions.push.apply(this.subscriptions, data);
       },(err)=>{
         console.log(err);
       }
     );
+  }
+
+  loadMoreSub(){
+    if(this.subType == this.SUB_TYPE[0]){
+      this.noPageSub++;
+      this.getListSubscriber();
+    }else{
+      this.noPageSubTo++;
+      this.getListSubscribeTo();
+    }
+  }
+
+  isLastPage(){
+    if(this.subType == this.SUB_TYPE[0]){
+      return this.noPageSub + 1 == this.totalPageSub;
+    }else{
+      return this.noPageSubTo + 1 == this.totalPageSubTo;
+    }
   }
 
   /*
