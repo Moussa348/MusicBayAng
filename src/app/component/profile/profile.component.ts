@@ -17,6 +17,7 @@ import { LikedMusic } from 'src/app/model/liked-music';
 import { SharedMusic } from 'src/app/model/shared-music';
 import { PurchasedMusic } from 'src/app/model/purchased-music';
 import { getUsername } from 'src/app/util/jwtUtils';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -39,9 +40,8 @@ export class ProfileComponent implements OnInit {
   sharedMusics: SharedMusic[];
   purchasedMusics: PurchasedMusic[];
 
-
   constructor(
-    private customerService: CustomerService,
+    private userService: UserService,
     private monitoringService: MonitoringService,
     private route: ActivatedRoute,
     private modalService: NgbModal
@@ -55,21 +55,24 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfile() {
-    this.customerService.getProfile(this.profileUserName).subscribe(
+    this.userService.getProfile(this.profileUserName).subscribe(
       (data) => {
         this.profile = data;
         console.log(this.profile);
         //TODO -> check if profile is not the one that is connected
-        this.monitoringService
-          .checkIfSubscribeTo(this.currentUserName, this.profileUserName)
-          .subscribe(
-            (data) => {
-              this.subscribed = data;
-            },
-            (err) => {
-              console.log(err);
-            }
-          );
+
+        if (this.isLoggedIn()) {
+          this.monitoringService
+            .checkIfSubscribeTo(this.currentUserName, this.profileUserName)
+            .subscribe(
+              (data) => {
+                this.subscribed = data;
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+        }
       },
       (err) => {
         console.log(err);
@@ -77,6 +80,9 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  isLoggedIn() {
+    return this.currentUserName != null;
+  }
 
   subscribe() {
     if (!this.subscribed) {
@@ -86,18 +92,17 @@ export class ProfileComponent implements OnInit {
           this.subscribed = true;
           this.profile.nbrOfSubscriber++;
         });
-      }else{
-        this.monitoringService
+    } else {
+      this.monitoringService
         .unSubscribe(this.currentUserName, this.profileUserName)
-        .subscribe(()=> {
+        .subscribe(() => {
           this.subscribed = false;
           this.profile.nbrOfSubscriber--;
-
-      });
+        });
     }
   }
-  
-  checkIfIsYourProfile(){
+
+  checkIfIsYourProfile() {
     return this.currentUserName == this.profileUserName;
   }
 
@@ -109,20 +114,31 @@ export class ProfileComponent implements OnInit {
     return this.profileUserName == 'bombay';
   }
 
-  openListSubscription(subType:string){
-    const modalRef = this.modalService.open(ProfileSubscriptionComponent, {
-      centered: true,
-      scrollable: true,
-    });
-    modalRef.componentInstance.username = this.profileUserName;
-    modalRef.componentInstance.subType = subType;
+  openListSubscription(subType: string) {
+    if(this.isLoggedIn()){
+
+      const modalRef = this.modalService.open(ProfileSubscriptionComponent, {
+        centered: true,
+        scrollable: true,
+      });
+      modalRef.componentInstance.username = this.profileUserName;
+      modalRef.componentInstance.subType = subType;
+      modalRef.componentInstance.nbSub.subscribe((nbSub) =>{
+       if(nbSub ==0){
+         modalRef.close();
+       }
+      });
+    }
   }
 
-  openUpdateRegistration(){
-    const modalRef = this.modalService.open(UpdateRegistrationComponent, {
-      centered: true,
-      scrollable: true,
-    });
-    modalRef.componentInstance.profile = this.profile;
+  openUpdateRegistration() {
+    if(this.isLoggedIn()){
+
+      const modalRef = this.modalService.open(UpdateRegistrationComponent, {
+        centered: true,
+        scrollable: true,
+      });
+      modalRef.componentInstance.profile = this.profile;
+    }
   }
 }

@@ -1,34 +1,36 @@
 <div *ngIf="hasTransactionAppending()">
   <div
-    class="d-flex align-items-center border rounded"
     *ngFor="let musicArticle of transaction.musicArticles"
   >
-    <div class="flex-shrink-0 ml-1 flex-fill">
-      <img
-        [src]="['/assets/images/welcomeBg1.png']"
-        alt="vaccinCovid"
-        class="rounded border border-2 img-responsive h-100 pl-1"
-      />
-    </div>
-    <div class="flex-grow-1 ms-3 m-4 flex-fill">
-      <div class="flex-row">
-        <small class="text-capitalize">{{ musicArticle.title }}</small>
+    <mat-card class="d-flex align-items-center border rounded">
+      <div class="flex-shrink-0">
+        <div class="pr-2"></div>
+        <img
+          [src]="['/assets/images/welcomeBg1.png']"
+          alt="vaccinCovid"
+          class="rounded border img-responsive h-100"
+        />
       </div>
-      <div class="flex-row">
-        <small>{{ musicArticle.price }}.00$</small>
+      <div class="flex-grow-1 ms-3 m-4">
+        <div class="flex-row">
+          <small class="text-capitalize">{{ musicArticle.title }}</small>
+        </div>
+        <div class="flex-row">
+          <small>{{ musicArticle.price }}.00$</small>
+        </div>
       </div>
-    </div>
-    <div class="flex-grow-1">
-      <div class="flex-row">
-        <button
-          class="btn btn-danger rounded-pill border"
-          (click)="removeMusicFromTransaction(musicArticle.title)"
-        >
-          Remove<i class="fas fa-trash-alt"></i>
-        </button>
+      <div class="float-end">
+        <div class="flex-row">
+          <button
+            class="btn btn-danger rounded-pill border"
+            (click)="removeMusicFromTransaction(musicArticle.title)"
+          >
+            Remove<i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
       </div>
+    </mat-card>
     </div>
-  </div>
 
   <div class="d-flex flex-row justify-content-center pt-4">
     <p class="text-capitalize">Total: {{ transaction.total }}.00$</p>

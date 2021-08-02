@@ -7,3 +7,52 @@ img:hover{
     opacity: 0.5;
 }
 
+@media only screen and (max-width: 800px) {
+  img{
+    width: 200px;
+    height: auto;
+  }
+  /* For tablets: */
+}
+
+@media only screen and (max-width: 600px) {
+  img{
+    width: 75px;
+    height: auto;
+  }
+  p{
+    font-size: 12px;
+  }
+  /* For tablets: */
+}
+
+@media only screen and (max-width: 375px) {
+  img{
+    width: 65px;
+    height: auto;
+  }
+  p{
+    font-size: 10px;
+  }
+  /* For tablets: */
+}
+
+@media only screen and (max-width: 320px) {
+  img{
+    width: 50px;
+    height: auto;
+  }
+  p{
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  img{
+      width: 40px;
+      height: auto;
+    }
+    p{
+      font-size: 8px;
+    }
+}

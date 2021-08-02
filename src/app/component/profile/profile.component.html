@@ -12,8 +12,7 @@
       justify-content-center
       text-uppercase
       font-weight-bold
-      text-light
-      text-center
+      text-light text-center
     "
   >
     <h1 style="font-family: 'Times New Roman', Times, serif">
@@ -23,88 +22,149 @@
   <div class="p-4"></div>
   <mat-divider class="text-light border border-3"></mat-divider>
   <div class="p-4"></div>
-  
-  <div class="row d-flex-justify-content-center">
-    
-    
-    <div class="grid-container">
+
+  <div class="grid-container">
+    <div class="row d-flex-justify-content-center">
       <mat-grid-list cols="2" rowHeight="350px">
         <mat-grid-tile colspan="2" rowspan="1">
-          <mat-card class="dashboard-card shadow-lg border border-2 border-light text-light font-weight-bolder rounded">
-
+          <mat-card
+            class="
+              dashboard-card
+              shadow-lg
+              border border-2 border-light
+              text-light
+              font-weight-bolder
+              rounded
+            "
+          >
             <mat-card-content class="dashboard-card-content">
-
-              <div class="flex-row d-flex align-items-center">
-                  <a class="btn">
-
-                    <div class="flex-shrink-0">
-                      <img
-                      [src]="['http://localhost:4444/customer/getPicture/bayDrip']"
+              <div class="d-flex align-items-center">
+                <a class="btn">
+                  <div class="flex-shrink-0">
+                    <img
+                      [src]="[
+                        'http://localhost:4444/user/getPicture/' +
+                          profileUserName
+                      ]"
                       alt="vaccinCovid"
-                      class="rounded shadow border border-2 border-dark text-center"
+                      class="
+                        rounded
+                        shadow
+                        border border-2 border-dark
+                        text-center
+                      "
                       (click)="openUpdateRegistration()"
-                      />
+                    />
+                  </div>
+                </a>
+                <div class="flex-grow-1 ms-3 text-start">
+                  <div class="container">
+                    <div class="flex-row">
+                      <p class="lead text-capitalize">
+                        <u class="text-lowercase">username :</u>
+                        {{ profile.username
+                        }}<i
+                          class="fas fa-crown text-warning pl-1"
+                          *ngIf="isOwner()"
+                        ></i>
+                      </p>
                     </div>
-                  </a>
-                <div class="flex-grow-1 ms-5 text-start">
-                  <div class=" flex-row">
-                    <p class="lead text-capitalize">
-                      <u class="text-lowercase">username :</u> {{profile.username}}<i class="fas fa-crown text-warning pl-1" *ngIf="isOwner()"></i>
-                    </p>
-                  </div>
-                  <div class=" flex-row">
-                    <p class="lead">
-                      <u>email :</u> {{profile.email}}<i class="fas fa-envelope"></i>
-                    </p>
-                  </div>
-                  <div class=" flex-row">
-                    <p class="lead">
-                      <u>city :</u> {{profile.city}}<i class="fas fa-city"></i>
-                    </p>
-                  </div>
-                  <div class=" flex-row">
-                    <p class="lead">
-                     <u> biography :</u> {{profile.biography}}<i class="fas fa-align-left"></i>
-                    </p>
+                    <div class="flex-row">
+                      <p class="lead">
+                        <u>email :</u> {{ profile.email
+                        }}<i class="fas fa-envelope"></i>
+                      </p>
+                    </div>
+                    <div class="flex-row">
+                      <p class="lead">
+                        <u>city :</u> {{ profile.city
+                        }}<i class="fas fa-city"></i>
+                      </p>
+                    </div>
+                    <div class="flex-row">
+                      <p class="lead">
+                        <u> biography :</u> {{ profile.biography
+                        }}<i class="fas fa-align-left"></i>
+                      </p>
+                    </div>
+                    <div class="row">
+                      <div class="col-4">
+
+                        <p class="lead">
+                          <u> Subscribers :</u> {{ profile.nbrOfSubscriber }}
+                          <i
+                          class="fas fa-users btn text-light"
+                          (click)="openListSubscription('subscriber')"
+                          ></i>
+                        </p>
+                      </div>
+                      <div class="col-4">
+
+                        <p class="lead">
+                          <u> SubscribeTo :</u> {{ profile.nbrOfSubscribeTo
+                          }}<i
+                          class="fas fa-users btn text-light"
+                          (click)="openListSubscription('subscriberTo')"
+                          ></i>
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="flex-grow-1 ms-3 d-flex justify-content-center">
-                  
-                  <div class=" flex-row">
-                    <p class="lead">
-                     <u> Subscribers :</u> {{profile.nbrOfSubscriber}} <i class="fas fa-users btn text-light" (click)="openListSubscription('subscriber')"></i>
-                    </p>
-                  </div>
-                  <div class=" flex-row">
-                    <p class="lead">
-                     <u> SubscribeTo :</u> {{profile.nbrOfSubscribeTo}}<i class="fas fa-users btn text-light" (click)="openListSubscription('subscriberTo')"></i>
-                    </p>
-                  </div>
-                  <div class="flex-row" *ngIf="!checkIfIsYourProfile()">
-                    <button class="btn btn-info text-white rounded-pill border" (click)="subscribe()">{{isSubscribedTo() ? 'UnSuscribe' : 'Subscribe'}}<i class="fas fa-bell text-{{ isSubscribedTo() ? 'warning' : 'white' }}"></i></button>
-                  </div>
+                <div
+                  class="float-end"
+                  *ngIf="!checkIfIsYourProfile() && isLoggedIn()"
+                >
+                  <button
+                    class="btn btn-info text-white rounded-pill border"
+                    (click)="subscribe()"
+                  >
+                    {{ isSubscribedTo() ? "UnSuscribe" : "Subscribe"
+                    }}<i
+                      class="fas fa-bell text-{{
+                        isSubscribedTo() ? 'warning' : 'white'
+                      }}"
+                    ></i>
+                  </button>
                 </div>
-                </div>
+              </div>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="3">
-          <mat-card class="dashboard-card shadow-lg border border-2 border-light text-light rounded" style="overflow-x:auto;overflow-y:auto;">
-              <mat-tab-group mat-align-tabs="center">
-                <mat-tab label="Liked Music">
-                    <app-list-liked-music [username]="currentUserName" ></app-list-liked-music>
-                </mat-tab>
-                <mat-tab label="Shared Music">
-                  <app-list-shared-music [username]="currentUserName" ></app-list-shared-music>
-                </mat-tab>
-                <mat-tab label="Purchased Music">
-                  <app-list-purchased-music [username]="currentUserName" ></app-list-purchased-music>
-                </mat-tab>
-              </mat-tab-group>
+          <mat-card
+            class="
+              dashboard-card
+              shadow-lg
+              border border-2 border-light
+              text-light
+              rounded
+            "
+            style="overflow-x: auto; overflow-y: auto"
+          >
+            <mat-tab-group mat-align-tabs="center">
+              <mat-tab label="Liked Music">
+                <app-list-liked-music
+                  *ngIf="isLoggedIn()"
+                  [username]="currentUserName"
+                ></app-list-liked-music>
+              </mat-tab>
+              <mat-tab label="Shared Music">
+                <app-list-shared-music
+                  *ngIf="isLoggedIn()"
+                  [username]="currentUserName"
+                ></app-list-shared-music>
+              </mat-tab>
+              <mat-tab label="Purchased Music">
+                <app-list-purchased-music
+                  *ngIf="isLoggedIn()"
+                  [username]="currentUserName"
+                ></app-list-purchased-music>
+              </mat-tab>
+            </mat-tab-group>
           </mat-card>
-
-        </mat-grid-tile >
+        </mat-grid-tile>
       </mat-grid-list>
     </div>
   </div>

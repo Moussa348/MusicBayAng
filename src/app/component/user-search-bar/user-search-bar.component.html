@@ -1,0 +1,14 @@
+<input
+  id="typeahead-format"
+  type="text"
+  placeholder="&#xF002; Enter username"
+  class="form-control border border-2 border-dark shadow rounded-pill"
+  [(ngModel)]="model"
+  [ngbTypeahead]="search"
+  [resultFormatter]="formatter"
+  (change)="goToProfile($event)"
+  (focus)="getListProfileSearch()"
+  [ngModelOptions]="{ standalone: true }"
+  [editable]="false"
+/>
+

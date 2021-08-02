@@ -59,6 +59,10 @@ export class CartComponent implements OnInit {
     //this.isOpen.emit(false);
   }
 
+  openCart(boolean){
+    
+  }
+
   hasTransactionAppending() {
     return this.transacPending;
   }

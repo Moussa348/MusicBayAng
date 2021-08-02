@@ -2,3 +2,75 @@ img{
     width: 150px;
     height:150px;
   }
+  @media only screen and (min-width: 100px) {
+    img{
+      width: 400px;
+      height: auto;
+    }
+    input,label{
+      font-size: 20px;
+    }
+    /* For tablets: */
+  }
+
+  @media only screen and (max-width: 800px) {
+    img{
+      width: 200px;
+      height: auto;
+    }
+    /* For tablets: */
+  }
+  
+  @media only screen and (max-width: 600px) {
+    img{
+      width: 75px;
+      height: auto;
+    }
+    p{
+      font-size: 12px;
+    }
+    /* For tablets: */
+  }
+
+  @media only screen and (min-width: 400px)  and (max-width: 450px) {
+    .bg-dark{
+      height: 650px;
+      width: auto;
+    }
+    /* For tablets: */
+  }
+  
+  @media only screen and (max-width: 375px) {
+    .bg-dark{
+      height: 600px;
+      width: auto;
+    }
+    img{
+      width: 65px;
+      height: auto;
+    }
+    p{
+      font-size: 10px;
+    }
+    /* For tablets: */
+  }
+  
+  @media only screen and (max-width: 320px) {
+    img{
+      width: 60px;
+      height: auto;
+    }
+    p{
+      font-size: 9px;
+    }
+  }
+  
+  @media only screen and (max-width: 300px) {
+    img{
+      width: 45px;
+      height: auto;
+    }
+    p{
+      font-size: 8px;
+    }
+  }

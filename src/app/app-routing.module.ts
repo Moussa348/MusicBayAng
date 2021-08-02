@@ -8,10 +8,12 @@ import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { RegistrationComponent } from './component/registration/registration.component';
+import { UserSearchBarComponent } from './component/user-search-bar/user-search-bar.component';
 import { WelcomeComponent } from './component/welcome/welcome.component';
 import { AuthGuardService } from './service/auth-guard.service';
 
 const routes: Routes = [
+  {path:'search',component:UserSearchBarComponent},
   {path:'conversation',component:ConversationComponent,canActivate:[AuthGuardService]},
   {path:'registration',component:RegistrationComponent,canActivate:[AuthGuardService]},
   {path:'feed',component:FeedComponent,canActivate:[AuthGuardService]},

@@ -25,9 +25,12 @@ export class ShareComponent implements OnInit {
   }
 
   share(){
-    this.monitoringService.shareMusic(this.username,this.music.title,this.sharingMsg).subscribe(()=>this.sharingMsg="");
-    this.router.navigate(['/profile/' + this.username]);
-    this.activeModal.close();
+    if(this.sharingMsg){
+
+      this.monitoringService.shareMusic(this.username,this.music.title,this.sharingMsg).subscribe(()=>this.sharingMsg="");
+      this.router.navigate(['/profile/' + this.username]);
+      this.activeModal.close();
+    }
   }
 
 }

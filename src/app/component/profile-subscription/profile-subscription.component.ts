@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Customer } from 'src/app/model/customer';
 import { CustomerService } from 'src/app/service/customer.service';
@@ -13,7 +13,9 @@ import { MonitoringService } from 'src/app/service/monitoring.service';
 export class ProfileSubscriptionComponent implements OnInit {
   @Input() username;
   @Input() subType;
+  @Output() nbSub: EventEmitter<number> = new EventEmitter<number>();
   subscriptions:Customer[] = new Array();
+
   SUB_TYPE = ['subscriber','subscribe_to'];
   noPageSub = 0 ;
   totalPageSub = 0
@@ -35,6 +37,7 @@ export class ProfileSubscriptionComponent implements OnInit {
       this.getNbrOfPageSubTo();
       this.getListSubscribeTo();
     }
+    this.nbSub.emit(this.subscriptions.length);
   }
 
   getNbrOfPageSub(){

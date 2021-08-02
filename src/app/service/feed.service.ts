@@ -20,6 +20,12 @@ export class FeedService {
     return this.http.get<Feed>(this.url + 'getFeed',options);
   }
 
+  getListPossibleSubscribeTo(username:string,noPage:number){
+    const params = new HttpParams().set("username",username).set("noPage",noPage.toString());
+    const options = {params:params};
+    return this.http.get<Customer[]>(this.url + 'getListPossibleSubscribeTo/',options);
+  }
+
   getListLikedMusic(username:string,noPage:number){
     const params = new HttpParams().set("username",username).set("noPage",noPage.toString());
     const options = {params:params};

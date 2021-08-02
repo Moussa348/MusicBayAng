@@ -1,9 +1,4 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { TransactionService } from 'src/app/service/transaction.service';
-import { AuthGuardService } from 'src/app/service/auth-guard.service';
 import { getUsername } from 'src/app/util/jwtUtils';
 
 @Component({

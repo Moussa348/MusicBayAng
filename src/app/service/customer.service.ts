@@ -22,8 +22,4 @@ export class CustomerService {
     return this.http.patch<Customer>(this.url + 'updateCustomer',customer);
   }
 
-  getProfile(username:string){
-    return this.http.get<Customer>(this.url + 'getProfile/' + username);
-  }
-
 }

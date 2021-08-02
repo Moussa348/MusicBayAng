@@ -99,17 +99,19 @@ export class CommentComponent implements OnInit {
     this.comment.nbrLike = 0;
     console.log(this.comment.content);
 
-    this.commentService.postComment(this.comment, this.title).subscribe(
-      (data) => {
-        this.comment.content = '';
-        this.comments.push(data);
-        this.nbComment.emit(this.comments.length);
-      },
-      (err) => {
-        console.log(err);
+    if(this.comment.content){
+      this.commentService.postComment(this.comment, this.title).subscribe(
+        (data) => {
+          this.comment.content = '';
+          this.comments.push(data);
+          this.nbComment.emit(this.comments.length);
+        },
+        (err) => {
+          console.log(err);
+        }
+        );
       }
-    );
-  }
+    }
 
   collapsed() {
     return this.isCollapsed;

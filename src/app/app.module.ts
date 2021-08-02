@@ -48,6 +48,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ALLOWED_URLS, STORAGE_KEY } from './util/constant';
 import { NotificationComponent } from './component/notification/notification.component';
 import { ConversationComponent } from './component/conversation/conversation.component';
+import { UserSearchBarComponent } from './component/user-search-bar/user-search-bar.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ConversationComponent } from './component/conversation/conversation.com
     ListPurchasedMusicComponent,
     NotificationComponent,
     ConversationComponent,
+    UserSearchBarComponent,
   ],
   imports: [
     BrowserModule,
