@@ -58,74 +58,88 @@
                   </div>
                 </a>
                 <div class="flex-grow-1 ms-3 text-start">
-                  <div class="container">
-                    <div class="flex-row">
-                      <p class="lead text-capitalize">
-                        <u class="text-lowercase">username :</u>
-                        {{ profile.username
-                        }}<i
-                          class="fas fa-crown text-warning pl-1"
-                          *ngIf="isOwner()"
-                        ></i>
-                      </p>
-                    </div>
-                    <div class="flex-row">
-                      <p class="lead">
-                        <u>email :</u> {{ profile.email
-                        }}<i class="fas fa-envelope"></i>
-                      </p>
-                    </div>
-                    <div class="flex-row">
-                      <p class="lead">
-                        <u>city :</u> {{ profile.city
-                        }}<i class="fas fa-city"></i>
-                      </p>
-                    </div>
-                    <div class="flex-row">
-                      <p class="lead">
-                        <u> biography :</u> {{ profile.biography
-                        }}<i class="fas fa-align-left"></i>
-                      </p>
-                    </div>
+                  <div class="container-fluid">
                     <div class="row">
-                      <div class="col-4">
-
-                        <p class="lead">
-                          <u> Subscribers :</u> {{ profile.nbrOfSubscriber }}
-                          <i
-                          class="fas fa-users btn text-light"
-                          (click)="openListSubscription('subscriber')"
-                          ></i>
-                        </p>
+                      
+                      <div class="col-lg-8 col-sm-12">
+                        <div class="container-fluid">
+                          <div class="flex-row">
+                            <p class="lead text-capitalize">
+                              <u class="text-lowercase">username :</u>
+                              {{ profile.username
+                              }}<i
+                                class="fas fa-crown text-warning pl-1"
+                                *ngIf="isOwner()"
+                              ></i>
+                            </p>
+                          </div>
+                          <div class="flex-row">
+                            <p class="lead">
+                              <u>email :</u> {{ profile.email
+                              }}<i class="fas fa-envelope"></i>
+                            </p>
+                          </div>
+                          <div class="flex-row">
+                            <p class="lead">
+                              <u>city :</u> {{ profile.city
+                              }}<i class="fas fa-city"></i>
+                            </p>
+                          </div>
+                          <div class="flex-row">
+                            <p class="lead">
+                              <u> biography :</u> {{ profile.biography
+                              }}<i class="fas fa-align-left"></i>
+                            </p>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-6 col-sm-12">
+                              <p class="lead">
+                                <u> Subscribers :</u>
+                                {{ profile.nbrOfSubscriber }}
+                                <i
+                                  class="fas fa-users btn text-light"
+                                  (click)="openListSubscription('subscriber')"
+                                ></i>
+                              </p>
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+                              <p class="lead">
+                                <u> SubscribeTo :</u>
+                                {{ profile.nbrOfSubscribeTo
+                                }}<i
+                                  class="fas fa-users btn text-light"
+                                  (click)="openListSubscription('subscriberTo')"
+                                ></i>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="col-4">
 
-                        <p class="lead">
-                          <u> SubscribeTo :</u> {{ profile.nbrOfSubscribeTo
-                          }}<i
-                          class="fas fa-users btn text-light"
-                          (click)="openListSubscription('subscriberTo')"
-                          ></i>
-                        </p>
+                      <div class="col-lg-4 align-self-center">
+                        <div class="flex-row d-flex justify-content-center">
+                          <div *ngIf="!checkIfIsYourProfile() && isLoggedIn()">
+                            <button
+                              class="
+                                btn btn-info
+                                text-white
+                                rounded-pill
+                                border
+                              "
+                              (click)="subscribe()"
+                            >
+                              {{ isSubscribedTo() ? "UnSuscribe" : "Subscribe"
+                              }}<i
+                                class="fas fa-bell text-{{
+                                  isSubscribedTo() ? 'warning' : 'white'
+                                }}"
+                              ></i>
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="float-end"
-                  *ngIf="!checkIfIsYourProfile() && isLoggedIn()"
-                >
-                  <button
-                    class="btn btn-info text-white rounded-pill border"
-                    (click)="subscribe()"
-                  >
-                    {{ isSubscribedTo() ? "UnSuscribe" : "Subscribe"
-                    }}<i
-                      class="fas fa-bell text-{{
-                        isSubscribedTo() ? 'warning' : 'white'
-                      }}"
-                    ></i>
-                  </button>
                 </div>
               </div>
             </mat-card-content>

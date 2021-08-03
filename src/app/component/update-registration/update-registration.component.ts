@@ -4,11 +4,25 @@ import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Customer } from 'src/app/model/customer';
 import { CustomerService } from 'src/app/service/customer.service';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-update-registration',
   templateUrl: './update-registration.component.html',
-  styleUrls: ['./update-registration.component.css']
+  styleUrls: ['./update-registration.component.css'],
+  animations: [
+    trigger('fade', [
+      state('void', style({ opacity: 0 })),
+
+      transition(':enter, :leave', [animate(1000)]),
+    ]),
+  ],
 })
 export class UpdateRegistrationComponent implements OnInit {
   @Input() profile: Customer;

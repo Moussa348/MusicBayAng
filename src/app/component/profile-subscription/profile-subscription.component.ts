@@ -4,11 +4,26 @@ import { Customer } from 'src/app/model/customer';
 import { CustomerService } from 'src/app/service/customer.service';
 import { FeedService } from 'src/app/service/feed.service';
 import { MonitoringService } from 'src/app/service/monitoring.service';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { SUB_TYPE } from 'src/app/util/constant';
 
 @Component({
   selector: 'app-profile-subscription',
   templateUrl: './profile-subscription.component.html',
-  styleUrls: ['./profile-subscription.component.css']
+  styleUrls: ['./profile-subscription.component.css'],
+  animations: [
+    trigger('fade', [
+      state('void', style({ opacity: 0 })),
+
+      transition(':enter, :leave', [animate(1000)]),
+    ]),
+  ],
 })
 export class ProfileSubscriptionComponent implements OnInit {
   @Input() username;
@@ -16,7 +31,6 @@ export class ProfileSubscriptionComponent implements OnInit {
   @Output() nbSub: EventEmitter<number> = new EventEmitter<number>();
   subscriptions:Customer[] = new Array();
 
-  SUB_TYPE = ['subscriber','subscribe_to'];
   noPageSub = 0 ;
   totalPageSub = 0
   noPageSubTo = 0;
@@ -30,16 +44,15 @@ export class ProfileSubscriptionComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.username + ' ' + this.subType);
     
-    if(this.subType == this.SUB_TYPE[0]){
+    if(this.subType == SUB_TYPE[0]){
       this.getNbrOfPageSub();
       this.getListSubscriber();
     }else{
       this.getNbrOfPageSubTo();
       this.getListSubscribeTo();
     }
-    this.nbSub.emit(this.subscriptions.length);
   }
-
+  
   getNbrOfPageSub(){
     this.feedService.getNbrOfPageSub(this.username).subscribe(
       (data) =>{
@@ -47,19 +60,20 @@ export class ProfileSubscriptionComponent implements OnInit {
       },(err) =>{
         console.log(err);
       }
-    );
+      );
   }
-
+  
   getNbrOfPageSubTo(){
     this.feedService.getNbrOfPageSubTo(this.username).subscribe(
       (data) =>{
         this.totalPageSubTo = data;
+        console.log(this.totalPageSubTo);
       },(err) =>{
         console.log(err);
       }
-    );
+      );
   }
-
+  
   getListSubscriber(){
     this.feedService.getListSubscriber(this.username,this.noPageSub).subscribe(
       (data) =>{
@@ -68,22 +82,22 @@ export class ProfileSubscriptionComponent implements OnInit {
       },(err)=>{
         console.log(err);
       }
-    );
-  }
-
-  getListSubscribeTo(){
-    this.feedService.getListSubscribeTo(this.username,this.noPageSubTo).subscribe(
-      (data) =>{
-        console.log(data);
-        this.subscriptions.push.apply(this.subscriptions, data);
-      },(err)=>{
+      );
+    }
+    
+    getListSubscribeTo(){
+      this.feedService.getListSubscribeTo(this.username,this.noPageSubTo).subscribe(
+        (data) =>{
+          console.log(data);
+          this.subscriptions.push.apply(this.subscriptions, data);
+        },(err)=>{
         console.log(err);
       }
     );
   }
 
   loadMoreSub(){
-    if(this.subType == this.SUB_TYPE[0]){
+    if(this.subType == SUB_TYPE[0]){
       this.noPageSub++;
       this.getListSubscriber();
     }else{
@@ -93,7 +107,7 @@ export class ProfileSubscriptionComponent implements OnInit {
   }
 
   isLastPage(){
-    if(this.subType == this.SUB_TYPE[0]){
+    if(this.subType == SUB_TYPE[0]){
       return this.noPageSub + 1 == this.totalPageSub;
     }else{
       return this.noPageSubTo + 1 == this.totalPageSubTo;

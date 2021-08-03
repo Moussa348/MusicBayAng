@@ -1,0 +1,51 @@
+<div class="container">
+  <div
+    class="row text-capitalize text-light"
+    *ngFor="let possibleSubTo of listPossibleSubTo"
+  >
+    <div class="col-4 pr-4" style="width: 75px">
+      <div class="pt-4">
+        <img
+          mat-card-image
+          [src]="[
+            'http://localhost:4444/user/getPicture/' + possibleSubTo.username
+          ]"
+          alt="vaccinCovid"
+          class="rounded-circle border img-responsive h-100 ml-3"
+        />
+      </div>
+    </div>
+
+    <div class="col-8 text-start">
+      <div class="flex-row text-capitalize">
+        <small>{{ possibleSubTo.username }}</small>
+      </div>
+      <div class="flex-row text-capitalize">
+        <small>
+          <u> Subscribers :</u> {{ possibleSubTo.nbrOfSubscriber
+          }}<i class="fas fa-users btn text-light"></i>
+        </small>
+      </div>
+      <div class="flex-row text-capitalize">
+        <small>
+          <u> SubscribeTo :</u> {{ possibleSubTo.nbrOfSubscribeTo
+          }}<i class="fas fa-users btn text-light"></i>
+        </small>
+      </div>
+    </div>
+    <div class="flex-row">
+      <mat-divider class="border"></mat-divider>
+    </div>
+  </div>
+
+  <div
+  class="flex-row d-flex justify-content-center pt-4 pb-4"
+>
+  <button
+    class="btn btn-outline-info rounded-pill border text-light"
+    (click)="loadMore()"
+  >
+  <i class="fas fa-caret-down"></i>
+  </button>
+</div>
+</div>

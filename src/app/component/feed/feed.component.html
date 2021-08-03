@@ -21,253 +21,324 @@
   <div class="p-4"></div>
   <mat-divider class="text-light border border-3"></mat-divider>
   <div class="p-4"></div>
+</div>
 
-  <mat-card
-    class="
-      d-flex
-      align-items-center
-      border border-2 border-light
-      shadow-lg
-      text-light
-      font-weight-bolder
-      m-4
-    "
-    *ngFor="let sharedMusic of feed.sharedMusics"
-  >
-    <a [routerLink]="">
-      <div class="flex-shrink-0">
-        <img
-          [src]="['assets/images/welcomeBg1.png']"
-          alt="vaccinCovid"
-          class="rounded border border-1 border-dark img-responsive img-fluid"
-        />
-      </div>
-    </a>
-    <div class="flex-grow-1 ms-3 text-start">
-      <div class="flex-row">
-        <p class="lead text-capitalize float-right">
-          {{ sharedMusic.sharedBy }} just shared this track<i
-            class="fas fa-share-alt"
-          ></i>
-        </p>
-      </div>
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <u>Sharing Date :</u> {{ sharedMusic.sharingDate | date
-          }}<i class="fas fa-share-square text-info"></i>
-        </p>
-      </div>
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <u>sharignMsg :</u> {{ sharedMusic.sharingMsg
-          }}<i class="fas fa-comment-alt"></i>
-        </p>
-      </div>
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <u>title :</u> {{ sharedMusic.music.title }}
-        </p>
-      </div>
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <u>tags :</u> {{ sharedMusic.music.tags }}<i class="fas fa-tags"></i>
-        </p>
-      </div>
-      <div class="flex-row">
-        <p
-          class="lead text-capitalize"
-          [routerLink]="['/profile', sharedMusic.music.creator]"
-        >
-          <u> creator :</u> {{ sharedMusic.music.creator
-          }}<i class="fas fa-user"></i>
-        </p>
-      </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3 col-md-1 col-sm-12">
+      <div class="container">
+        <div class="flex-row pb-4">
+          <mat-card class="border border-1 border-light">
+            <h4 class="text-light">Become A producer</h4>
+            <p class="text-light text-justify">
 
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <u> basicPrice :</u> {{ sharedMusic.music.basicPrice }}.00<i
-            class="fas fa-dollar-sign"
-          ></i>
-        </p>
-      </div>
-      
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <u> ExclusivePrice :</u> {{ sharedMusic.music.exclusivePrice }}.00<i
-            class="fas fa-dollar-sign"
-          ></i>
-        </p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
+              nam, ipsa ipsam rem labore necessitatibus velit officia error in
+              repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
+              reprehenderit praesentium blanditiis doloremque. <a>https://MusicBayPro.com</a>
+            </p>
+          </mat-card>
+        </div>
+
+        <div class="flex-row pb-4">
+          <mat-card class="border border-1 border-light">
+            <h4 class="text-light">Want to sell music?</h4>
+            <p class="text-light text-justify">
+
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
+              nam, ipsa ipsam rem labore necessitatibus velit officia error in
+              repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
+              reprehenderit praesentium blanditiis doloremque.<a>https://MusicBayPro.com</a>
+            </p>
+          </mat-card>
+        </div>
+
       </div>
     </div>
-  </mat-card>
 
-  <mat-card
-    class="
-      d-flex
-      align-items-center
-      border border-4 border-dark
-      shadow-lg
-      text-light
-      font-weight-bolder
-      m-4
-    "
-    *ngFor="let purchasedMusic of feed.purchasedMusics"
-  >
-    <a [routerLink]="">
-      <div class="flex-shrink-0">
-        <img
-          [src]="['assets/images/welcomeBg1.png']"
-          alt="vaccinCovid"
+    <div class="col-lg-6 col-md-10 col-sm-4">
+      <div class="container">
+        <mat-card
           class="
-            rounded
+            d-flex
+            align-items-center
+            border border-2 border-light
+            shadow-lg
+            text-light
+            font-weight-bolder
+            m-4
+          "
+          *ngFor="let sharedMusic of feed.sharedMusics"
+        >
+          <a [routerLink]="">
+            <div class="flex-shrink-0">
+              <img
+                [src]="['assets/images/welcomeBg1.png']"
+                alt="vaccinCovid"
+                class="
+                  rounded
+                  border border-1 border-dark
+                  img-responsive img-fluid
+                "
+              />
+            </div>
+          </a>
+          <div class="flex-grow-1 ms-4 text-start">
+            <div class="flex-row">
+              <p class="lead text-capitalize float-right">
+                {{ sharedMusic.sharedBy }} just shared this track<i
+                  class="fas fa-share-alt"
+                ></i>
+              </p>
+            </div>
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <u>Sharing Date :</u> {{ sharedMusic.sharingDate | date
+                }}<i class="fas fa-share-square text-info"></i>
+              </p>
+            </div>
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <u>sharignMsg :</u> {{ sharedMusic.sharingMsg
+                }}<i class="fas fa-comment-alt"></i>
+              </p>
+            </div>
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <u>title :</u> {{ sharedMusic.music.title }}
+              </p>
+            </div>
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <u>tags :</u> {{ sharedMusic.music.tags
+                }}<i class="fas fa-tags"></i>
+              </p>
+            </div>
+            <div class="flex-row">
+              <p
+                class="lead text-capitalize"
+                [routerLink]="['/profile', sharedMusic.music.creator]"
+              >
+                <u> creator :</u> {{ sharedMusic.music.creator
+                }}<i class="fas fa-user"></i>
+              </p>
+            </div>
+
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <u> basicPrice :</u> {{ sharedMusic.music.basicPrice }}.00<i
+                  class="fas fa-dollar-sign"
+                ></i>
+              </p>
+            </div>
+
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <u> ExclusivePrice :</u>
+                {{ sharedMusic.music.exclusivePrice }}.00<i
+                  class="fas fa-dollar-sign"
+                ></i>
+              </p>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card
+          class="
+            d-flex
+            align-items-center
             border border-4 border-dark
-            h-100
-            img-responsive img-fluid
+            shadow-lg
+            text-light
+            font-weight-bolder
+            m-4
           "
-        />
-      </div>
-    </a>
-    <div class="flex-grow-1 ms-5 text-start">
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <i class="fas fa-dollar-sign"></i>
-          {{ purchasedMusic.purchasedBy }} just purchased this track
-        </p>
-      </div>
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <u>Purchased Date :</u>
-          {{ purchasedMusic.purchasedDate | date
-          }}<i class="fas fa-heart text-danger"></i>
-        </p>
-      </div>
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <u>title :</u> {{ purchasedMusic.music.title }}
-        </p>
-      </div>
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <u>tags :</u> {{ purchasedMusic.music.tags
-          }}<i class="fas fa-tags"></i>
-        </p>
-      </div>
-      <div class="flex-row">
-        <p
-          class="lead text-capitalize"
-          [routerLink]="['/profile', likedMusic.music.creator]"
+          *ngFor="let purchasedMusic of feed.purchasedMusics"
         >
-          <u> creator :</u> {{ purchasedMusic.music.creator
-          }}<i class="fas fa-user"></i>
-        </p>
-      </div>
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <u> basicPrice :</u> {{ purchasedMusic.music.basicPrice }}.00<i
-            class="fas fa-dollar-sign"
-          ></i>
-        </p>
-      </div>
-      <div class="flex-row pl-4">
-        <p class="lead text-capitalize">
-          <u> ExclusivePrice :</u>
-          {{ purchasedMusic.music.exclusivePrice }}.00<i
-            class="fas fa-dollar-sign"
-          ></i>
-        </p>
-      </div>
-    </div>
-  </mat-card>
+          <a [routerLink]="">
+            <div class="flex-shrink-0">
+              <img
+                [src]="['assets/images/welcomeBg1.png']"
+                alt="vaccinCovid"
+                class="
+                  rounded
+                  border border-4 border-dark
+                  h-100
+                  img-responsive img-fluid
+                "
+              />
+            </div>
+          </a>
+          <div class="flex-grow-1 ms-4 text-start">
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <i class="fas fa-dollar-sign"></i>
+                {{ purchasedMusic.purchasedBy }} just purchased this track
+              </p>
+            </div>
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <u>Purchased Date :</u>
+                {{ purchasedMusic.purchasedDate | date
+                }}<i class="fas fa-heart text-danger"></i>
+              </p>
+            </div>
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <u>title :</u> {{ purchasedMusic.music.title }}
+              </p>
+            </div>
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <u>tags :</u> {{ purchasedMusic.music.tags
+                }}<i class="fas fa-tags"></i>
+              </p>
+            </div>
+            <div class="flex-row">
+              <p
+                class="lead text-capitalize"
+                [routerLink]="['/profile', likedMusic.music.creator]"
+              >
+                <u> creator :</u> {{ purchasedMusic.music.creator
+                }}<i class="fas fa-user"></i>
+              </p>
+            </div>
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <u> basicPrice :</u> {{ purchasedMusic.music.basicPrice }}.00<i
+                  class="fas fa-dollar-sign"
+                ></i>
+              </p>
+            </div>
+            <div class="flex-row pl-4">
+              <p class="lead text-capitalize">
+                <u> ExclusivePrice :</u>
+                {{ purchasedMusic.music.exclusivePrice }}.00<i
+                  class="fas fa-dollar-sign"
+                ></i>
+              </p>
+            </div>
+          </div>
+        </mat-card>
 
-  <mat-card
-    class="
-      d-flex
-      align-items-center
-      border border-2 border-light
-      shadow-lg
-      text-light
-      font-weight-bolder
-      m-4
-    "
-    *ngFor="let likedMusic of feed.likedMusics"
-  >
-    <a [routerLink]="">
-      <div class="flex-shrink-0">
-        <img
-          [src]="['assets/images/welcomeBg2.png']"
-          alt="vaccinCovid"
+        <mat-card
           class="
-            rounded
-            shadow
-            border border-1 border-dark
-            h-100
-            img-responsive img-fluid
+            d-flex
+            align-items-center
+            border border-2 border-light
+            shadow-lg
+            text-light
+            font-weight-bolder
+            m-4
           "
-        />
-      </div>
-    </a>
-    <div class="flex-grow-1 ms-4 text-start">
-      <div class="flex-row col-sm-4 col-md-12">
-        <p class="lead text-capitalize">
-          {{ likedMusic.likedBy }} just liked this track<i
-            class="fas fa-thumbs-up"
-          ></i>
-        </p>
-      </div>
-      <div class="flex-row col-sm-4 col-md-12">
-        <p class="lead text-capitalize">
-          <u>Liking Date :</u>
-          {{ likedMusic.likingDate | date
-          }}<i class="fas fa-heart text-danger"></i>
-        </p>
-      </div>
-      <div class="flex-row col-sm-4 col-md-12">
-        <p class="lead text-capitalize">
-          <u>title :</u> {{ likedMusic.music.title }}
-        </p>
-      </div>
-      <div class="flex-row col-sm-4 col-md-12">
-        <p class="lead text-capitalize">
-          <u>tags :</u> {{ likedMusic.music.tags }}<i class="fas fa-tags"></i>
-        </p>
-      </div>
-      <div class="flex-row col-sm-4 col-md-12">
-        <p
-          class="lead text-capitalize"
-          [routerLink]="['/profile', likedMusic.music.creator]"
+          *ngFor="let likedMusic of feed.likedMusics"
         >
-          <u> creator :</u> {{ likedMusic.music.creator
-          }}<i class="fas fa-user"></i>
-        </p>
-      </div>
-      <div class="flex-row">
-        <p class="lead text-capitalize">
-          <u> basicPrice :</u> {{ likedMusic.music.basicPrice }}.00<i
-            class="fas fa-dollar-sign"
-          ></i>
-        </p>
-      </div>
-      <div class="flex-row pl-4">
-        <p class="lead text-capitalize">
-          <u> ExclusivePrice :</u> {{ likedMusic.music.exclusivePrice }}.00<i
-            class="fas fa-dollar-sign"
-          ></i>
-        </p>
+          <a [routerLink]="">
+            <div class="flex-shrink-0">
+              <img
+                [src]="['assets/images/welcomeBg2.png']"
+                alt="vaccinCovid"
+                class="
+                  rounded
+                  shadow
+                  border border-1 border-dark
+                  h-100
+                  img-responsive img-fluid
+                "
+              />
+            </div>
+          </a>
+          <div class="flex-grow-1 ms-4 text-start">
+            <div class="flex-row col-sm-4 col-md-12">
+              <p class="lead text-capitalize">
+                {{ likedMusic.likedBy }} just liked this track<i
+                  class="fas fa-thumbs-up"
+                ></i>
+              </p>
+            </div>
+            <div class="flex-row col-sm-4 col-md-12">
+              <p class="lead text-capitalize">
+                <u>Liking Date :</u>
+                {{ likedMusic.likingDate | date
+                }}<i class="fas fa-heart text-danger"></i>
+              </p>
+            </div>
+            <div class="flex-row col-sm-4 col-md-12">
+              <p class="lead text-capitalize">
+                <u>title :</u> {{ likedMusic.music.title }}
+              </p>
+            </div>
+            <div class="flex-row col-sm-4 col-md-12">
+              <p class="lead text-capitalize">
+                <u>tags :</u> {{ likedMusic.music.tags
+                }}<i class="fas fa-tags"></i>
+              </p>
+            </div>
+            <div class="flex-row col-sm-4 col-md-12">
+              <p
+                class="lead text-capitalize"
+                [routerLink]="['/profile', likedMusic.music.creator]"
+              >
+                <u> creator :</u> {{ likedMusic.music.creator
+                }}<i class="fas fa-user"></i>
+              </p>
+            </div>
+            <div class="flex-row">
+              <p class="lead text-capitalize">
+                <u> basicPrice :</u> {{ likedMusic.music.basicPrice }}.00<i
+                  class="fas fa-dollar-sign"
+                ></i>
+              </p>
+            </div>
+            <div class="flex-row pl-4">
+              <p class="lead text-capitalize">
+                <u> ExclusivePrice :</u>
+                {{ likedMusic.music.exclusivePrice }}.00<i
+                  class="fas fa-dollar-sign"
+                ></i>
+              </p>
+            </div>
+          </div>
+        </mat-card>
       </div>
     </div>
-  </mat-card>
 
-  <div class="flex-row">
-    <div class="p-5"></div>
+    <div class="col-lg-3 col-md-1 col-sm-12">
+      <div class="container-fluid">
+        <div class="flex-row pb-4">
+          <h4 class="text-light text-capitalize">Profile Suggestions</h4>
+          <mat-card class="border border-1 border-light">
+
+              <app-list-possible-subscribe-to></app-list-possible-subscribe-to>
+          </mat-card>
+        </div>
+
+        <div class="flex-row pb-4">
+          <mat-card class="border border-1 border-light">
+            <p class="text-light text-justify">
+
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
+              nam, ipsa ipsam rem labore necessitatibus velit officia error in
+              repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
+              reprehenderit praesentium blanditiis doloremque.
+            </p>
+          </mat-card>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="flex-row d-flex justify-content-center">
-    <button
-      class="btn btn-lg btn-dark rounded-pill border border-3 shadow p-4"
-      (click)="loadFeed()"
-    >
-      Load More Content<i class="fas fa-cloud-download-alt pl-1"></i>
-    </button>
-  </div>
+</div>
+
+<div class="flex-row">
+  <div class="p-5"></div>
+</div>
+<div class="flex-row d-flex justify-content-center">
+  <button
+    class="btn btn-lg btn-dark rounded-pill border border-3 shadow p-4"
+    (click)="loadFeed()"
+  >
+    Load More Content<i class="fas fa-cloud-download-alt pl-1"></i>
+  </button>
 </div>
 
 <div class="flex-row">

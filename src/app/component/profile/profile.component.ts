@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   animate,
   state,
@@ -18,6 +18,7 @@ import { SharedMusic } from 'src/app/model/shared-music';
 import { PurchasedMusic } from 'src/app/model/purchased-music';
 import { getUsername } from 'src/app/util/jwtUtils';
 import { UserService } from 'src/app/service/user.service';
+import { SUB_TYPE } from 'src/app/util/constant';
 
 @Component({
   selector: 'app-profile',
@@ -39,6 +40,7 @@ export class ProfileComponent implements OnInit {
   likedMusics: LikedMusic[];
   sharedMusics: SharedMusic[];
   purchasedMusics: PurchasedMusic[];
+  @ViewChild(ProfileSubscriptionComponent) profileSubcomp;
 
   constructor(
     private userService: UserService,
@@ -115,19 +117,16 @@ export class ProfileComponent implements OnInit {
   }
 
   openListSubscription(subType: string) {
-    if(this.isLoggedIn()){
-
+    if(this.isLoggedIn() && 
+    (subType == SUB_TYPE[0] && this.profile.nbrOfSubscriber >0) ||
+    (subType == SUB_TYPE[1] && this.profile.nbrOfSubscribeTo >0)
+    ){
       const modalRef = this.modalService.open(ProfileSubscriptionComponent, {
         centered: true,
         scrollable: true,
       });
       modalRef.componentInstance.username = this.profileUserName;
       modalRef.componentInstance.subType = subType;
-      modalRef.componentInstance.nbSub.subscribe((nbSub) =>{
-       if(nbSub ==0){
-         modalRef.close();
-       }
-      });
     }
   }
 

@@ -23,6 +23,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatBadgeModule} from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
 import {MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -49,6 +50,7 @@ import { ALLOWED_URLS, STORAGE_KEY } from './util/constant';
 import { NotificationComponent } from './component/notification/notification.component';
 import { ConversationComponent } from './component/conversation/conversation.component';
 import { UserSearchBarComponent } from './component/user-search-bar/user-search-bar.component';
+import { ListPossibleSubscribeToComponent } from './component/list-possible-subscribe-to/list-possible-subscribe-to.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,7 @@ import { UserSearchBarComponent } from './component/user-search-bar/user-search-
     NotificationComponent,
     ConversationComponent,
     UserSearchBarComponent,
+    ListPossibleSubscribeToComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +93,7 @@ import { UserSearchBarComponent } from './component/user-search-bar/user-search-
     ReactiveFormsModule,
     MatSnackBarModule,
     LayoutModule,
+    MatBadgeModule,
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,
