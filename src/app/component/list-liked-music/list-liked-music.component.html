@@ -15,7 +15,7 @@
   </a>
     <div class="flex-grow-1 ms-3 text-start">
       <div class="flex-row">
-        <p class="lead text-capitalize">
+        <p class="text-capitalize">
           <u>Liking Date :</u>
           {{ likedMusic.likingDate | date
           }}<i class="fas fa-heart text-danger"></i>
@@ -25,25 +25,25 @@
         <p class="lead text-capitalize"><u>title :</u> {{ likedMusic.music.title }}</p>
       </div>
       <div class="flex-row">
-        <p class="lead text-capitalize">
+        <p class="text-capitalize">
           <u>tags :</u> {{ likedMusic.music.tags }}<i class="fas fa-tags"></i>
         </p>
       </div>
       <div class="flex-row">
-        <p class="lead text-capitalize" [routerLink]="['/profile', likedMusic.music.creator]">
+        <p class="text-capitalize" [routerLink]="['/profile', likedMusic.music.creator]">
           <u> creator :</u> {{ likedMusic.music.creator
           }}<i class="fas fa-user"></i>
         </p>
       </div>
       <div class="flex-row">
-        <p class="lead text-capitalize">
+        <p class="text-capitalize">
           <u> basicPrice :</u> {{ likedMusic.music.basicPrice }}.00<i
             class="fas fa-dollar-sign"
           ></i>
         </p>
       </div>
       <div class="flex-row pl-4">
-        <p class="lead text-capitalize">
+        <p class="text-capitalize">
           <u> ExclusivePrice :</u> {{ likedMusic.music.exclusivePrice }}.00<i
             class="fas fa-dollar-sign"
           ></i>

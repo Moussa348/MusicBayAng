@@ -57,7 +57,7 @@
     </div>
 
     <div class="col-lg-6 col-md-10 col-sm-4">
-      <div class="container">
+      <div class="container-fluid">
         <mat-card
           class="
             d-flex
@@ -71,7 +71,7 @@
           *ngFor="let sharedMusic of feed.sharedMusics"
         >
           <a [routerLink]="">
-            <div class="flex-shrink-0">
+            <div class="flex-shrink-0 flex-nowrap ">
               <img
                 [src]="['assets/images/welcomeBg1.png']"
                 alt="vaccinCovid"
@@ -83,40 +83,40 @@
               />
             </div>
           </a>
-          <div class="flex-grow-1 ms-4 text-start">
+          <div class="flex-shrink-1 flex-nowrap ms-4 text-start">
             <div class="flex-row">
-              <p class="lead text-capitalize float-right">
+              <p class=" text-capitalize">
                 {{ sharedMusic.sharedBy }} just shared this track<i
                   class="fas fa-share-alt"
                 ></i>
               </p>
             </div>
             <div class="flex-row">
-              <p class="lead text-capitalize">
+              <p class=" text-capitalize">
                 <u>Sharing Date :</u> {{ sharedMusic.sharingDate | date
                 }}<i class="fas fa-share-square text-info"></i>
               </p>
             </div>
-            <div class="flex-row">
-              <p class="lead text-capitalize">
-                <u>sharignMsg :</u> {{ sharedMusic.sharingMsg
+            <div class="flex-row d-inline-flex">
+              <p class="text-wrap text-break">
+                <u class="text-capitalize">sharignMsg :</u> {{ sharedMusic.sharingMsg
                 }}<i class="fas fa-comment-alt"></i>
               </p>
             </div>
             <div class="flex-row">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 <u>title :</u> {{ sharedMusic.music.title }}
               </p>
             </div>
             <div class="flex-row">
-              <p class="lead text-capitalize">
+              <p class=" text-capitalize">
                 <u>tags :</u> {{ sharedMusic.music.tags
                 }}<i class="fas fa-tags"></i>
               </p>
             </div>
             <div class="flex-row">
               <p
-                class="lead text-capitalize"
+                class=" text-capitalize"
                 [routerLink]="['/profile', sharedMusic.music.creator]"
               >
                 <u> creator :</u> {{ sharedMusic.music.creator
@@ -125,7 +125,7 @@
             </div>
 
             <div class="flex-row">
-              <p class="lead text-capitalize">
+              <p class=" text-capitalize">
                 <u> basicPrice :</u> {{ sharedMusic.music.basicPrice }}.00<i
                   class="fas fa-dollar-sign"
                 ></i>
@@ -133,7 +133,7 @@
             </div>
 
             <div class="flex-row">
-              <p class="lead text-capitalize">
+              <p class=" text-capitalize">
                 <u> ExclusivePrice :</u>
                 {{ sharedMusic.music.exclusivePrice }}.00<i
                   class="fas fa-dollar-sign"
@@ -171,13 +171,13 @@
           </a>
           <div class="flex-grow-1 ms-4 text-start">
             <div class="flex-row">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 <i class="fas fa-dollar-sign"></i>
                 {{ purchasedMusic.purchasedBy }} just purchased this track
               </p>
             </div>
             <div class="flex-row">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 <u>Purchased Date :</u>
                 {{ purchasedMusic.purchasedDate | date
                 }}<i class="fas fa-heart text-danger"></i>
@@ -189,14 +189,14 @@
               </p>
             </div>
             <div class="flex-row">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 <u>tags :</u> {{ purchasedMusic.music.tags
                 }}<i class="fas fa-tags"></i>
               </p>
             </div>
             <div class="flex-row">
               <p
-                class="lead text-capitalize"
+                class="text-capitalize"
                 [routerLink]="['/profile', likedMusic.music.creator]"
               >
                 <u> creator :</u> {{ purchasedMusic.music.creator
@@ -204,14 +204,14 @@
               </p>
             </div>
             <div class="flex-row">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 <u> basicPrice :</u> {{ purchasedMusic.music.basicPrice }}.00<i
                   class="fas fa-dollar-sign"
                 ></i>
               </p>
             </div>
             <div class="flex-row pl-4">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 <u> ExclusivePrice :</u>
                 {{ purchasedMusic.music.exclusivePrice }}.00<i
                   class="fas fa-dollar-sign"
@@ -250,33 +250,33 @@
           </a>
           <div class="flex-grow-1 ms-4 text-start">
             <div class="flex-row col-sm-4 col-md-12">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 {{ likedMusic.likedBy }} just liked this track<i
                   class="fas fa-thumbs-up"
                 ></i>
               </p>
             </div>
             <div class="flex-row col-sm-4 col-md-12">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 <u>Liking Date :</u>
                 {{ likedMusic.likingDate | date
                 }}<i class="fas fa-heart text-danger"></i>
               </p>
             </div>
             <div class="flex-row col-sm-4 col-md-12">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 <u>title :</u> {{ likedMusic.music.title }}
               </p>
             </div>
             <div class="flex-row col-sm-4 col-md-12">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 <u>tags :</u> {{ likedMusic.music.tags
                 }}<i class="fas fa-tags"></i>
               </p>
             </div>
             <div class="flex-row col-sm-4 col-md-12">
               <p
-                class="lead text-capitalize"
+                class="text-capitalize"
                 [routerLink]="['/profile', likedMusic.music.creator]"
               >
                 <u> creator :</u> {{ likedMusic.music.creator
@@ -284,14 +284,14 @@
               </p>
             </div>
             <div class="flex-row">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 <u> basicPrice :</u> {{ likedMusic.music.basicPrice }}.00<i
                   class="fas fa-dollar-sign"
                 ></i>
               </p>
             </div>
             <div class="flex-row pl-4">
-              <p class="lead text-capitalize">
+              <p class="text-capitalize">
                 <u> ExclusivePrice :</u>
                 {{ likedMusic.music.exclusivePrice }}.00<i
                   class="fas fa-dollar-sign"
@@ -306,15 +306,16 @@
     <div class="col-lg-3 col-md-1 col-sm-12">
       <div class="container-fluid">
         <div class="flex-row pb-4">
-          <h4 class="text-light text-capitalize">Profile Suggestions</h4>
-          <mat-card class="border border-1 border-light">
+          <h4 class="text-light text-capitalize">Profile Suggestions<i class="fas {{ isItCollapsed() ? 'fa-eye': 'fa-eye-slash'}} btn text-light" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"></i></h4>
+          <mat-card class="border border-1 border-light" [@collapse]="isItCollapsed() ? true : false" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
 
-              <app-list-possible-subscribe-to></app-list-possible-subscribe-to>
+              <app-list-possible-subscribe-to [username]="username"></app-list-possible-subscribe-to>
           </mat-card>
         </div>
 
         <div class="flex-row pb-4">
           <mat-card class="border border-1 border-light">
+            <h4 class="text-light">Best Music Streaming Platform!</h4>
             <p class="text-light text-justify">
 
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam

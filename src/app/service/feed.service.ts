@@ -64,4 +64,8 @@ export class FeedService {
     return this.http.get<number>(this.url + 'getNbrOfPageSubTo/' + username);
   }
 
+  getNbrOfPagePossibleSubTo(username:string){
+    return this.http.get<number>(this.url + 'getNbrOfPagePossibleSubTo/' + username);
+  }
+
 }

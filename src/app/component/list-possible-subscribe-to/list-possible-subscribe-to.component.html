@@ -1,22 +1,22 @@
-<div class="container">
-  <div
-    class="row text-capitalize text-light"
-    *ngFor="let possibleSubTo of listPossibleSubTo"
-  >
-    <div class="col-4 pr-4" style="width: 75px">
-      <div class="pt-4">
+<div
+  class="container"
+  *ngFor="let possibleSubTo of listPossibleSubTo; let i = index"
+>
+  <div class="row text-capitalize text-light d-flex justify-content-start">
+    <div class="col-md-4 col-sm-12 pr-4" style="width: 75px">
+      <div class="pt-4 d-flex justify-content-start">
         <img
           mat-card-image
           [src]="[
             'http://localhost:4444/user/getPicture/' + possibleSubTo.username
           ]"
           alt="vaccinCovid"
-          class="rounded-circle border img-responsive h-100 ml-3"
+          class="rounded-circle border img-responsive img-fluid h-100 ml-3"
         />
       </div>
     </div>
 
-    <div class="col-8 text-start">
+    <div class="col-md-6 text-md-start text-sm-center">
       <div class="flex-row text-capitalize">
         <small>{{ possibleSubTo.username }}</small>
       </div>
@@ -33,19 +33,39 @@
         </small>
       </div>
     </div>
-    <div class="flex-row">
-      <mat-divider class="border"></mat-divider>
+
+    <div class="col-md-2 col-sm-6 align-self-center pb-2 pt-2">
+      <button
+        class="btn btn-primary rounded-pill text-light border shadow fs-6"
+        (click)="subscribeOrUnsubscribe(possibleSubTo.username, i)"
+      >
+        Subscribe
+      </button>
     </div>
   </div>
 
-  <div
-  class="flex-row d-flex justify-content-center pt-4 pb-4"
+  <div class="flex-row pb-4 pt-3">
+    <mat-divider class="border"></mat-divider>
+  </div>
+</div>
+
+<div
+  class="flex-row d-flex align-self-center justify-content-center pb-1 pt-2"
+  *ngIf="hasMoreContent()"
 >
   <button
     class="btn btn-outline-info rounded-pill border text-light"
     (click)="loadMore()"
   >
-  <i class="fas fa-caret-down"></i>
+    <i class="fas fa-caret-down"></i>
   </button>
+
 </div>
-</div>
+<div
+    class="flex-row d-flex align-self-center justify-content-center pb-1 pt-2"
+    *ngIf="!hasMoreContent()"
+  >
+    <p class="text-warning">
+      Nothing more to Suggest<i class="fas fa-exclamation-circle"></i>
+    </p>
+  </div>

@@ -21,12 +21,20 @@ import { getUsername } from 'src/app/util/jwtUtils';
 
       transition(':enter, :leave', [animate(1000)]),
     ]),
-  ]
+    trigger('collapse',[
+      state('false', style({ opacity: 1 })),
+      state('true', style({ opacity: 0 })),
+
+      transition('false <=> true', [animate(1000)])
+    
+    ])
+  ],
 })
 export class FeedComponent implements OnInit {
   username = getUsername();
   lastDateOfCurrentFeed;
   noPage = 0;
+  public isCollapsed = false;
 
   feed: Feed = new Feed();
 
@@ -68,5 +76,9 @@ export class FeedComponent implements OnInit {
           console.log(err);
         }
       );
+  }
+
+  isItCollapsed(){
+    return this.isCollapsed;
   }
 }
