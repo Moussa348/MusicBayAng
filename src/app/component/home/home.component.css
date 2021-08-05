@@ -1,3 +1,7 @@
 img{
-    height: 550px;
+    height: 650px;
+}
+
+i:hover{
+    opacity: 0.5;
 }

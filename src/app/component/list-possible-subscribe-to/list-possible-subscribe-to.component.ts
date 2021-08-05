@@ -73,7 +73,7 @@ export class ListPossibleSubscribeToComponent implements OnInit {
 
   loadMore() {
     this.noPage++;
-    if(this.noPage < this.totalPage && this.listPossibleSubTo.length == 0){
+    if(this.noPage < this.totalPage && this.listPossibleSubTo.length > 0){
 
       console.log(this.noPage);
       this.getListPossibleSubscribeTo();
@@ -115,7 +115,7 @@ export class ListPossibleSubscribeToComponent implements OnInit {
     this.renderer.setProperty(button, 'textContent', text);
   }
 
-  hasMoreContent(){
-    return this.noPage == this.totalPage -1;
+  isLastPage(){
+    return this.noPage + 1 == this.totalPage;
   }
 }

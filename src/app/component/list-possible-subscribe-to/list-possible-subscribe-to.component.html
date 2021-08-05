@@ -51,7 +51,7 @@
 
 <div
   class="flex-row d-flex align-self-center justify-content-center pb-1 pt-2"
-  *ngIf="hasMoreContent()"
+  *ngIf="!isLastPage()"
 >
   <button
     class="btn btn-outline-info rounded-pill border text-light"
@@ -63,7 +63,7 @@
 </div>
 <div
     class="flex-row d-flex align-self-center justify-content-center pb-1 pt-2"
-    *ngIf="!hasMoreContent()"
+    *ngIf="isLastPage()"
   >
     <p class="text-warning">
       Nothing more to Suggest<i class="fas fa-exclamation-circle"></i>

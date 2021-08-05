@@ -59,6 +59,10 @@
             class="d-block w-100"
             alt="..."
           />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Second slide label</h5>
+            <p>Some representative placeholder content for the second slide.</p>
+          </div>
         </div>
         <div class="carousel-item border border-2 rounded shadow-lg">
           <img
@@ -66,6 +70,10 @@
             class="d-block w-100"
             alt="..."
           />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Second slide label</h5>
+            <p>Some representative placeholder content for the second slide.</p>
+          </div>
         </div>
         <div class="carousel-item border border-2 rounded shadow-lg">
           <img
@@ -73,6 +81,10 @@
             class="d-block w-100"
             alt="..."
           />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>No Music No Life</h5>
+            <p>Without Music There Is No Color In life</p>
+          </div>
         </div>
       </div>
       <button
@@ -99,43 +111,119 @@
 
 <div class="container-fluid">
   <div class="row">
-   
+    <div class="col-1"></div>
     <div class="col-2">
-        <div class="row p-5"></div>
-        <div class="row p-5"></div>
-        <div class="row p-5"></div>
-        <div class="row p-5"></div>
-        <div class="row p-5"></div>
-  
-  
-          <div class="flex-row">
+      <div class="row p-5"></div>
+
+      <div class="flex-row">
+        <mat-card class="border border-dark rounded shadow-lg">
+            <div id="socialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner text-light">
+                  <div class="carousel-item active">
+                    
+                    <div class="d-flex justify-content-center">
+                            <i class="fab fa-instagram-square fa-4x pr-2 btn text-light"></i>
+                        <div class="pt-1">
+                          <p class="text-wrap text-break">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                          </p>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="d-flex justify-content-center">
+                        <i class="fab fa-twitter fa-4x pr-2 btn text-light"></i>
+                        <div class="pt-1">
+                          <p class="text-wrap text-break">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                          </p>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="d-flex justify-content-center">
+                        <i class="fab fa-snapchat-ghost fa-4x pr-2 btn text-light"></i>
+                        <div class="pt-1">
+                          <p class="text-wrap text-break">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                          </p>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#socialCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#socialCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </mat-card>
+        <div class="p-3"></div>
+      </div>
+
+      <div class="flex-row">
+        <mat-card class="border border-dark shadow-lg rounded">
+            <h4 class="text-light">Want to learn from the best?</h4>
             <p class="text-light text-justify">
+
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
               nam, ipsa ipsam rem labore necessitatibus velit officia error in
               repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
-              reprehenderit praesentium blanditiis doloremque.
-            </p>
-          </div>
-  
-          <div class="flex-row">
-            <p class="text-light text-justify">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
-              nam, ipsa ipsam rem labore necessitatibus velit officia error in
-              repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
-              reprehenderit praesentium blanditiis doloremque.
-            </p>
-          </div>
-          <div class="flex-row">
-            <p class="text-light text-justify">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
-              nam, ipsa ipsam rem labore necessitatibus velit officia error in
-              repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
-              reprehenderit praesentium blanditiis doloremque.
-            </p>
-          </div>
+              reprehenderit praesentium blanditiis doloremque. <a>https://youtube.com/bombay</a>
+            </p>   
+        </mat-card>
+        <div class="p-3"></div>
+      </div>
+
+      <div class="flex-row">
+        <mat-divider class="border border-light"></mat-divider>
+        <div class="p-1"></div>
+      </div>
+
+      <div class="flex-row">
+        <p class="text-light text-justify">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam nam,
+          ipsa ipsam rem labore necessitatibus velit officia error in
+          repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
+          reprehenderit praesentium blanditiis doloremque.
+        </p>
+      </div>
+      <div class="flex-row">
+        <mat-divider class="border border-light"></mat-divider>
+        <div class="p-1"></div>
+      </div>
+
+      <div class="flex-row">
+        <p class="text-light text-justify">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam nam,
+          ipsa ipsam rem labore necessitatibus velit officia error in
+          repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
+          reprehenderit praesentium blanditiis doloremque.
+        </p>
+      </div>
+
+      <div class="flex-row">
+        <mat-divider class="border border-light"></mat-divider>
+        <div class="p-1"></div>
+      </div>
+      <div class="flex-row">
+        <p class="text-light text-justify">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam nam,
+          ipsa ipsam rem labore necessitatibus velit officia error in
+          repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
+          reprehenderit praesentium blanditiis doloremque.
+        </p>
+      </div>
+      <div class="flex-row">
+        <mat-divider class="border border-light"></mat-divider>
+        <div class="p-1"></div>
+      </div>
     </div>
-    
-    <div class="col-8">
+
+    <div class="col-6">
       <div class="container-fluid">
         <div class="row">
           <div class="p-5"></div>
@@ -171,19 +259,15 @@
 
         <div class="row d-flex justify-content-around">
           <div
-            class="col-md-2 col-sm-6 border border-2 rounded shadow-lg pb-4"
+            class="col-md-3 col-sm-6 border border-2 rounded shadow-lg pb-4"
             style="height: 300px"
           ></div>
           <div
-            class="col-md-2 col-sm-6 border border-2 rounded shadow-lg pb-4"
+            class="col-md-3 col-sm-6 border border-2 rounded shadow-lg pb-4"
             style="height: 300px"
           ></div>
           <div
-            class="col-md-2 col-sm-6 border border-2 rounded shadow-lg pb-4"
-            style="height: 300px"
-          ></div>
-          <div
-            class="col-md-2 col-sm-6 border border-2 rounded shadow-lg pb-4"
+            class="col-md-3 col-sm-6 border border-2 rounded shadow-lg pb-4"
             style="height: 300px"
           ></div>
         </div>
@@ -202,36 +286,54 @@
     </div>
 
     <div class="col-2">
-        <div class="flex-row p-5">
-        
-        </div>
-        
-        <div class="flex-row">
-            <p class="text-light text-justify">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
-              nam, ipsa ipsam rem labore necessitatibus velit officia error in
-              repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
-              reprehenderit praesentium blanditiis doloremque.
-            </p>
-          </div>
-  
-          <div class="flex-row">
-            <p class="text-light text-justify">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
-              nam, ipsa ipsam rem labore necessitatibus velit officia error in
-              repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
-              reprehenderit praesentium blanditiis doloremque.
-            </p>
-          </div>
-          <div class="flex-row">
-            <p class="text-light text-justify">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
-              nam, ipsa ipsam rem labore necessitatibus velit officia error in
-              repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
-              reprehenderit praesentium blanditiis doloremque.
-            </p>
-          </div>
+      <div class="flex-row p-5"></div>
+
+      <div class="flex-row">
+        <mat-divider class="border border-light"></mat-divider>
+        <div class="p-1"></div>
+      </div>
+
+      <div class="flex-row">
+        <p class="text-light text-justify">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam nam,
+          ipsa ipsam rem labore necessitatibus velit officia error in
+          repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
+          reprehenderit praesentium blanditiis doloremque.
+        </p>
+      </div>
+
+      <div class="flex-row">
+        <mat-divider class="border border-light"></mat-divider>
+        <div class="p-1"></div>
+      </div>
+
+      <div class="flex-row">
+        <p class="text-light text-justify">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam nam,
+          ipsa ipsam rem labore necessitatibus velit officia error in
+          repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
+          reprehenderit praesentium blanditiis doloremque.
+        </p>
+      </div>
+
+      <div class="flex-row">
+        <mat-divider class="border border-light"></mat-divider>
+        <div class="p-1"></div>
+      </div>
+      <div class="flex-row">
+        <p class="text-light text-justify">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam nam,
+          ipsa ipsam rem labore necessitatibus velit officia error in
+          repellendus, cupiditate vitae, enim corrupti? Optio reiciendis
+          reprehenderit praesentium blanditiis doloremque.
+        </p>
+      </div>
+      <div class="flex-row">
+        <mat-divider class="border border-light"></mat-divider>
+        <div class="p-1"></div>
+      </div>
     </div>
+    <div class="col-1"></div>
   </div>
 </div>
 
