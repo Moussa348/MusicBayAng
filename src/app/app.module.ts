@@ -48,6 +48,7 @@ import { DatePipe } from '@angular/common';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ALLOWED_URLS, STORAGE_KEY } from './util/constant';
 import { NotificationComponent } from './component/notification/notification.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { ConversationComponent } from './component/conversation/conversation.component';
 import { UserSearchBarComponent } from './component/user-search-bar/user-search-bar.component';
 import { ListPossibleSubscribeToComponent } from './component/list-possible-subscribe-to/list-possible-subscribe-to.component';
@@ -96,6 +97,7 @@ import { ListPossibleSubscribeToComponent } from './component/list-possible-subs
     MatBadgeModule,
     MatToolbarModule,
     MatButtonModule,
+    MatPaginatorModule,
     MatInputModule,
     MatSelectModule,
     MatSidenavModule,

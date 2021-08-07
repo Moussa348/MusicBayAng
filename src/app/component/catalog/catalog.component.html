@@ -26,24 +26,39 @@
 </div>
 <div class="container-fluid">
   <div class="row">
-    
-    <div class="col-1"></div>
-    <div class="col-2">
-      <mat-card class="border border-dark shadow-lg rounded" style="height: 45%;">
-        
+    <div class="col-lg-1"></div>
+
+    <div class="col-lg-2">
+      <div class="pt-4"></div>
+      <mat-card
+        class="border border-light shadow-lg rounded"
+        style="height:45%"
+      >
         <div class="flex-row">
-          <h3 class="text-light"> <u>Filtering <i class="fas fa-filter"></i></u>:</h3>
+          <h3 class="text-light">
+            <u>Filtering <i class="fas fa-filter"></i></u>:
+          </h3>
         </div>
-        
+
+        <div class="flex-row text-end">
+          <div class="p-2"></div>
+          <input
+            #username
+            type="text"
+            class="form-control border border-2 border-dark shadow"
+            placeholder="Search by title or tag..."
+            [formControl]="filter"
+          />
+        </div>
       </mat-card>
     </div>
 
-    <div class="col-md-6 col-sm-4">
+    <div class="col-md-8 col-sm-4" *ngIf="catalog.musics != null">
       <div class="">
         <div class="row d-flex justify-content-center">
           <div
             class="col-sm-10 col-md-6 col-lg-4 p-4"
-            *ngFor="let music of catalog.musics; let i = index"
+            *ngFor="let music of musics$ | async; index as i"
           >
             <mat-card
               class="shadow-lg border border-light text-light rounded"
@@ -62,7 +77,7 @@
                   />
                 </div>
               </a>
-              <mat-card-header class="row d-flex justify-content-center">
+              <mat-card-header class="flex-row d-flex justify-content-center">
                 <mat-card-title
                   class="
                     lead
@@ -71,13 +86,19 @@
                     text-center text-break
                   "
                 >
-                  <u>{{ music.title }}</u>
+                  <u>
+                    <ngb-highlight [result]="music.title" [term]="filter.value">
+                      {{ music.title }}
+                    </ngb-highlight>
+                  </u>
                 </mat-card-title>
               </mat-card-header>
               <mat-card-content class="container">
                 <div class="row d-flex justify-content-center">
                   <p class="text-center">
-                    {{ music.tags }} <i class="fas fa-tags"></i>
+                    <ngb-highlight [result]="music.tags" [term]="filter.value">
+                      {{ music.tags }} <i class="fas fa-tags"></i>
+                    </ngb-highlight>
                   </p>
                 </div>
 
@@ -163,12 +184,24 @@
             </mat-card>
           </div>
         </div>
+
+        <div class="flex-row justify-content-center w-100 position-sticky">
+
+          <div class="p-3"></div>
+          <mat-paginator
+          class="border border-2 rounded shadow-lg text-light"
+            [length]="100"
+            [pageSize]="12"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page"
+            (page)="loadMore($event,catalog.musics)"
+          >
+          </mat-paginator>
+        </div>
       </div>
     </div>
 
-    <div class="col-3">
-    </div>
-
+    <div class="col-2"></div>
   </div>
 </div>
 

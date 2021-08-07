@@ -15,8 +15,11 @@ import { ShareComponent } from '../share/share.component';
 import { AddingCartArticleComponent } from '../adding-cart-article/adding-cart-article.component';
 import { DatePipe } from '@angular/common';
 import { getUsername } from 'src/app/util/jwtUtils';
-import { Howl, Howler } from 'howler';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { Music } from 'src/app/model/music';
+import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-catalog',
@@ -33,32 +36,53 @@ import { Observable } from 'rxjs';
 export class CatalogComponent implements OnInit {
   catalog: Catalog = new Catalog();
   username = getUsername();
-  sounds : HTMLAudioElement[];
+  sounds: HTMLAudioElement[];
   tabPaginations;
-  nbrOfPage$ : Observable<number>;
+  nbrOfPage$: Observable<number>;
+  musics$: Observable<Music[]>;
   noPage = 0;
   noPageShow = 1;
+  filter = new FormControl('');
 
   constructor(
     private musicService: MusicService,
     private monitoringService: MonitoringService,
     private modalService: NgbModal,
     private datePipe: DatePipe
-  ) {}
+  ) {
+    this.musics$ = this.filter.valueChanges.pipe(
+      startWith(''),
+      map((text) =>  this.search(text, datePipe))
+    );
+  }
 
   ngOnInit(): void {
     //this.nbrOfPage$ = this.musicService.getNbrOfPage();
     this.getNbrOfPage();
-    this.getCatalog(0);
+    this.getCatalog();
   }
 
+  search(text: string, datePipe: DatePipe): Music[] {
+    this.musics$ = of(new Array());
+    return this.catalog.musics.filter((music) => {
+      const term = text.toLowerCase();
+      return (
+        music.title.toLowerCase().includes(term) ||
+        music.tags.toLowerCase().includes(term)
+      );
+    });
+  }
 
-  getCatalog(noPage:number) {
+  getCatalog() {
     if (this.username != null) {
-      this.musicService.getCatalog(this.username,noPage).subscribe(
+      this.musicService.getCatalog(this.username, this.noPage).subscribe(
         (data) => {
-          this.catalog = data;
-          this.setSoundPlayings(this.catalog.musics.length)
+          
+          if(data.musics.length > 0){
+            this.catalog = data;
+            this.musics$ = of(data.musics);
+            this.setSoundPlayings(this.catalog.musics.length);
+          }
           console.log(this.catalog);
         },
         (err) => {
@@ -66,44 +90,49 @@ export class CatalogComponent implements OnInit {
         }
         );
       } else {
-        this.musicService.getListMusic(noPage).subscribe(
-          (data) => {
+      this.musicService.getListMusic(this.noPage).subscribe(
+        (data) => {
+          if(data.length > 0){
             this.catalog.musics = data;
-            this.setSoundPlayings(this.catalog.musics.length)
-          console.log(this.catalog.musics);
+            this.musics$ = of(data);
+            this.setSoundPlayings(this.catalog.musics.length);
+          }
+          console.log(data);
         },
         (err) => {
           console.log(err);
         }
       );
     }
+    this.filter.reset();
   }
 
-
-  loadMore(noPage:number){
-    this.getCatalog(noPage);
+  loadMore($event : PageEvent,musics:Music[]) {
+    this.noPage = $event.pageIndex;
+    this.getCatalog();
+    console.log(musics);
   }
 
-  getNbrOfPage(){
+  getNbrOfPage() {
     this.musicService.getNbrOfPage().subscribe(
-      (data) =>{
+      (data) => {
         this.tabPaginations = new Array(data);
         console.log(data);
-      },(err) =>{
+      },
+      (err) => {
         console.log(err);
       }
     );
   }
 
-  setSoundPlayings(length:number){
+  setSoundPlayings(length: number) {
     this.sounds = new Array(length);
-   
-    for(let i = 0; i < this.sounds.length ; i++){
-        this.sounds[i] = new Audio();
-    }
-    
-    console.log(this.sounds);
 
+    for (let i = 0; i < this.sounds.length; i++) {
+      this.sounds[i] = new Audio();
+    }
+
+    console.log(this.sounds);
   }
 
   likeOrUnlike(username: string, title: string) {
@@ -136,15 +165,19 @@ export class CatalogComponent implements OnInit {
   }
 
   isShared(title: string) {
-    return this.catalog.sharedMusicTitles != null?this.catalog.sharedMusicTitles.find(
-      (sharedMusicTitle) => sharedMusicTitle == title
-    ):false;
+    return this.catalog.sharedMusicTitles != null
+      ? this.catalog.sharedMusicTitles.find(
+          (sharedMusicTitle) => sharedMusicTitle == title
+        )
+      : false;
   }
 
   isLiked(title: string) {
-    return this.catalog.likedMusicTitles? this.catalog.likedMusicTitles.find(
-      (likedMusicTitle) => likedMusicTitle == title
-    ):false;
+    return this.catalog.likedMusicTitles
+      ? this.catalog.likedMusicTitles.find(
+          (likedMusicTitle) => likedMusicTitle == title
+        )
+      : false;
   }
 
   openComment(title: string) {
@@ -155,8 +188,9 @@ export class CatalogComponent implements OnInit {
 
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.username = this.username;
-    modalRef.componentInstance.nbComment.subscribe((nbComment) =>{
-      this.catalog.musics.find(music => music.title == title).nbrOfComment = nbComment;
+    modalRef.componentInstance.nbComment.subscribe((nbComment) => {
+      this.catalog.musics.find((music) => music.title == title).nbrOfComment =
+        nbComment;
     });
   }
 
@@ -197,39 +231,38 @@ export class CatalogComponent implements OnInit {
     modalRef.componentInstance.exclusivePrice = exclusivePrice;
   }
 
-  play(index: number,title:string) {
+  play(index: number, title: string) {
     const sound = this.sounds[index];
 
-    if(!sound.src){
+    if (!sound.src) {
       console.log(sound);
       //Put title with + .mp3
       //Maybe add a method that checks if there is any file to load -> in spring
       sound.src = 'http://localhost:4444/file/play/Hope.mp3';
       sound.load();
       this.stopOthers();
-      console.log("PLAY FOR FIRST TIME");
+      console.log('PLAY FOR FIRST TIME');
       sound.play();
       return;
     }
 
-    if(sound.src && !sound.paused){
-      console.log("PAUSE");
+    if (sound.src && !sound.paused) {
+      console.log('PAUSE');
       sound.pause();
       return;
     }
-    
-    if(sound.src && sound.paused){
-      console.log("PLAYING AFTER BEING PAUSED");
+
+    if (sound.src && sound.paused) {
+      console.log('PLAYING AFTER BEING PAUSED');
       this.stopOthers();
       sound.play();
       return;
     }
   }
-  
-  replay(index:number){
-    const sound = this.sounds[index];
-    if(!sound.paused){
 
+  replay(index: number) {
+    const sound = this.sounds[index];
+    if (!sound.paused) {
       sound.currentTime = 0;
       sound.play();
     }
@@ -237,26 +270,25 @@ export class CatalogComponent implements OnInit {
     //setTime
   }
 
-  setNbrComments($event,index:number){
+  setNbrComments($event, index: number) {
     this.catalog.musics[index].nbrOfComment = $event;
   }
 
-  stopOthers(){
-    for (let i = 0 ; i < this.sounds.length; i++){
+  stopOthers() {
+    for (let i = 0; i < this.sounds.length; i++) {
       const sound = this.sounds[i];
-      if(!sound.paused){
+      if (!sound.paused) {
         sound.pause();
         sound.currentTime = 0;
       }
     }
   }
 
-
-  isPaused(index:number){
-    return this.sounds[index].paused;
+  isPaused(index: number) {
+    return this.sounds[index]?this.sounds[index].paused:false;
   }
 
-  isLoggedIn(){
-   return this.username != null;
+  isLoggedIn() {
+    return this.username != null;
   }
 }

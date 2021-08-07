@@ -5,3 +5,45 @@ img{
 i:hover{
     opacity: 0.5;
 }
+
+#creator1{
+    background: url("../../../assets/images/creator1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#creator2{
+    background: url("../../../assets/images/creator2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+}
+
+#creator3{
+    background: url("../../../assets/images/creator3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+}
+
+@media only screen and (max-width: 500px) {
+    img{
+      height: 275px;
+    }
+    /* For tablets: */
+  }
+
+  @media only screen and (min-width:540px) and (max-width: 600px) {
+    img{
+      height: 400px;
+    }
+    /* For tablets: */
+  }
+
+  @media only screen and (max-width: 300px) {
+    img{
+      height: 225px;
+    }
+    /* For tablets: */
+  }
