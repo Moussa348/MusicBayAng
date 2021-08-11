@@ -52,6 +52,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { ConversationComponent } from './component/conversation/conversation.component';
 import { UserSearchBarComponent } from './component/user-search-bar/user-search-bar.component';
 import { ListPossibleSubscribeToComponent } from './component/list-possible-subscribe-to/list-possible-subscribe-to.component';
+import { ListLastSentMessageComponent } from './component/list-last-sent-message/list-last-sent-message.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ListPossibleSubscribeToComponent } from './component/list-possible-subs
     ConversationComponent,
     UserSearchBarComponent,
     ListPossibleSubscribeToComponent,
+    ListLastSentMessageComponent,
   ],
   imports: [
     BrowserModule,

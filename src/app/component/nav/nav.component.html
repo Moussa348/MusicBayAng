@@ -44,12 +44,14 @@
               >FEED<i class="fas fa-rss"></i></a
             >
           </li>
-          <li class="nav-item" *ngIf="isLoggedIn()">
+          <li class="nav-item dropdown" *ngIf="isLoggedIn()">
             <a
-              [routerLink]="['/catalog']" 
-              class="nav-link text-uppercase font-weight px-3 text-light"
+              class="nav-link btn text-uppercase font-weight px-3 dropdown text-light dropdown-toggle" id="convDropdown" data-bs-toggle="dropdown" aria-expanded="false"
               >CONVERSATION<i class="fas fa-comments"></i></a
             >
+            <div class="dropdown-menu" aria-labelledby="convDropdown" style="overflow-x:auto;overflow-y:auto;" >
+              <app-list-last-sent-message class="w-100" (click)="$event.stopPropagation()" ></app-list-last-sent-message>
+            </div>
           </li>
         </ul>
       </div>

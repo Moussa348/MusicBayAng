@@ -5,7 +5,7 @@ import { ConversationComponent } from './component/conversation/conversation.com
 import { Error404Component } from './component/error404/error404.component';
 import { FeedComponent } from './component/feed/feed.component';
 import { HomeComponent } from './component/home/home.component';
-import { ListPossibleSubscribeToComponent } from './component/list-possible-subscribe-to/list-possible-subscribe-to.component';
+import { ListLastSentMessageComponent } from './component/list-last-sent-message/list-last-sent-message.component';
 import { LoginComponent } from './component/login/login.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { RegistrationComponent } from './component/registration/registration.component';
@@ -14,7 +14,7 @@ import { WelcomeComponent } from './component/welcome/welcome.component';
 import { AuthGuardService } from './service/auth-guard.service';
 
 const routes: Routes = [
-  {path:'listPossibleSubTo',component:ListPossibleSubscribeToComponent},
+  {path:'listSentMessage',component:ListLastSentMessageComponent},
   {path:'conversation',component:ConversationComponent,canActivate:[AuthGuardService]},
   {path:'registration',component:RegistrationComponent,canActivate:[AuthGuardService]},
   {path:'feed',component:FeedComponent,canActivate:[AuthGuardService]},
