@@ -1,33 +1,34 @@
-<mat-card *ngFor="let sentMessage of sentMessages">
-    <div class="d-flex align-items-center rounded pl-2">
-      <div class="flex-shrink-0">
-        <img
-          [src]="['http://localhost:4444/user/getPicture/' + sentMessage.sendBy]"
+<mat-card *ngFor="let lastSentMessage of lastSentMessages;let i=index;">
+    <div class="d-flex align-items-center rounded pl-2 btn" (click)="goToConversation()">
+
+        <div class="flex-shrink-0">
+          <img
+          [src]="['http://localhost:4444/user/getPicture/' + lastSentMessage.sendBy]"
           alt="vaccinCovid"
           class="rounded-pill border border-2 img-responsive h-100 ml-1"
-        />
+          />
+        </div>
+        
+        <div class="flex-grow-1 ms-4 text-start">
+          <div class="flex-row">
+            <small class="text-capitalize">{{
+              isConversationGroup(i)?lastSentMessage.conversationName:lastSentMessage.sendBy
+            }}<i class="fas fa-users" *ngIf="isConversationGroup(i)"></i> <i class="fas fa-user" *ngIf="!isConversationGroup(i)"></i> </small>
+          </div>
+          <div class="flex-row">
+            <small>{{ lastSentMessage.content }}</small>
+          </div>
+          <div class="flex-row">
+            <small>{{ lastSentMessage.date | date: "medium" }}</small>
+          </div>
+          <div class="flex-row">
+            <div class="p-2"></div>
+          </div>
+          <div class="flex-row">
+            <mat-divider class="border border-1"></mat-divider>
+          </div>
+        </div>
       </div>
-  
-      <div class="flex-grow-1 ms-4 text-start">
-        <div class="flex-row">
-          <small class="text-capitalize">{{
-            sentMessage.sendBy
-          }}</small>
-        </div>
-        <div class="flex-row">
-          <small>{{ sentMessage.content }}</small>
-        </div>
-        <div class="flex-row">
-          <small>{{ sentMessage.date | date: "medium" }}</small>
-        </div>
-        <div class="flex-row">
-          <div class="p-2"></div>
-        </div>
-        <div class="flex-row">
-          <mat-divider class="border border-1"></mat-divider>
-        </div>
-      </div>
-    </div>
   </mat-card>
 
   <div

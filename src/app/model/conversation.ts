@@ -7,5 +7,5 @@ export class Conversation {
     creationDate:string;
     conversationType:string;
     usernames:string[];
-    sentMessages:SentMessage[];
+    sentMessages:SentMessage[] = new Array();
 }

@@ -3,6 +3,9 @@ img{
     height:50px;
   }
 
-div div:hover{
+div:hover{
 opacity: 0.5;
+}
+small:hover{
+  opacity: 1;
 }

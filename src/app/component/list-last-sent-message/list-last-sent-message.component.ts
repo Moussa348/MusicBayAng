@@ -1,4 +1,6 @@
+import { state } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SentMessage } from 'src/app/model/sent-message';
 import { ConversationService } from 'src/app/service/conversation.service';
 
@@ -10,9 +12,12 @@ import { ConversationService } from 'src/app/service/conversation.service';
 export class ListLastSentMessageComponent implements OnInit {
   @Input()username = "bombay";
   noPage = 0;
-  sentMessages:SentMessage[] = new Array();
+  lastSentMessages:SentMessage[] = new Array();
 
-  constructor(private conversationService:ConversationService) { }
+  constructor(
+    private conversationService:ConversationService,
+    private router:Router
+    ) { }
 
   ngOnInit(): void {
     this.getLastSentMessages();
@@ -21,8 +26,8 @@ export class ListLastSentMessageComponent implements OnInit {
   getLastSentMessages(){
     this.conversationService.getLastSentMessages(this.username,this.noPage).subscribe(
       (data) =>{
-        this.sentMessages.push.apply(this.sentMessages, data);
-        console.log(this.sentMessages);
+        this.lastSentMessages.push.apply(this.lastSentMessages, data);
+        console.log(this.lastSentMessages);
       },(err) =>{
         console.log(err);
       }
@@ -32,6 +37,14 @@ export class ListLastSentMessageComponent implements OnInit {
   loadMore(){
     this.noPage++;
     this.getLastSentMessages();
+  }
+  
+  goToConversation(){
+    this.router.navigate(['/conversation'],{state:{data:this.lastSentMessages}});
+  }
+
+  isConversationGroup(index:number){
+    return this.lastSentMessages[index].conversationType.toLowerCase() == 'group';
   }
 
 }

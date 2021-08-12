@@ -13,7 +13,7 @@ export class AuthGuardService implements CanActivate{
   canActivate(route: ActivatedRouteSnapshot) {
     const url = route.url.join('');
     
-    if(!this.isLoggedIn() && url == 'feed' || url == 'conversation'){
+    if(!this.isLoggedIn() && (url == 'feed' || url == 'conversation')){
       this.router.navigate(['/login']);
       return false;
     }

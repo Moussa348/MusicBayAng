@@ -1,0 +1,68 @@
+<div
+  class="bg-dark border text-light container-fluid modal-dialog-scrollable"
+  style="overflow-x: auto; overflow-y: auto"
+>
+  <div class="modal-header">
+    <h4 class="modal-title text-center">
+      List User<i class="fas fa-comment"></i>
+    </h4>
+
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true"><i class="fas fa-times text-danger"></i></span>
+    </button>
+  </div>
+  <div class="modal-body bg-dark">
+    <div class="card">
+        <div class="card-body bg-dark" >
+          <div *ngFor="let username of usernames;let i=index;">
+            <mat-card
+              class="d-flex text-center justify-content-center text-break align-items-center collapse"
+              id="{{ 'hideComment' + i }}"
+            >
+              <div class="flex-shrink-0">
+                <img
+                  [src]="['http://localhost:4444/user/getPicture/' + username]"
+                  alt="vaccinCovid"
+                  class="
+                    rounded-circle
+                    border border-2
+                    img-responsive
+                    h-100
+                    ml-1
+                  "
+                />
+
+                <div class="flex-row">
+                    <small
+                    class="text-light"
+                    ><u>{{ username }}</u></small
+                    >
+                </div>
+              </div>
+
+              <div class="flex-grow-1 ms-3" *ngIf="isCreator()">
+
+                <div class="flex-row">
+                   <button class="btn btn-danger rounded-pill border" (click)="removeUserFromConversationGroup(i)">
+                       Remove
+                   </button>
+                </div>
+            </div>
+
+            </mat-card>
+            <mat-divider class="border border-2"></mat-divider>
+          </div>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer flex-row d-flex justify-content-center">
+      <div class="m-4"></div>
+  </div>
+</div>

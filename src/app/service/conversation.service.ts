@@ -34,7 +34,7 @@ export class ConversationService {
   getMessagesFromConversation(id:number,noPage:number){
     const params = new HttpParams().set("id",id.toString()).set("noPage",noPage.toString());
     const options = {params:params};
-    return this.http.get<SentMessage[]>(this.url + 'getMessagesFromConversation/',options);
+    return this.http.get<Conversation>(this.url + 'getMessagesFromConversation/',options);
   }
 
   
