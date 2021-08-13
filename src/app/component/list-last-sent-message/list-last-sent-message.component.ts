@@ -39,8 +39,8 @@ export class ListLastSentMessageComponent implements OnInit {
     this.getLastSentMessages();
   }
   
-  goToConversation(){
-    this.router.navigate(['/conversation'],{state:{data:this.lastSentMessages}});
+  goToConversation(id:number){
+    this.router.navigate(['/conversation',id],{state:{data:this.lastSentMessages}});
   }
 
   isConversationGroup(index:number){

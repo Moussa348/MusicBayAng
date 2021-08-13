@@ -14,7 +14,7 @@ import { WelcomeComponent } from './component/welcome/welcome.component';
 import { AuthGuardService } from './service/auth-guard.service';
 
 const routes: Routes = [
-  {path:'conversation',component:ConversationComponent,canActivate:[AuthGuardService]},
+  {path:'conversation/:id',component:ConversationComponent,canActivate:[AuthGuardService]},
   {path:'registration',component:RegistrationComponent,canActivate:[AuthGuardService]},
   {path:'feed',component:FeedComponent,canActivate:[AuthGuardService]},
   {path:'login',component:LoginComponent},

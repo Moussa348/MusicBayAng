@@ -1,5 +1,5 @@
 <mat-card *ngFor="let lastSentMessage of lastSentMessages;let i=index;">
-    <div class="d-flex align-items-center rounded pl-2 btn" (click)="goToConversation()">
+    <div class="d-flex align-items-center rounded pl-2 btn" (click)="goToConversation(lastSentMessage.conversationId)">
 
         <div class="flex-shrink-0">
           <img

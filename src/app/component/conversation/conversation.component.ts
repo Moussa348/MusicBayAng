@@ -12,6 +12,8 @@ import { Conversation } from 'src/app/model/conversation';
 import { ConversationService } from 'src/app/service/conversation.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ListUserInConvoComponent } from '../list-user-in-convo/list-user-in-convo.component';
+import { getUsername } from 'src/app/util/jwtUtils';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-conversation',
@@ -33,19 +35,27 @@ import { ListUserInConvoComponent } from '../list-user-in-convo/list-user-in-con
   ],
 })
 export class ConversationComponent implements OnInit {
+  username = getUsername();
   filter = new FormControl('');
+  
   lastSentMessages: SentMessage[] = window.history.state.data;
   conversation:Conversation = new Conversation();
+  newlySentMessage: SentMessage = new SentMessage();
   noPage = 0;
 
   constructor(
     private conversationService:ConversationService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private route : ActivatedRoute
   ) { 
   }
   
   ngOnInit(): void {
-    this.getMessagesFromConversation(this.lastSentMessages[0].conversationId);
+    this.route.params.subscribe((myMap : Params) => {
+      this.conversation.id = myMap.id;
+      console.log(this.conversation.id);
+      this.getMessagesFromConversation(this.conversation.id);
+    }); 
     console.log(this.lastSentMessages.length);
   }
 
@@ -56,13 +66,18 @@ export class ConversationComponent implements OnInit {
   getMessagesFromConversation(id:number){
     this.conversationService.getMessagesFromConversation(id,this.noPage).subscribe(
       (data) =>{
-        if(this.conversation.id != data.id){
-          this.noPage = 0;
-        }
         if(this.noPage == 0){
           this.conversation = data;
+          return;
         }
-        this.conversation.sentMessages.push.apply(this.conversation.sentMessages,data);
+        else if(this.conversation.id != data.id){
+          this.noPage = 0;
+          this.conversation = data;
+          return;
+        }
+        else{
+          this.conversation.sentMessages.push.apply(this.conversation.sentMessages,data.sentMessages);
+        }
         console.log(this.conversation);
       }
     );
@@ -83,6 +98,27 @@ export class ConversationComponent implements OnInit {
     modalRef.componentInstance.usernames = this.conversation.usernames;
     modalRef.componentInstance.conversationId = this.conversation.id;
     modalRef.componentInstance.creator = this.conversation.createdBy;
+  }
+
+  isMe(sentMessage:SentMessage){
+    return sentMessage.sendBy == this.username;
+  }
+
+  sendMessage(){
+    this.newlySentMessage.conversationId = this.conversation.id;
+    this.newlySentMessage.sendBy = this.username;
+    this.conversationService.sendMessageInConversation(this.newlySentMessage).subscribe(
+      (data) =>{
+        if(data !=null){
+
+          this.conversation.sentMessages.push(data);
+          console.log(data);
+          this.newlySentMessage.content = '';
+        }
+      },(err) =>{
+        console.log(err);
+      }
+    )
   }
 
 }
