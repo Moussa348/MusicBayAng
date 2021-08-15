@@ -41,7 +41,7 @@
               <div class="flex-row">
                 <input
                   type="email"
-                  class="form-control text-primary border border-2 border-light"
+                  class="form-control p-2 rounded-pill text-primary border border-2 border-light"
                   placeholder="email@email.com"
                   [(ngModel)]="profile.email"
                   id="email"
@@ -61,7 +61,7 @@
                 <input
                   #username
                   type="text"
-                  class="form-control border border-2 border-light"
+                  class="form-control p-2 rounded-pill border border-2 border-light"
                   placeholder="min 6 character max 20 character"
                   [(ngModel)]="profile.username"
                   id="username"
@@ -83,7 +83,7 @@
                 <input
                   #username
                   type="text"
-                  class="form-control border border-2 border-light"
+                  class="form-control p-2 rounded-pill border border-2 border-light"
                   [(ngModel)]="profile.city"
                   id="city"
                   formControlName="city"
@@ -150,7 +150,7 @@
                 <input
                   #pass
                   type="password"
-                  class="form-control is-invalid border border-2 border-light"
+                  class="form-control p-2 rounded-pill is-invalid border border-2 border-light"
                   [(ngModel)]="profile.password"
                   formControlName="password"
                   placeholder="min 8 character and max 40 character"
@@ -175,7 +175,7 @@
                   formControlName="passwordAgain"
                   [(ngModel)]="profile.password"
                   placeholder="min 8 character and max 40 character"
-                  class="form-control border border-2 border-light"
+                  class="form-control p-2 rounded-pill border border-2 border-light"
                   id="passwordAgain"
                   min="8"
                   max="40"

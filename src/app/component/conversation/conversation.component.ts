@@ -16,6 +16,8 @@ import { getUsername } from 'src/app/util/jwtUtils';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { CreateUniqueConversationComponent } from '../create-unique-conversation/create-unique-conversation.component';
+import { CreateGroupConversationComponent } from '../create-group-conversation/create-group-conversation.component';
 
 @Component({
   selector: 'app-conversation',
@@ -113,18 +115,18 @@ export class ConversationComponent implements OnInit {
     modalRef.componentInstance.conversationId = this.conversation.id;
     modalRef.componentInstance.creator = this.conversation.createdBy;
   }
-
+  
   isMe(sentMessage:SentMessage){
     return sentMessage.sendBy == this.username;
   }
-
+  
   sendMessage(){
     this.newlySentMessage.conversationId = this.conversation.id;
     this.newlySentMessage.sendBy = this.username;
     this.conversationService.sendMessageInConversation(this.newlySentMessage).subscribe(
       (data) =>{
         if(data !=null){
-
+          
           this.conversation.sentMessages.push(data);
           console.log(data);
           this.newlySentMessage.content = '';
@@ -132,7 +134,24 @@ export class ConversationComponent implements OnInit {
       },(err) =>{
         console.log(err);
       }
-    )
-  }
-
+      )
+    }
+    
+    openCreateUnique(){
+      const modalRef = this.modalService.open(CreateUniqueConversationComponent, {
+        centered: true,
+        scrollable: true,
+      });
+      modalRef.componentInstance.usernames = this.username;
+    }
+    
+    openCreateGroup(){
+      const modalRef = this.modalService.open(CreateGroupConversationComponent, {
+        centered: true,
+        scrollable: true,
+      });
+      modalRef.componentInstance.username = this.username;
+      modalRef.componentInstance.newConversation.subscribe((newConv) => this.conversation= newConv);
+    }
+    
 }

@@ -54,6 +54,8 @@ import { UserSearchBarComponent } from './component/user-search-bar/user-search-
 import { ListPossibleSubscribeToComponent } from './component/list-possible-subscribe-to/list-possible-subscribe-to.component';
 import { ListLastSentMessageComponent } from './component/list-last-sent-message/list-last-sent-message.component';
 import { ListUserInConvoComponent } from './component/list-user-in-convo/list-user-in-convo.component';
+import { CreateUniqueConversationComponent } from './component/create-unique-conversation/create-unique-conversation.component';
+import { CreateGroupConversationComponent } from './component/create-group-conversation/create-group-conversation.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,8 @@ import { ListUserInConvoComponent } from './component/list-user-in-convo/list-us
     ListPossibleSubscribeToComponent,
     ListLastSentMessageComponent,
     ListUserInConvoComponent,
+    CreateUniqueConversationComponent,
+    CreateGroupConversationComponent,
   ],
   imports: [
     BrowserModule,

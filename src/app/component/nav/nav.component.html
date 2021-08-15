@@ -58,7 +58,7 @@
       <div class="collapse navbar-collapse justify-content-end text-light" id="nav" [ngbCollapse]="isMenuCollapsed">
         <ul class="navbar-nav">
           <li class="nav-item d-flex justify-content-center">
-              <app-user-search-bar [username]="username" [componentTag]="getComponentTag()"></app-user-search-bar>
+              <app-user-search-bar [username]="username" [componentTag]="getComponentTag()" style="width: 200px;"></app-user-search-bar>
           </li>
           <li class="nav-item dropdown" *ngIf="isLoggedIn()">
             <a

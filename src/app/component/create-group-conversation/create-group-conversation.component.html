@@ -1,0 +1,76 @@
+<div
+  class="bg-dark border text-light container-fluid modal-dialog-scrollable"
+  style="overflow-x: auto; overflow-y: auto"
+>
+  <div class="modal-header">
+    <h4 class="modal-title text-center">
+      Create Group <i class="fas fa-users"></i
+      ><i class="fas fa-plus-circle"></i>
+    </h4>
+
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true"><i class="fas fa-times text-danger"></i></span>
+    </button>
+  </div>
+  <div class="modal-body bg-dark">
+    <div class="card">
+      <div class="card-body bg-dark">
+        <div class="flex-row d-flex justify-content-start">
+          <label for="name" class="form-label text-light"
+            ><u>Conversation Name</u></label
+          >
+        </div>
+        <div class="flex-row d-flex justify-content-center">
+          <input
+            #pass
+            type="text"
+            class="form-control rounded-pill border border-2 border-dark shadow"
+            [(ngModel)]="conversationGroup.name"
+            placeholder="min 8 character and max 40 character"
+            id="name"
+          />
+        </div>
+
+        <div class="flex-row d-flex justify-content-start mt-2">
+          <label for="name" class="form-label text-light"
+            ><u>Find Users to Add</u></label
+          >
+        </div>
+        <div class="flex-row d-flex justify-content-start">
+          <app-user-search-bar
+            style="width: 100%"
+            (searchedUsername$)="addUserInConvo($event)"
+            [username]="username"
+            [componentTag]="getComponentTag()"
+          ></app-user-search-bar>
+
+        </div>
+
+        <div class="flex-row d-flex justify-content-center mt-2">
+            <mat-chip-list #chipList aria-label="Usernames Selection">
+                <mat-chip
+                class="border"
+                *ngFor="let username of conversationGroup.usernames"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(username)"
+                >
+                {{ username }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer flex-row d-flex justify-content-center">
+    <button type="button" class="btn btn-outline-light rounded-pill" (click)="createGroupConv()">
+      Create Group<i class="fas fa-external-link-alt"></i>
+    </button>
+  </div>
+</div>

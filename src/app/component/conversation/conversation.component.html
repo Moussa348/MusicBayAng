@@ -42,27 +42,51 @@
           "
         >
           <div class="flex-row text-light mt-3">
-            <div class="d-flex justify-content-start" style="width: 280px;">
-                <span>
-
-                  <i class="fas fa-comment-medical border rounded shadow btn text-light fa-2x"></i>
-                  
-                  <i class="fas fa-plus btn text-light border rounded shadow ml-2 fa-2x"></i>
-                </span>
+            <div class="d-flex justify-content-start" style="width: 280px">
+              <i
+                (click)="openCreateUnique()"
+                class="
+                  fas
+                  fa-comment-medical
+                  border
+                  rounded
+                  shadow
+                  btn
+                  text-light
+                  fa-2x
+                "
+              ></i>
+              <i
+                (click)="openCreateGroup()"
+                class="
+                  fas
+                  fa-plus
+                  btn
+                  text-light
+                  border
+                  rounded
+                  shadow
+                  ml-2
+                  fa-2x
+                "
+              ></i>
             </div>
+            <mat-divider class="border border-2 border-dark mt-3"></mat-divider>
+            
             <div class="form-group d-flex justify-content-center mt-3">
               <input
-                type="text"
-                class="
-                  form-control
-                  border border-2 border-light
-                  rounded-pill
-                  shadow
-                "
-                placeholder="Filter through last sent messages"
-                [formControl]="filter"
+              type="text"
+              class="
+              form-control
+              border border-2 border-light
+              rounded-pill
+              shadow
+              "
+              placeholder="Filter through last sent messages"
+              [formControl]="filter"
               />
             </div>
+            <mat-divider class="border border-2 border-dark mt-3"></mat-divider>
             <mat-card
               *ngFor="
                 let lastSentMessage of lastSentMessages$ | async;

@@ -14,6 +14,8 @@ import { COMPONENTS_TAGS } from 'src/app/util/constant';
 export class UserSearchBarComponent implements OnInit {
   @Input() username = 'bombay';
   @Input() componentTag ;
+  usernamesToAdd:string[] = new Array();
+  @Output() usernamesToAdd$: EventEmitter<string[]> = new EventEmitter();
   noPage = 0;
 
   usernames:string[] = new Array();
@@ -66,6 +68,7 @@ export class UserSearchBarComponent implements OnInit {
     if(this.componentTag == COMPONENTS_TAGS[1]){
       console.log($event.target.value);
       this.searchedUsername$.emit($event.target.value);
+      this.searchedUsername = '';
     }
   }
 

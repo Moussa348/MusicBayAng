@@ -6,6 +6,6 @@ export class Conversation {
     createdBy:string;
     creationDate:string;
     conversationType:string;
-    usernames:string[];
+    usernames:string[] = new Array();
     sentMessages:SentMessage[] = new Array();
 }

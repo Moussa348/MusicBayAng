@@ -6,9 +6,23 @@
   [(ngModel)]="searchedUsername"
   [ngbTypeahead]="search"
   [resultFormatter]="formatter"
-  (change)="goToProfile($event)"
+  (keyup.enter)="goToProfile($event)"
   (focus)="getListProfileSearch()"
   [ngModelOptions]="{ standalone: true }"
   [editable]="false"
   />
+  <div class="flex-row d-flex justify-content-center mt-2">
+    <mat-chip-list #chipList aria-label="Usernames Selection">
+      <mat-chip
+        class="border"
+        *ngFor="let username of usernamesToAdd"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(username)"
+      >
+        {{ username }}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
 
