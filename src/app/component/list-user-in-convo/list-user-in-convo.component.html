@@ -18,51 +18,62 @@
   </div>
   <div class="modal-body bg-dark">
     <div class="card">
-        <div class="card-body bg-dark" >
-          <div *ngFor="let username of usernames;let i=index;">
-            <mat-card
-              class="d-flex text-center justify-content-center text-break align-items-center collapse"
-              id="{{ 'hideComment' + i }}"
-            >
-              <div class="flex-shrink-0">
-                <img
-                  [src]="['http://localhost:4444/user/getPicture/' + username]"
-                  alt="vaccinCovid"
-                  class="
-                    rounded-circle
-                    border border-2
-                    img-responsive
-                    h-100
-                    ml-1
-                  "
-                />
+      <div class="card-body bg-dark">
+        <div *ngFor="let username of usernames; let i = index">
+          <mat-card
+            class="
+              d-flex
+              text-center
+              justify-content-center
+              text-break
+              align-items-center
+              collapse
+            "
+            id="{{ 'hideComment' + i }}"
+          >
+            <div class="flex-shrink-0">
+              <img
+                [src]="['http://localhost:4444/user/getPicture/' + username]"
+                alt="vaccinCovid"
+                class="rounded-circle border border-2 img-responsive h-100 ml-1"
+              />
 
-                <div class="flex-row">
-                    <small
-                    class="text-light"
-                    ><u>{{ username }}</u></small
-                    >
-                </div>
+              <div class="flex-row">
+                <small class="text-light btn" (click)="goToProfile(username)"
+                  ><u
+                    >{{ username
+                    }}<i
+                      class="fas fa-star-of-life"
+                      *ngIf="showCreatorFlag(username)"
+                    ></i></u
+                ></small>
               </div>
-
-              <div class="flex-grow-1 ms-3" *ngIf="isCreator()">
-
-                <div class="flex-row">
-                   <button class="btn btn-danger rounded-pill border" (click)="removeUserFromConversationGroup(i)">
-                       Remove
-                   </button>
-                </div>
             </div>
 
-            </mat-card>
-            <mat-divider class="border border-2"></mat-divider>
-          </div>
-
+            <div class="flex-grow-1 ms-3" *ngIf="isCreator()">
+              <div class="flex-row">
+                <button
+                  class="btn btn-danger rounded-pill border"
+                  (click)="removeUserFromConversationGroup(i)"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          </mat-card>
+          <mat-divider class="border border-2"></mat-divider>
+        </div>
       </div>
-
     </div>
   </div>
   <div class="modal-footer flex-row d-flex justify-content-center">
-      <div class="m-4"></div>
+    <app-user-search-bar (searchedUsername$)="setSearchedUsername($event)" [username]="username" [componentTag]="getComponentTag()" ></app-user-search-bar>
+
+    <button
+      class="btn btn-success border rounded-pill"
+      (click)="addUserInConvo()"
+    >
+      Add<i class="fas fa-user-plus"></i>
+    </button>
   </div>
 </div>

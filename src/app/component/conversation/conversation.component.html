@@ -41,9 +41,33 @@
             width: 320px;
           "
         >
-          <div class="flex-row text-light">
+          <div class="flex-row text-light mt-3">
+            <div class="d-flex justify-content-start" style="width: 280px;">
+                <span>
+
+                  <i class="fas fa-comment-medical border rounded shadow btn text-light fa-2x"></i>
+                  
+                  <i class="fas fa-plus btn text-light border rounded shadow ml-2 fa-2x"></i>
+                </span>
+            </div>
+            <div class="form-group d-flex justify-content-center mt-3">
+              <input
+                type="text"
+                class="
+                  form-control
+                  border border-2 border-light
+                  rounded-pill
+                  shadow
+                "
+                placeholder="Filter through last sent messages"
+                [formControl]="filter"
+              />
+            </div>
             <mat-card
-              *ngFor="let lastSentMessage of lastSentMessages; let i = index"
+              *ngFor="
+                let lastSentMessage of lastSentMessages$ | async;
+                index as i
+              "
               (click)="
                 getMessagesFromConversation(lastSentMessage.conversationId)
               "
@@ -104,139 +128,121 @@
         </div>
 
         <div class="col-8">
-          <div class="container align-items-center">
-              <div class="flex-row d-flex justify-content-end mt-2">
-                <i
-                  class="
-                    fas
-                    fa-users-cog
-                    text-light
-                    border
-                    rounded-circle
-                    btn
-                    fa-2x
-                  "
-                  (click)="openListUserConvo()"
-                ></i>
-                <i
-                  class="
-                    fas
-                    fa-user-plus
-                    text-light
-                    border
-                    rounded-circle
-                    btn
-                    fa-2x
-                  "
-                ></i>
-              </div>
-              <div class="flex-row d-flex justify-content-center">
-                <h3 class="text-capitalize text-light">
-                  {{ conversation.name }}
-                </h3>
-              </div>
+          <div class="container align-items-center" style="height: 114px">
+            <div class="flex-row d-flex justify-content-end mt-2">
+              <i
+                class="
+                  fas
+                  fa-users-cog
+                  text-light
+                  border
+                  rounded-circle
+                  btn
+                  pr-2
+                  fa-2x
+                "
+                (click)="openListUserConvo()"
+              ></i>
+            </div>
+            <div class="flex-row d-flex justify-content-center">
+              <h3 class="text-capitalize text-light">
+                {{ conversation.name }}
+              </h3>
+            </div>
 
-              <div class="row d-flex justify-content-center mt-3">
-                <mat-divider
-                  class="text-light border border-2 border-light"
-                ></mat-divider>
-              </div>
+            <div class="row d-flex justify-content-center m-4">
+              <mat-divider
+                class="text-light border border-2 border-light"
+              ></mat-divider>
+            </div>
           </div>
 
-          <div class="container mt-5">
+          <div
+            class="container mt-5"
+            style="overflow-x: auto; overflow-y: auto; height: 540px"
+          >
             <div *ngFor="let sentMessage of conversation.sentMessages">
-              <div style="overflow-x: auto; overflow-y: auto">
-                <div
-                  class="
-                    flex-row
-                    align-items-center
-                    d-flex
-                    justify-content-start
-                  "
-                  *ngIf="!isMe(sentMessage)"
-                >
-                  <div class="flex-shrink-0">
-                    <img
-                      [src]="[
-                        'http://localhost:4444/user/getPicture/' +
-                          sentMessage.sendBy
-                      ]"
-                      alt="vaccinCovid"
-                      class="
-                        rounded-pill
-                        border border-2
-                        img-responsive
-                        h-100
-                        ml-1
-                      "
-                    />
-                    <div class="flex-row d-flex justify-content-center">
-                      <small class="text-light"
-                        ><u>{{ sentMessage.sendBy }}</u></small
-                      >
-                    </div>
+              <div
+                class="flex-row align-items-center d-flex justify-content-start"
+                *ngIf="!isMe(sentMessage)"
+              >
+                <div class="flex-shrink-0">
+                  <img
+                    [src]="[
+                      'http://localhost:4444/user/getPicture/' +
+                        sentMessage.sendBy
+                    ]"
+                    alt="vaccinCovid"
+                    class="
+                      rounded-pill
+                      border border-2
+                      img-responsive
+                      h-100
+                      ml-1
+                    "
+                  />
+                  <div class="flex-row d-flex justify-content-center">
+                    <small class="text-light"
+                      ><u>{{ sentMessage.sendBy }}</u></small
+                    >
                   </div>
-                  <div class="flex-grow-1 ms-2 text-center">
-                    <div class="flex-row d-flex justify-content-start">
-                      <div style="width: 450px" class="text-center">
-                        <p
-                          class="
-                            rounded-pill
-                            shadow
-                            p-2
-                            border
-                            text-light text-wrap text-break
-                          "
-                        >
-                          {{ sentMessage.content }}
-                        </p>
-                      </div>
-                      <div class="align-self-center">
-                        <small class="text-light">{{
-                          sentMessage.date | date: "shortTime"
-                        }}</small>
-                      </div>
+                </div>
+                <div class="flex-grow-1 ms-2 text-center">
+                  <div class="flex-row d-flex justify-content-start">
+                    <div style="width: 450px" class="text-center">
+                      <p
+                        class="
+                          rounded-pill
+                          shadow
+                          p-2
+                          border
+                          text-light text-wrap text-break
+                        "
+                      >
+                        {{ sentMessage.content }}
+                      </p>
+                    </div>
+                    <div class="align-self-center">
+                      <small class="text-light">{{
+                        sentMessage.date | date: "shortTime"
+                      }}</small>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div
-                  class="flex-row d-flex justify-content-end"
-                  *ngIf="isMe(sentMessage)"
-                >
-                  <div style="width: 450px" class="text-center">
-                    <p
-                      class="
-                        rounded-pill
-                        shadow
-                        m-2
-                        border border-info
-                        text-light text-wrap text-break
-                      "
-                    >
-                      {{ sentMessage.content }}
-                    </p>
-                  </div>
-                  <div class="align-self-center">
-                    <small class="text-light">{{
-                      sentMessage.date | date: "shortTime"
-                    }}</small>
-                  </div>
+              <div
+                class="flex-row d-flex justify-content-end"
+                *ngIf="isMe(sentMessage)"
+              >
+                <div style="width: 450px" class="text-center">
+                  <p
+                    class="
+                      rounded-pill
+                      shadow
+                      p-2
+                      border border-info
+                      text-light text-wrap text-break
+                    "
+                  >
+                    {{ sentMessage.content }}
+                  </p>
+                </div>
+                <div class="align-self-center">
+                  <small class="text-light">{{
+                    sentMessage.date | date: "shortTime"
+                  }}</small>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="container-fluid">
-            <div class="row d-flex justify-content-center">
-              <div class="mt-5"></div>
-              <div class="mt-5"></div>
-              <div class="mt-5"></div>
-              <div class="mt-5"></div>
+          <div class="container" style="height: 246px">
+            <div class="row d-flex justify-content-center m-4">
               <mat-divider class="border border-2 border-light"></mat-divider>
             </div>
 
-            <div class="row d-flex justify-content-center w-100 mt-4">
+            <div class="row d-flex justify-content-center w-100 m-4">
               <div class="col-8">
                 <div class="form-floating text-dark">
                   <textarea
@@ -255,7 +261,7 @@
                     class="btn btn-success btn-lg border rounded-pill shadow"
                     (click)="sendMessage()"
                   >
-                    SEND
+                    SEND <i class="fas fa-paper-plane"></i>
                   </button>
                 </div>
               </div>

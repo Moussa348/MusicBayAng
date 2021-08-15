@@ -3,7 +3,7 @@
   type="text"
   placeholder="&#xF002; Enter username"
   class="form-control border border-2 border-dark shadow rounded-pill"
-  [(ngModel)]="model"
+  [(ngModel)]="searchedUsername"
   [ngbTypeahead]="search"
   [resultFormatter]="formatter"
   (change)="goToProfile($event)"

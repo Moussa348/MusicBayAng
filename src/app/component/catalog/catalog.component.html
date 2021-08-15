@@ -24,7 +24,7 @@
     <div class="p-4"></div>
   </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid" style="height: 2892px;">
   <div class="row">
     <div class="col-lg-1"></div>
 
@@ -32,7 +32,7 @@
       <div class="pt-4"></div>
       <mat-card
         class="border border-light shadow-lg rounded"
-        style="height:45%"
+        style="height: 1550px"
       >
         <div class="flex-row">
           <h3 class="text-light">
@@ -54,147 +54,144 @@
     </div>
 
     <div class="col-md-8 col-sm-4" *ngIf="catalog.musics != null">
-      <div class="">
-        <div class="row d-flex justify-content-center">
-          <div
-            class="col-sm-10 col-md-6 col-lg-4 p-4"
-            *ngFor="let music of musics$ | async; index as i"
+      <div class="row d-flex justify-content-center" style="overflow-x: auto;overflow-y: auto;">
+        <div
+          class="col-sm-10 col-md-6 col-lg-4 p-4"
+          *ngFor="let music of musics$ | async; index as i"
+        >
+          <mat-card
+            class="shadow-lg border border-light text-light rounded"
+            style="width: 300px"
           >
-            <mat-card
-              class="shadow-lg border border-light text-light rounded"
-              style="width: 300px"
-            >
-              <a [routerLink]="">
-                <div
-                  class="d-flex justify-content-center rounded"
-                  style="height: 300px"
-                >
-                  <img
-                    mat-card-image
-                    [src]="['/assets/images/welcomeBg2.png']"
-                    alt="vaccinCovid"
-                    class="rounded shadow border-2 border-bottom border-light"
-                  />
-                </div>
-              </a>
-              <mat-card-header class="flex-row d-flex justify-content-center">
-                <mat-card-title
-                  class="
-                    lead
-                    text-capitalize
-                    font-weight-bolder
-                    text-center text-break
-                  "
-                >
-                  <u>
-                    <ngb-highlight [result]="music.title" [term]="filter.value">
-                      {{ music.title }}
-                    </ngb-highlight>
-                  </u>
-                </mat-card-title>
-              </mat-card-header>
-              <mat-card-content class="container">
-                <div class="row d-flex justify-content-center">
-                  <p class="text-center">
-                    <ngb-highlight [result]="music.tags" [term]="filter.value">
-                      {{ music.tags }} <i class="fas fa-tags"></i>
-                    </ngb-highlight>
-                  </p>
-                </div>
+            <a [routerLink]="">
+              <div
+                class="d-flex justify-content-center rounded"
+                style="height: 300px"
+              >
+                <img
+                  mat-card-image
+                  [src]="['/assets/images/welcomeBg2.png']"
+                  alt="vaccinCovid"
+                  class="rounded shadow border-2 border-bottom border-light"
+                />
+              </div>
+            </a>
+            <mat-card-header class="flex-row d-flex justify-content-center">
+              <mat-card-title
+                class="
+                  lead
+                  text-capitalize
+                  font-weight-bolder
+                  text-center text-break
+                "
+              >
+                <u>
+                  <ngb-highlight [result]="music.title" [term]="filter.value">
+                    {{ music.title }}
+                  </ngb-highlight>
+                </u>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="container">
+              <div class="row d-flex justify-content-center">
+                <p class="text-center">
+                  <ngb-highlight [result]="music.tags" [term]="filter.value">
+                    {{ music.tags }} <i class="fas fa-tags"></i>
+                  </ngb-highlight>
+                </p>
+              </div>
 
-                <div class="flex-row d-flex justify-content-center">
-                  <p>
-                    {{ music.basicPrice }}.00
-                    <i class="fas fa-hand-holding-usd fa-2 text-light"></i>
-                  </p>
-                </div>
+              <div class="flex-row d-flex justify-content-center">
+                <p>
+                  {{ music.basicPrice }}.00
+                  <i class="fas fa-hand-holding-usd fa-2 text-light"></i>
+                </p>
+              </div>
 
-                <div
-                  class="flex-row d-flex justify-content-between"
-                  *ngIf="isLoggedIn()"
-                >
-                  <p>
-                    {{ music.nbrOfLike }}
-                    <i
-                      class="fab fa-gratipay btn text-{{
-                        isLiked(music.title) ? 'danger' : 'white'
-                      }}"
-                      (click)="likeOrUnlike(username, music.title)"
-                    ></i>
-                  </p>
-                  <p>
-                    {{ music.nbrOfShare }}
-                    <i
-                      class="fas fa-share-square btn text-{{
-                        isShared(music.title) ? 'info' : 'white'
-                      }}"
-                      (click)="openShare(music.title)"
-                    ></i>
-                  </p>
-                  <p>
-                    {{ music.nbrOfComment }}
-                    <i
-                      class="fas btn text-light fa-comment"
-                      (click)="openComment(music.title)"
-                    ></i>
-                  </p>
-                </div>
+              <div
+                class="flex-row d-flex justify-content-between"
+                *ngIf="isLoggedIn()"
+              >
+                <p>
+                  {{ music.nbrOfLike }}
+                  <i
+                    class="fab fa-gratipay btn text-{{
+                      isLiked(music.title) ? 'danger' : 'white'
+                    }}"
+                    (click)="likeOrUnlike(music.title)"
+                  ></i>
+                </p>
+                <p>
+                  {{ music.nbrOfShare }}
+                  <i
+                    class="fas fa-share-square btn text-{{
+                      isShared(music.title) ? 'info' : 'white'
+                    }}"
+                    (click)="openShare(music.title)"
+                  ></i>
+                </p>
+                <p>
+                  {{ music.nbrOfComment }}
+                  <i
+                    class="fas btn text-light fa-comment"
+                    (click)="openComment(music.title)"
+                  ></i>
+                </p>
+              </div>
 
-                <!--<div class="flex-row d-flex justify-content-evenly">
+              <!--<div class="flex-row d-flex justify-content-evenly">
              </div>-->
 
-                <div class="row d-flex justify-content-center pb-2">
-                  <button
-                    type="button"
-                    class="btn btn-primary text-light mb-3 border rounded-pill"
-                    (click)="play(i)"
-                  >
-                    <span>
-                      {{ isPaused(i) ? "PLAY" : "PAUSE" }}
-                    </span>
-                    <span class="pl-1">
-                      <i
-                        class="fas {{ isPaused(i) ? 'fa-play' : 'fa-pause' }}"
-                      ></i>
-                    </span>
-                  </button>
+              <div class="row d-flex justify-content-center pb-2">
+                <button
+                  type="button"
+                  class="btn btn-primary text-light mb-3 border rounded-pill"
+                  (click)="play(i)"
+                >
+                  <span>
+                    {{ isPaused(i) ? "PLAY" : "PAUSE" }}
+                  </span>
+                  <span class="pl-1">
+                    <i
+                      class="fas {{ isPaused(i) ? 'fa-play' : 'fa-pause' }}"
+                    ></i>
+                  </span>
+                </button>
 
-                  <button
-                    class="btn btn-info text-light mb-3 border rounded-pill"
-                    (click)="replay(i)"
-                  >
-                    REPLAY <i class="fas fa-step-backward"></i>
-                  </button>
+                <button
+                  class="btn btn-info text-light mb-3 border rounded-pill"
+                  (click)="replay(i)"
+                >
+                  REPLAY <i class="fas fa-step-backward"></i>
+                </button>
 
-                  <button
-                    class="btn btn-warning text-light border rounded-pill"
-                    (click)="
-                      openAddingArticle(
-                        music.title,
-                        music.basicPrice,
-                        music.exclusivePrice
-                      )
-                    "
-                    *ngIf="isLoggedIn()"
-                  >
-                    ADD TO CART <i class="fas fa-shopping-cart text-light"></i>
-                  </button>
-                </div>
-              </mat-card-content>
-            </mat-card>
-          </div>
+                <button
+                  class="btn btn-warning text-light border rounded-pill"
+                  (click)="
+                    openAddingArticle(
+                      music.title,
+                      music.basicPrice,
+                      music.exclusivePrice
+                    )
+                  "
+                  *ngIf="isLoggedIn()"
+                >
+                  ADD TO CART <i class="fas fa-shopping-cart text-light"></i>
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
         </div>
 
         <div class="flex-row justify-content-center w-100 position-sticky">
-
           <div class="p-3"></div>
           <mat-paginator
-          class="border border-2 rounded shadow-lg text-light"
+            class="border border-2 rounded shadow-lg text-light"
             [length]="100"
             [pageSize]="12"
             [pageSizeOptions]="[5, 10, 25, 100]"
             aria-label="Select page"
-            (page)="loadMore($event,catalog.musics)"
+            (page)="loadMore($event, catalog.musics)"
           >
           </mat-paginator>
         </div>
@@ -205,8 +202,10 @@
   </div>
 </div>
 
-<div class="flex-row d-flex justify-content-center">
-  <div class="p-5"></div>
-  <div class="p-5"></div>
-</div>
-<app-footer class="position-sticky"></app-footer>
+  
+  <div class="flex-row d-flex justify-content-center">
+    <div class="p-5"></div>
+    <div class="p-5"></div>
+  </div>
+
+    <app-footer class="position-sticky"></app-footer>

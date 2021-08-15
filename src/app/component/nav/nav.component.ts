@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { COMPONENTS_TAGS } from 'src/app/util/constant';
 import { getUsername } from 'src/app/util/jwtUtils';
 
 @Component({
@@ -30,6 +31,10 @@ export class NavComponent {
   isCartOpen($event){
     console.log($event);
     this.openCart = $event;
+  }
+
+  getComponentTag(){
+    return COMPONENTS_TAGS[0];
   }
 
 }

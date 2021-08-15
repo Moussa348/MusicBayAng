@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Customer } from 'src/app/model/customer';
 import { UserService } from 'src/app/service/user.service';
+import { COMPONENTS_TAGS } from 'src/app/util/constant';
 
 @Component({
   selector: 'app-user-search-bar',
@@ -11,17 +12,20 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./user-search-bar.component.css'],
 })
 export class UserSearchBarComponent implements OnInit {
-  @Input() username = 'bombay'; //passe input after testing
+  @Input() username = 'bombay';
+  @Input() componentTag ;
   noPage = 0;
 
-  profils: Customer[] = new Array();
+  usernames:string[] = new Array();
+
+  searchedUsername:string;
+  @Output() searchedUsername$: EventEmitter<string> = new EventEmitter();
 
   constructor(private userService: UserService,private router:Router) {}
 
   ngOnInit(): void {
   }
 
-  public model: Customer;
 
   formatter = (username: string) => username.toLowerCase();
 
@@ -35,10 +39,10 @@ export class UserSearchBarComponent implements OnInit {
       map((term) =>
         term === ''
           ? []
-          : this.profils
+          : this.usernames
               .filter(
-                (profil) => profil.username.indexOf(term.toLowerCase()) > -1
-              ).map((profil) => profil.username)
+                (username) => username.indexOf(term.toLowerCase()) > -1
+              )
               .slice(0, 10)
       )
     );
@@ -46,8 +50,7 @@ export class UserSearchBarComponent implements OnInit {
   getListProfileSearch() {
     this.userService.getListProfileSearch().subscribe(
       (data) => {
-        this.profils = data;
-        console.log(this.profils);
+        this.usernames =data.map(profile => profile.username);
       },
       (err) => {
         console.log(err);
@@ -57,6 +60,16 @@ export class UserSearchBarComponent implements OnInit {
 
   goToProfile($event){
    //this.router.navigate(['/profile',$event.target.value]);
-   window.location.replace('http://localhost:5001/profile/' + $event.target.value );
+   if(this.componentTag == COMPONENTS_TAGS[0]){
+     window.location.replace('http://localhost:5001/profile/' + $event.target.value );
+    }
+    if(this.componentTag == COMPONENTS_TAGS[1]){
+      console.log($event.target.value);
+      this.searchedUsername$.emit($event.target.value);
+    }
+  }
+
+  getComponentTag(){
+    return COMPONENTS_TAGS[0];
   }
 }

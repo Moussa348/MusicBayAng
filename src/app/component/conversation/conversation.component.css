@@ -6,6 +6,10 @@ mat-card:hover {
   opacity: 0.5;
 }
 
-.fa-users-cog:hover, .fa-user-plus:hover{
+.fa-users-cog:hover, .fa-user-plus:hover,.fa-comment-medical:hover,.fa-plus:hover{
     opacity: 0.5;
+}
+
+.btn-success:hover{
+  color: black;
 }

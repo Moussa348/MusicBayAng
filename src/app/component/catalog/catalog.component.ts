@@ -63,9 +63,8 @@ export class CatalogComponent implements OnInit {
   }
 
   search(text: string, datePipe: DatePipe): Music[] {
-    this.musics$ = of(new Array());
     return this.catalog.musics.filter((music) => {
-      const term = text.toLowerCase();
+      const term = text !=null ?text.toLowerCase():'';
       return (
         music.title.toLowerCase().includes(term) ||
         music.tags.toLowerCase().includes(term)
@@ -80,7 +79,6 @@ export class CatalogComponent implements OnInit {
           
           if(data.musics.length > 0){
             this.catalog = data;
-            this.musics$ = of(data.musics);
             this.setSoundPlayings(this.catalog.musics.length);
           }
           console.log(this.catalog);
@@ -94,7 +92,6 @@ export class CatalogComponent implements OnInit {
         (data) => {
           if(data.length > 0){
             this.catalog.musics = data;
-            this.musics$ = of(data);
             this.setSoundPlayings(this.catalog.musics.length);
           }
           console.log(data);
@@ -135,11 +132,11 @@ export class CatalogComponent implements OnInit {
     console.log(this.sounds);
   }
 
-  likeOrUnlike(username: string, title: string) {
+  likeOrUnlike(title: string) {
     const index = this.catalog.likedMusicTitles.indexOf(title);
 
     if (this.isLiked(title)) {
-      this.monitoringService.unLikeMusic(username, title).subscribe();
+      this.monitoringService.unLikeMusic(this.username, title).subscribe();
 
       this.catalog.likedMusicTitles.splice(index);
 
@@ -150,7 +147,7 @@ export class CatalogComponent implements OnInit {
         }
       });
     } else {
-      this.monitoringService.likeMusic(username, title).subscribe();
+      this.monitoringService.likeMusic(this.username, title).subscribe();
 
       this.catalog.likedMusicTitles.push(title);
 

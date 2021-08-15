@@ -14,6 +14,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ListUserInConvoComponent } from '../list-user-in-convo/list-user-in-convo.component';
 import { getUsername } from 'src/app/util/jwtUtils';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-conversation',
@@ -39,6 +41,7 @@ export class ConversationComponent implements OnInit {
   filter = new FormControl('');
   
   lastSentMessages: SentMessage[] = window.history.state.data;
+  lastSentMessages$: Observable<SentMessage[]>;
   conversation:Conversation = new Conversation();
   newlySentMessage: SentMessage = new SentMessage();
   noPage = 0;
@@ -48,6 +51,10 @@ export class ConversationComponent implements OnInit {
     private modalService: NgbModal,
     private route : ActivatedRoute
   ) { 
+    this.lastSentMessages$ = this.filter.valueChanges.pipe(
+      startWith(''),
+      map((text) =>  this.search(text))
+    );
   }
   
   ngOnInit(): void {
@@ -57,6 +64,13 @@ export class ConversationComponent implements OnInit {
       this.getMessagesFromConversation(this.conversation.id);
     }); 
     console.log(this.lastSentMessages.length);
+  }
+
+  search(text: string): SentMessage[] {
+    return this.lastSentMessages.filter((lastSentMessage) => {
+      const term = text !=null ?text.toLowerCase():'';
+      return (lastSentMessage.conversationName.toLowerCase().includes(term.toLowerCase()));
+    });
   }
 
   isConversationGroup(index:number){
